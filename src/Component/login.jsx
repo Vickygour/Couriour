@@ -8,11 +8,10 @@ import {
   ShieldCheck,
   Truck,
   Loader2,
-  Minus,
   Sparkles,
 } from "lucide-react";
 
-const LuxuryShineAuth = () => {
+const LuxuryShineAuth = ({ onLoginSuccess }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -27,199 +26,173 @@ const LuxuryShineAuth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    // Yahan backend logic aayegi
     setTimeout(() => {
       setLoading(false);
+      if (onLoginSuccess) onLoginSuccess(); // Triggering the Preloader & Website flow
     }, 2000);
   };
 
   return (
-    <div className="min-h-screen bg-[#010409] flex items-center justify-center p-6 relative overflow-hidden font-sans">
-      {/* --- PREMIUM CSS FOR SHINE EFFECT --- */}
+    <div className="min-h-screen bg-[#010409] flex items-center justify-center p-4 relative overflow-hidden font-sans">
       <style>
         {`
-          @keyframes shine {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-          }
+          @keyframes shine { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
           .shining-text {
             background: linear-gradient(90deg, #ffffff 0%, #ef4444 25%, #ffffff 50%, #ef4444 75%, #ffffff 100%);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: shine 4s linear infinite;
+            background-size: 200% auto; color: transparent; -webkit-background-clip: text; animation: shine 4s linear infinite;
           }
           .glass-panel {
-            background: rgba(0, 29, 38, 0.85);
-            backdrop-filter: blur(25px);
+            background: rgba(0, 29, 38, 0.9); backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.05);
           }
         `}
       </style>
 
-      {/* Background Decor */}
+      {/* Glow Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-red-600/10 blur-[150px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-900/10 blur-[120px] rounded-full" />
+        <div className="absolute top-[-5%] left-[-5%] w-[400px] h-[400px] bg-red-600/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-5%] right-[-5%] w-[300px] h-[300px] bg-blue-900/10 blur-[100px] rounded-full" />
       </div>
 
+      {/* Reduced Size Main Card (Max-w-4xl for better fit) */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 glass-panel rounded-[4rem] shadow-[0_60px_120px_rgba(0,0,0,0.9)] relative z-10 overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 glass-panel rounded-[2.5rem] shadow-2xl relative z-10 overflow-hidden"
       >
-        {/* --- LEFT SIDE: THE ELITE BRANDING --- */}
-        <div className="p-16 text-white flex flex-col justify-between relative overflow-hidden hidden lg:flex border-r border-white/5">
+        {/* LEFT SIDE: Branding (More compact padding) */}
+        <div className="p-10 text-white flex flex-col justify-between relative hidden md:flex border-r border-white/5">
           <div className="relative z-10">
-            <motion.div
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="flex items-center gap-4 mb-24"
-            >
-              <div className="w-12 h-12 bg-red-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <Truck size={24} className="text-white" />
+            <div className="flex items-center gap-3 mb-16">
+              <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Truck size={20} />
               </div>
-              <span className="text-2xl font-black italic tracking-tighter uppercase shining-text">
+              <span className="text-xl font-black italic uppercase shining-text tracking-tighter">
                 Localmate
               </span>
-            </motion.div>
-
-            <div className="space-y-4">
-              <motion.h2
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="text-7xl font-black italic uppercase leading-[0.85] tracking-tighter"
-              >
-                The Art <br /> Of Perfect <br />
-                <span className="shining-text">Logistics.</span>
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2 }}
-                className="text-gray-400 text-lg italic border-l-2 border-red-600 pl-6 max-w-sm mt-8"
-              >
-                Experience the golden standard of global freight management.
-              </motion.p>
             </div>
+            <h2 className="text-5xl font-black italic uppercase leading-none tracking-tighter">
+              The Art <br /> Of <span className="shining-text">Logistics.</span>
+            </h2>
+            <p className="text-gray-400 text-sm italic border-l-2 border-red-600 pl-4 mt-6 leading-relaxed">
+              Global standard freight management.
+            </p>
           </div>
-
-          <div className="relative z-10 flex items-center gap-10">
-            <div className="flex flex-col gap-1">
-              <span className="text-white font-black text-2xl italic">
-                1990
-              </span>
-              <span className="text-white/20 text-[8px] uppercase tracking-[0.4em]">
-                Est. Legacy
+          <div className="relative z-10 flex gap-6 mt-10">
+            <div className="flex flex-col">
+              <span className="text-white font-black text-xl italic">1990</span>
+              <span className="text-white/20 text-[7px] uppercase tracking-widest">
+                Legacy
               </span>
             </div>
-            <div className="h-10 w-[1px] bg-white/10" />
-            <div className="flex flex-col gap-1">
-              <span className="text-red-600 font-black text-2xl italic">
+            <div className="h-8 w-[1px] bg-white/10" />
+            <div className="flex flex-col">
+              <span className="text-red-600 font-black text-xl italic">
                 24/7
               </span>
-              <span className="text-white/20 text-[8px] uppercase tracking-[0.4em]">
-                Priority Care
+              <span className="text-white/20 text-[7px] uppercase tracking-widest">
+                Support
               </span>
             </div>
           </div>
         </div>
 
-        {/* --- RIGHT SIDE: THE SHINING AUTH FORM --- */}
-        <div className="p-12 lg:p-24 flex flex-col justify-center relative">
+        {/* RIGHT SIDE: Form (Optimized spacing) */}
+        <div className="p-10 md:p-12 flex flex-col justify-center relative bg-white/[0.01]">
           <AnimatePresence mode="wait">
             <motion.div
               key={isLogin ? "login" : "signup"}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.5 }}
             >
-              <div className="mb-16">
-                <h3 className="text-5xl font-black text-white italic uppercase tracking-tighter mb-4 leading-none">
-                  {isLogin ? "Portal Access" : "Join Agency"}
+              <div className="mb-10">
+                <h3 className="text-3xl font-black text-white italic uppercase tracking-tighter leading-none mb-3">
+                  {isLogin ? "Access Portal" : "Join Agency"}
                 </h3>
-                <div className="flex items-center gap-3">
-                  <div className="h-[2px] w-12 bg-red-600" />
-                  <p className="text-red-500 font-bold uppercase text-[9px] tracking-[0.5em] shining-text">
-                    Secure Identity Layer
+                <div className="flex items-center gap-2">
+                  <div className="h-[1px] w-8 bg-red-600" />
+                  <p className="text-red-500 font-bold uppercase text-[8px] tracking-[0.4em] shining-text">
+                    Secure Identity
                   </p>
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-10">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {!isLogin && (
-                  <div className="relative group">
+                  <div className="relative group border-b border-white/10">
                     <User
-                      className="absolute left-0 bottom-4 text-white/10 group-focus-within:text-red-600 transition-all duration-500"
-                      size={18}
+                      className="absolute left-0 bottom-3 text-white/10 group-focus-within:text-red-600 transition-all"
+                      size={16}
                     />
                     <input
                       name="name"
                       required
-                      placeholder="Full Name"
-                      className="w-full pl-8 pb-4 bg-transparent border-b border-white/10 text-white outline-none font-bold text-xs tracking-[0.2em] uppercase placeholder:text-white/5 transition-all focus:border-red-600"
+                      placeholder="Name"
+                      onChange={handleChange}
+                      className="w-full pl-6 pb-3 bg-transparent text-white outline-none font-bold text-xs uppercase placeholder:text-white/5"
                     />
                   </div>
                 )}
-
-                <div className="relative group">
+                <div className="relative group border-b border-white/10">
                   <Mail
-                    className="absolute left-0 bottom-4 text-white/10 group-focus-within:text-red-600 transition-all duration-500"
-                    size={18}
+                    className="absolute left-0 bottom-3 text-white/10 group-focus-within:text-red-600 transition-all"
+                    size={16}
                   />
                   <input
                     name="email"
                     required
-                    placeholder="Email Address"
-                    className="w-full pl-8 pb-4 bg-transparent border-b border-white/10 text-white outline-none font-bold text-xs tracking-[0.2em] uppercase placeholder:text-white/5 transition-all focus:border-red-600"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    className="w-full pl-6 pb-3 bg-transparent text-white outline-none font-bold text-xs uppercase placeholder:text-white/5"
                   />
                 </div>
-
-                <div className="relative group">
+                <div className="relative group border-b border-white/10">
                   <Lock
-                    className="absolute left-0 bottom-4 text-white/10 group-focus-within:text-red-600 transition-all duration-500"
-                    size={18}
+                    className="absolute left-0 bottom-3 text-white/10 group-focus-within:text-red-600 transition-all"
+                    size={16}
                   />
                   <input
                     name="password"
                     required
                     type="password"
                     placeholder="Password"
-                    className="w-full pl-8 pb-4 bg-transparent border-b border-white/10 text-white outline-none font-bold text-xs tracking-[0.2em] uppercase placeholder:text-white/5 transition-all focus:border-red-600"
+                    onChange={handleChange}
+                    className="w-full pl-6 pb-3 bg-transparent text-white outline-none font-bold text-xs uppercase placeholder:text-white/5"
                   />
                 </div>
 
-                <div className="pt-10">
+                <div className="pt-6">
                   <motion.button
-                    whileHover={{ scale: 1.02, letterSpacing: "0.5em" }}
+                    whileHover={{ scale: 1.02, letterSpacing: "0.4em" }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-red-600 text-white py-8 rounded-full font-black uppercase italic tracking-[0.3em] flex items-center justify-center gap-6 transition-all duration-700 text-xs shadow-[0_30px_60px_rgba(220,38,38,0.3)] relative overflow-hidden group"
+                    className="w-full bg-red-600 text-white py-4 rounded-full font-black uppercase italic tracking-widest flex items-center justify-center gap-4 transition-all duration-500 text-[10px] shadow-lg relative overflow-hidden group"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                     {loading ? (
-                      <Loader2 className="animate-spin" size={20} />
+                      <Loader2 className="animate-spin" size={18} />
                     ) : (
-                      <span className="flex items-center gap-4">
+                      <span className="flex items-center gap-2">
                         {isLogin ? "Authenticate" : "Create Account"}{" "}
-                        <ArrowRight size={18} />
+                        <ArrowRight size={14} />
                       </span>
                     )}
                   </motion.button>
                 </div>
               </form>
 
-              <div className="mt-20">
+              <div className="mt-10">
                 <button
                   onClick={() => setIsLogin(!isLogin)}
-                  className="text-white/30 text-[10px] font-black uppercase tracking-widest hover:text-white transition-all duration-500 flex items-center justify-center gap-4 group"
+                  className="text-white/30 text-[9px] font-black uppercase tracking-widest hover:text-white transition-all flex items-center justify-center gap-2 w-full group"
                 >
-                  <span className="h-[1px] w-10 bg-white/5 group-hover:w-20 group-hover:bg-red-600 transition-all" />
-                  {isLogin ? "Register with Agency" : "Back to Access Console"}
-                  <span className="h-[1px] w-10 bg-white/5 group-hover:w-20 group-hover:bg-red-600 transition-all" />
+                  <span className="h-[1px] w-6 bg-white/5 group-hover:bg-red-600 transition-all" />
+                  {isLogin ? "Join Agency" : "Access Console"}
+                  <span className="h-[1px] w-6 bg-white/5 group-hover:bg-red-600 transition-all" />
                 </button>
               </div>
             </motion.div>
@@ -227,9 +200,9 @@ const LuxuryShineAuth = () => {
         </div>
       </motion.div>
 
-      {/* Floating Elements */}
-      <div className="absolute bottom-10 left-10 flex gap-4 opacity-10">
-        <ShieldCheck className="text-white" size={40} />
+      {/* Minimal Icon */}
+      <div className="absolute bottom-6 left-6 opacity-10">
+        <ShieldCheck className="text-white" size={30} />
       </div>
     </div>
   );
