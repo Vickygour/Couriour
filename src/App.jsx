@@ -5,14 +5,20 @@ import { AnimatePresence } from "framer-motion";
 // Components & Pages
 import Preloader from "./Pages/PreLoader";
 import HomePage from "./Pages/HomePage";
-// import LuxuryAuthPortal from "../components/LuxuryAuthPortal"; // Jo aapne banwaya tha
+import Navbar from "./Component/Navbar";
+import Footer from "./Component/Footer";
+import LuxuryAuthPortal from "./Component/login"; // Path check karlein
+import AboutPage from "./Pages/AboutPage";
+import Tracking from "./Pages/TrackingPage";
+import OrderTrack from "./Pages/OrderTrack";
+import CreateShipment from "./Pages/CreateShipment";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isDelivered, setIsDelivered] = useState(false);
 
   useEffect(() => {
-    // 2s parcel animation, 4.5s total preloader
+    // 2s parcel animation, 6.5s total preloader (as per your code)
     const deliveryTimer = setTimeout(() => setIsDelivered(true), 2000);
     const finalTimer = setTimeout(() => setIsLoading(false), 6500);
 
@@ -26,13 +32,31 @@ function App() {
     <Router>
       <AnimatePresence mode="wait">
         {isLoading ? (
-          <Preloader isDelivered={isDelivered} />
+          // Preloader screen - No Navbar or Footer here
+          <Preloader isDelivered={isDelivered} key="preloader" />
         ) : (
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            {/* <Route path="/login" element={<LuxuryAuthPortal />} /> */}
-            {/* Baaki routes yahan add karein */}
-          </Routes>
+          /* Main Website Wrapper */
+          <div className="flex flex-col min-h-screen bg-white">
+            {/* Navbar hamesha top par rahega */}
+            <Navbar />
+
+            {/* Main Content Area - grow karega taaki footer hamesha bottom par rahe */}
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/login" element={<LuxuryAuthPortal />} />
+                <Route path="/tracking" element={<Tracking />} />
+                <Route path="/track" element={<OrderTrack />} />
+                <Route path="/CreateShipment" element={<CreateShipment />} />
+
+                {/* Aap yahan aur routes add kar sakte hain */}
+              </Routes>
+            </main>
+
+            {/* Footer hamesha bottom par rahega */}
+            <Footer />
+          </div>
         )}
       </AnimatePresence>
     </Router>
