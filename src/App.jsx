@@ -18,6 +18,7 @@ import PartTruckLoad from "./Pages/PartTruckLoad";
 import FullTruckLoad from "./Pages/FullTruckLoad";
 import BikePage from "./Pages/BIkePage";
 import ContactPage from "./Pages/ContactPage";
+import CyberVaultLogin from "./Component/CyberVaultLogin";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -51,7 +52,8 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
-                <Route path="/login" element={<LuxuryAuthPortal />} />
+                <Route path="/login" element={<CyberVaultLogin />} />
+                <Route path="/contact" element={<LuxuryAuthPortal />} />
                 <Route path="/tracking" element={<Tracking />} />
                 <Route path="/track" element={<OrderTrack />} />
                 <Route path="/CreateShipment" element={<CreateShipment />} />

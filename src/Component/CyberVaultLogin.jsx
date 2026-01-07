@@ -12,7 +12,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { toast } from 'react-toastify';
-import API from '../utils/api'; // Your API instance
+import API from '../../utils/api'; // Your API instance
 
 const CyberVaultLogin = () => {
   const navigate = useNavigate();
