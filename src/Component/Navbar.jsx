@@ -19,12 +19,11 @@ const Navbar = () => {
 
   // Image ke basis par dropdown items
   const serviceItems = [
+    { name: "Bike Service", path: "/services/Bike-service" },
     { name: "Express Parcel", path: "/services/express" },
     { name: "Warehousing", path: "/services/warehousing" },
     { name: "Part Truckload", path: "/services/part-truck" },
     { name: "Full Truckload", path: "/services/full-truck" },
-    { name: "International", path: "/services/international" },
-    { name: "Data Intelligence", path: "/services/data" },
   ];
 
   const menuLinks = [
@@ -37,7 +36,6 @@ const Navbar = () => {
       dropdownItems: serviceItems,
     },
     { name: "Tracking", path: "/tracking" },
-    { name: "News", path: "/news" },
     { name: "Contact", path: "/contact" },
   ];
 

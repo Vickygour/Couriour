@@ -5,28 +5,28 @@ import { ArrowUpRight, Plus } from "lucide-react";
 const TeamSection = () => {
   const teamMembers = [
     {
-      name: "Leslie Alexander",
-      role: "Lead Strategist",
+      name: "Aman Kumar Mahto",
+      role: "CEO & Founder",
       img: "https://i.pravatar.cc/600?img=11",
     },
     {
-      name: "Mehedi Hasan",
-      role: "Visionary Designer",
+      name: "Karan Meena",
+      role: "Marketing Head",
       img: "https://i.pravatar.cc/600?img=12",
     },
     {
-      name: "Robiul Hasan",
-      role: "Tech Architect",
+      name: "Prabhat Kumar",
+      role: "COO",
       img: "https://i.pravatar.cc/600?img=13",
     },
     {
-      name: "Riad Hasan",
-      role: "Backend Expert",
+      name: "Badal",
+      role: "HR Head",
       img: "https://i.pravatar.cc/600?img=14",
     },
     {
-      name: "Arjun Singh",
-      role: "Logistics Head",
+      name: "Kartik Kumar",
+      role: "Marketing Head",
       img: "https://i.pravatar.cc/600?img=15",
     },
   ];
@@ -135,8 +135,8 @@ const TeamSection = () => {
                   </span>
                 </h4>
                 <div className="flex items-center gap-3 mt-3">
-                  <span className="w-4 h-[1px] bg-slate-300"></span>
-                  <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest leading-none">
+                  <span className="w-4 h-[2px] bg-slate-600"></span>
+                  <p className="text-[11px] font-bold text-slate-700 uppercase tracking-widest leading-none">
                     {member.role}
                   </p>
                 </div>
