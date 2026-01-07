@@ -134,7 +134,7 @@ const CourierContactPremium = () => {
                   <p className="text-gray-400 leading-relaxed font-medium">
                     12/B Global Logistics Park, South Cargo Terminal,
                     <br />
-                    New Delhi, India - 110001
+                    {/* New Delhi, India - 110001 */}
                   </p>
                 </div>
               </div>

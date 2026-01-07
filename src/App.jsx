@@ -12,6 +12,12 @@ import AboutPage from "./Pages/AboutPage";
 import Tracking from "./Pages/TrackingPage";
 import OrderTrack from "./Pages/OrderTrack";
 import CreateShipment from "./Pages/CreateShipment";
+import ExpressParcel from "./Pages/ExpressParcel";
+import WareHousing from "./Pages/WareHousing";
+import PartTruckLoad from "./Pages/PartTruckLoad";
+import FullTruckLoad from "./Pages/FullTruckLoad";
+import BikePage from "./Pages/BIkePage";
+import ContactPage from "./Pages/ContactPage";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -49,6 +55,18 @@ function App() {
                 <Route path="/tracking" element={<Tracking />} />
                 <Route path="/track" element={<OrderTrack />} />
                 <Route path="/CreateShipment" element={<CreateShipment />} />
+                <Route path="/services/express" element={<ExpressParcel />} />
+                <Route path="/services/warehousing" element={<WareHousing />} />
+                <Route
+                  path="/services/part-truck"
+                  element={<PartTruckLoad />}
+                />
+                <Route
+                  path="/services/full-truck"
+                  element={<FullTruckLoad />}
+                />
+                <Route path="/services/Bike-service" element={<BikePage />} />
+                <Route path="/contact" element={<ContactPage />} />
 
                 {/* Aap yahan aur routes add kar sakte hain */}
               </Routes>
