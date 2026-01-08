@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import API from '../../utils/api'; // Import your API instance
-import Payment from '../assets/Payment.jpeg';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import API from "../../utils/api"; // Import your API instance
+import Payment from "../assets/Payment.jpeg";
 
 import {
   Package,
@@ -23,35 +23,35 @@ import {
   Loader2,
   Download,
   Copy,
-} from 'lucide-react';
+} from "lucide-react";
 
 const CreateShipment = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [shipmentData, setShipmentData] = useState(null);
-  const [trackingCode, setTrackingCode] = useState('');
-  const [paymentQR, setPaymentQR] = useState('');
+  const [trackingCode, setTrackingCode] = useState("");
+  const [paymentQR, setPaymentQR] = useState("");
 
   const [formData, setFormData] = useState({
-    senderName: '',
-    senderPhone: '',
-    senderEmail: '',
-    originPincode: '',
-    originAddress: '',
-    originCity: '',
-    originState: '',
-    receiverName: '',
-    receiverPhone: '',
-    receiverEmail: '',
-    destPincode: '',
-    destAddress: '',
-    destCity: '',
-    destState: '',
+    senderName: "",
+    senderPhone: "",
+    senderEmail: "",
+    originPincode: "",
+    originAddress: "",
+    originCity: "",
+    originState: "",
+    receiverName: "",
+    receiverPhone: "",
+    receiverEmail: "",
+    destPincode: "",
+    destAddress: "",
+    destCity: "",
+    destState: "",
     weight: 1,
-    packageDescription: '',
+    packageDescription: "",
     packageValue: 0,
     fragile: false,
-    method: 'surface',
+    method: "surface",
   });
 
   const [pricing, setPricing] = useState({
@@ -96,15 +96,15 @@ const CreateShipment = () => {
         !formData.originPincode ||
         !formData.originAddress
       ) {
-        toast.error('Please fill all Origin details!');
+        toast.error("Please fill all Origin details!");
         return false;
       }
       if (formData.originPincode.length !== 6) {
-        toast.error('Please enter valid 6-digit pincode!');
+        toast.error("Please enter valid 6-digit pincode!");
         return false;
       }
       if (formData.senderPhone.length !== 10) {
-        toast.error('Please enter valid 10-digit phone number!');
+        toast.error("Please enter valid 10-digit phone number!");
         return false;
       }
     } else if (step === 2) {
@@ -114,20 +114,20 @@ const CreateShipment = () => {
         !formData.destPincode ||
         !formData.destAddress
       ) {
-        toast.error('Please fill all Destination details!');
+        toast.error("Please fill all Destination details!");
         return false;
       }
       if (formData.destPincode.length !== 6) {
-        toast.error('Please enter valid 6-digit pincode!');
+        toast.error("Please enter valid 6-digit pincode!");
         return false;
       }
       if (formData.receiverPhone.length !== 10) {
-        toast.error('Please enter valid 10-digit phone number!');
+        toast.error("Please enter valid 10-digit phone number!");
         return false;
       }
     } else if (step === 3) {
       if (formData.weight < 0.1 || formData.weight > 100) {
-        toast.error('Weight must be between 0.1 and 100 KG!');
+        toast.error("Weight must be between 0.1 and 100 KG!");
         return false;
       }
     }
@@ -178,7 +178,7 @@ const CreateShipment = () => {
         },
         package: {
           weight: parseFloat(formData.weight),
-          description: formData.packageDescription || 'General Cargo',
+          description: formData.packageDescription || "General Cargo",
           value: parseFloat(formData.packageValue) || 0,
           fragile: formData.fragile,
         },
@@ -186,7 +186,7 @@ const CreateShipment = () => {
       };
 
       // API Call - No need to write full URL
-      const response = await API.post('/shipment/create', payload);
+      const response = await API.post("/shipment/create", payload);
 
       if (response.data.success) {
         const { trackingCode, shipment, qrCode } = response.data.data;
@@ -196,13 +196,13 @@ const CreateShipment = () => {
         setPaymentQR(qrCode || Payment);
         setPricing(shipment.pricing);
 
-        toast.success('Shipment created successfully!');
+        toast.success("Shipment created successfully!");
         setStep(5);
       } else {
-        toast.error(response.data.message || 'Failed to create shipment');
+        toast.error(response.data.message || "Failed to create shipment");
       }
     } catch (error) {
-      console.error('Create Shipment Error:', error);
+      console.error("Create Shipment Error:", error);
 
       // Fallback to demo mode if backend not ready
       const demoTrackingCode = `LM-${Math.random()
@@ -218,7 +218,7 @@ const CreateShipment = () => {
       });
       setPaymentQR(Payment);
 
-      toast.success('Shipment created! (Demo Mode)');
+      toast.success("Shipment created! (Demo Mode)");
       setStep(5);
     } finally {
       setLoading(false);
@@ -231,7 +231,7 @@ const CreateShipment = () => {
 
     try {
       const fakeTransactionId = `TXN${Date.now()}${Math.floor(
-        Math.random() * 1000,
+        Math.random() * 1000
       )}`;
 
       // API Call - Simple route
@@ -239,21 +239,21 @@ const CreateShipment = () => {
         `/shipment/${trackingCode}/verify-payment`,
         {
           transactionId: fakeTransactionId,
-          paymentMethod: 'upi',
-        },
+          paymentMethod: "upi",
+        }
       );
 
       if (response.data.success) {
-        toast.success('Payment verified successfully! 🎉');
+        toast.success("Payment verified successfully! 🎉");
         setStep(6);
       } else {
-        toast.error(response.data.message || 'Payment verification failed');
+        toast.error(response.data.message || "Payment verification failed");
       }
     } catch (error) {
-      console.error('Payment Verification Error:', error);
+      console.error("Payment Verification Error:", error);
 
       // Auto success for demo mode
-      toast.success('Payment completed! (Demo Mode) 💳');
+      toast.success("Payment completed! (Demo Mode) 💳");
       setStep(6);
     } finally {
       setLoading(false);
@@ -262,7 +262,7 @@ const CreateShipment = () => {
 
   const downloadInvoice = () => {
     if (!trackingCode) {
-      toast.error('No shipment data available!');
+      toast.error("No shipment data available!");
       return;
     }
 
@@ -271,7 +271,7 @@ const CreateShipment = () => {
 
       doc.setFontSize(22);
       doc.setTextColor(220, 38, 38);
-      doc.text('LOCAL MATE LOGISTICS', 14, 20);
+      doc.text("LOCAL MATE LOGISTICS", 14, 20);
 
       doc.setFontSize(10);
       doc.setTextColor(100);
@@ -281,68 +281,68 @@ const CreateShipment = () => {
 
       autoTable(doc, {
         startY: 45,
-        head: [['Shipment Detail', 'Information']],
+        head: [["Shipment Detail", "Information"]],
         body: [
-          ['Sender', formData.senderName.toUpperCase()],
-          ['Sender Phone', formData.senderPhone],
+          ["Sender", formData.senderName.toUpperCase()],
+          ["Sender Phone", formData.senderPhone],
           [
-            'Origin',
+            "Origin",
             `${formData.originAddress}, ${formData.originCity} - ${formData.originPincode}`,
           ],
-          ['Receiver', formData.receiverName.toUpperCase()],
-          ['Receiver Phone', formData.receiverPhone],
+          ["Receiver", formData.receiverName.toUpperCase()],
+          ["Receiver Phone", formData.receiverPhone],
           [
-            'Destination',
+            "Destination",
             `${formData.destAddress}, ${formData.destCity} - ${formData.destPincode}`,
           ],
-          ['Package Weight', `${formData.weight} KG`],
-          ['Delivery Method', formData.method.toUpperCase().replace('_', ' ')],
-          ['Tracking Code', trackingCode],
+          ["Package Weight", `${formData.weight} KG`],
+          ["Delivery Method", formData.method.toUpperCase().replace("_", " ")],
+          ["Tracking Code", trackingCode],
         ],
         headStyles: { fillColor: [220, 38, 38] },
-        theme: 'striped',
+        theme: "striped",
       });
 
       const startY = doc.lastAutoTable.finalY + 10;
       autoTable(doc, {
         startY,
-        head: [['Description', 'Amount (INR)']],
+        head: [["Description", "Amount (INR)"]],
         body: [
-          ['Base Price', `₹${pricing.basePrice.toFixed(2)}`],
-          ['Weight Charges', `₹${pricing.weightCharges.toFixed(2)}`],
-          ['Distance Charges', `₹${pricing.distanceCharges.toFixed(2)}`],
-          ['Tax (18% GST)', `₹${pricing.tax.toFixed(2)}`],
-          ['Total Amount', `₹${pricing.total.toFixed(2)}`],
+          ["Base Price", `₹${pricing.basePrice.toFixed(2)}`],
+          ["Weight Charges", `₹${pricing.weightCharges.toFixed(2)}`],
+          ["Distance Charges", `₹${pricing.distanceCharges.toFixed(2)}`],
+          ["Tax (18% GST)", `₹${pricing.tax.toFixed(2)}`],
+          ["Total Amount", `₹${pricing.total.toFixed(2)}`],
         ],
         headStyles: { fillColor: [220, 38, 38] },
-        theme: 'grid',
+        theme: "grid",
       });
 
       const finalY = doc.lastAutoTable.finalY + 10;
       doc.setFontSize(8);
       doc.setTextColor(150);
-      doc.text('Thank you for choosing LocalMate Logistics!', 14, finalY);
+      doc.text("Thank you for choosing LocalMate Logistics!", 14, finalY);
       doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, finalY + 5);
 
       doc.save(`LocalMate_Invoice_${trackingCode}.pdf`);
-      toast.success('Invoice downloaded successfully!');
+      toast.success("Invoice downloaded successfully!");
     } catch (e) {
-      console.error('PDF Error:', e);
-      toast.error('PDF generation failed.');
+      console.error("PDF Error:", e);
+      toast.error("PDF generation failed.");
     }
   };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(trackingCode);
-    toast.info('Tracking ID Copied!');
+    toast.info("Tracking ID Copied!");
   };
 
   const steps = [
-    { id: 1, name: 'Origin', icon: <MapPin size={18} /> },
-    { id: 2, name: 'Destination', icon: <NavigationIcon size={18} /> },
-    { id: 3, name: 'Package', icon: <Package size={18} /> },
-    { id: 4, name: 'Method', icon: <Send size={18} /> },
-    { id: 5, name: 'Payment', icon: <CreditCard size={18} /> },
+    { id: 1, name: "Origin", icon: <MapPin size={18} /> },
+    { id: 2, name: "Destination", icon: <NavigationIcon size={18} /> },
+    { id: 3, name: "Package", icon: <Package size={18} /> },
+    { id: 4, name: "Method", icon: <Send size={18} /> },
+    { id: 5, name: "Payment", icon: <CreditCard size={18} /> },
   ];
 
   return (
@@ -361,16 +361,16 @@ const CreateShipment = () => {
               <div
                 key={s.id}
                 className={`flex items-center gap-5 transition-all ${
-                  step >= s.id ? 'opacity-100' : 'opacity-20'
+                  step >= s.id ? "opacity-100" : "opacity-20"
                 }`}
               >
                 <div
                   className={`w-12 h-12 rounded-xl flex items-center justify-center border-2 ${
                     step > s.id
-                      ? 'bg-green-600 border-green-600 text-white shadow-lg shadow-green-600/20'
+                      ? "bg-green-600 border-green-600 text-white shadow-lg shadow-green-600/20"
                       : step === s.id
-                      ? 'bg-red-600 border-red-600 text-white shadow-lg shadow-red-600/20'
-                      : 'border-white/10 text-white'
+                      ? "bg-red-600 border-red-600 text-white shadow-lg shadow-red-600/20"
+                      : "border-white/10 text-white"
                   }`}
                 >
                   {step > s.id ? <CheckCircle size={20} /> : s.icon}
@@ -740,7 +740,7 @@ const CreateShipment = () => {
                             ₹
                             {shipmentData
                               ? shipmentData.pricing.distanceCharges.toFixed(2)
-                              : '0.00'}
+                              : "0.00"}
                           </span>
                         </div>
                         <div className="flex justify-between text-gray-400">
@@ -770,7 +770,7 @@ const CreateShipment = () => {
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    transition={{ type: 'spring', duration: 0.6 }}
+                    transition={{ type: "spring", duration: 0.6 }}
                     className="text-green-500 mx-auto mb-6 flex justify-center"
                   >
                     <CheckCircle size={80} />
@@ -826,7 +826,7 @@ const CreateShipment = () => {
                         <div className="flex justify-between">
                           <span className="text-gray-400">Method:</span>
                           <span className="text-white font-bold uppercase">
-                            {formData.method.replace('_', ' ')}
+                            {formData.method.replace("_", " ")}
                           </span>
                         </div>
                         <div className="flex justify-between">
@@ -871,7 +871,7 @@ const CreateShipment = () => {
                     onClick={nextStep}
                     disabled={loading}
                     className={`bg-red-600 text-white px-10 py-5 rounded-2xl font-black uppercase italic text-[10px] flex items-center gap-3 shadow-lg hover:bg-red-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
-                      step === 1 ? 'ml-auto' : ''
+                      step === 1 ? "ml-auto" : ""
                     }`}
                   >
                     {loading ? (
@@ -882,10 +882,10 @@ const CreateShipment = () => {
                     ) : (
                       <>
                         {step === 4
-                          ? 'CREATE SHIPMENT'
+                          ? "CREATE SHIPMENT"
                           : step === 5
-                          ? 'VERIFY & CONFIRM'
-                          : 'NEXT PHASE'}
+                          ? "VERIFY & CONFIRM"
+                          : "NEXT PHASE"}
                         <ArrowRight size={16} />
                       </>
                     )}
@@ -917,7 +917,7 @@ const CustomInput = ({
   placeholder,
   value,
   onChange,
-  type = 'text',
+  type = "text",
   maxLength,
   required,
 }) => (
@@ -955,11 +955,11 @@ const MethodCard = ({ id, name, icon, duration, active, onClick }) => (
     onClick={() => onClick(id)}
     className={`p-6 rounded-3xl border-2 cursor-pointer transition-all text-center flex flex-col items-center gap-3 hover:scale-105 ${
       active === id
-        ? 'bg-red-600 border-red-600 shadow-xl shadow-red-600/20'
-        : 'bg-white/5 border-white/10 opacity-60 hover:opacity-100'
+        ? "bg-red-600 border-red-600 shadow-xl shadow-red-600/20"
+        : "bg-white/5 border-white/10 opacity-60 hover:opacity-100"
     }`}
   >
-    <div className={active === id ? 'text-white' : 'text-red-600'}>{icon}</div>
+    <div className={active === id ? "text-white" : "text-red-600"}>{icon}</div>
     <div>
       <span className="text-white font-black italic uppercase text-xs tracking-widest block">
         {name}

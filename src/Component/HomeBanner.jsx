@@ -112,10 +112,10 @@ const HeroBanner = () => {
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
             <Link
-              to="/contact"
+              to="/CreateShipment"
               className="bg-red-600 hover:bg-white hover:text-red-600 text-white px-6 py-3 sm:px-10 sm:py-5 font-black transition-all group flex items-center justify-center shadow-[0_0_20px_rgba(220,38,38,0.4)]"
             >
-              Contact Us
+              Create Shipment
               <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />
             </Link>
 
