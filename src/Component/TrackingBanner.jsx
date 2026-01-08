@@ -14,7 +14,7 @@ const TrackingBanner = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <section className="relative w-full h-auto lg:h-[550px] flex items-center justify-center overflow-hidden bg-[#010409] py-16 px-6 border-t border-white/5 mt-32">
+    <section className="relative w-full h-auto lg:h-[550px] flex items-center justify-center overflow-hidden bg-[#010409] py-16 px-6 border-t border-white/5 mt-20 md:mt-32">
       {/* --- CYBER DYNAMIC BACKGROUND --- */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Animated Scanning Beam */}

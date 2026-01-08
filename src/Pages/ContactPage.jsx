@@ -1,12 +1,12 @@
 import React from "react";
 import ContactBanner from "../Component/ContactBanner";
-import Login from "../Component/login";
+import ContactUs from "../Component/ContactUs";
 
 const ContactPage = () => {
   return (
     <>
       <ContactBanner />
-      <Login />
+      <ContactUs />
     </>
   );
 };

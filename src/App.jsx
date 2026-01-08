@@ -7,7 +7,7 @@ import Preloader from "./Pages/PreLoader";
 import HomePage from "./Pages/HomePage";
 import Navbar from "./Component/Navbar";
 import Footer from "./Component/Footer";
-import LuxuryAuthPortal from "./Component/login"; // Path check karlein
+// import LuxuryAuthPortal from "./Component/login"; // Path check karlein
 import AboutPage from "./Pages/AboutPage";
 import Tracking from "./Pages/TrackingPage";
 import OrderTrack from "./Pages/OrderTrack";
@@ -53,7 +53,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/login" element={<CyberVaultLogin />} />
-                <Route path="/contact" element={<LuxuryAuthPortal />} />
+                {/* <Route path="/contact" element={<LuxuryAuthPortal />} /> */}
                 <Route path="/tracking" element={<Tracking />} />
                 <Route path="/track" element={<OrderTrack />} />
                 <Route path="/CreateShipment" element={<CreateShipment />} />

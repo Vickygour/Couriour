@@ -49,24 +49,38 @@ const Navbar = () => {
       {/* --- TOP WHITE BAR --- */}
       <div className="bg-white border-b border-gray-100 hidden lg:block">
         <div className="flex justify-between items-center h-12 max-w-[1400px] mx-auto px-4">
+          {/* LEFT SIDE */}
           <div className="flex items-center space-x-8 ml-40">
-            <div className="flex items-center text-[13px] text-gray-600">
+            {/* ADDRESS */}
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Kh+No+11/14/1+And+14/1+Street+No+03+Block+A+Kamal+Vihar+Burari+Delhi+110084"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-[13px] text-gray-600 hover:text-red-600 transition-colors"
+            >
               <MapPin size={14} className="text-red-600 mr-2" />
-              55 Main Street, 2nd block, Australia
-            </div>
-            <div className="flex items-center text-[13px] text-gray-600">
+              Kh No 11/14/1, Kamal Vihar, Burari, Delhi
+            </a>
+
+            {/* EMAIL */}
+            <a
+              href="mailto:localmate2025@gmail.com"
+              className="flex items-center text-[13px] text-gray-600 hover:text-red-600 transition-colors"
+            >
               <Mail size={14} className="text-red-600 mr-2" />
-              support@localmate.com
-            </div>
+              localmate2025@gmail.com
+            </a>
           </div>
-          <div className="flex items-center">
-            <div className="bg-red-600 text-white text-[13px] px-6 h-12 flex items-center transform skew-x-[-20deg] mr-[-20px]">
+
+          {/* RIGHT SIDE – SUPPORT */}
+          <a href="tel:+918826262858" className="flex items-center">
+            <div className="bg-red-600 text-white text-[13px] px-6 h-12 flex items-center transform skew-x-[-20deg] mr-[-20px] hover:bg-red-700 transition-colors">
               <div className="transform skew-x-[20deg] flex items-center font-bold">
                 <MapPin size={14} className="mr-2" />
-                Quick Support: +91 98765 43210
+                Quick Support: +91 8826262858
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 

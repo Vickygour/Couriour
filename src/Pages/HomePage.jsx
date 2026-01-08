@@ -10,7 +10,7 @@ import FinalLogisticsTemplate from "../Component/HomeContact1";
 import HomeCarousel from "../Component/HomeCarousel";
 import TrackingDashboard from "../Component/TrackingPage";
 import SupportBrand from "../Component/SupportBrand";
-import Login from "../Component/login";
+import ContactUs from "../Component/ContactUs";
 
 const HomePage = () => {
   return (
@@ -25,7 +25,7 @@ const HomePage = () => {
       <HomeCarousel />
       <TrackingDashboard />
 
-      <Login />
+      <ContactUs />
       <SupportBrand />
       {/* <Contact /> */}
     </>

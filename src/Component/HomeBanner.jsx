@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import AOS from "aos";
 import CornerBanner from "../assets/CornerBanner.png";
 import "aos/dist/aos.css";
@@ -45,14 +46,15 @@ const HeroBanner = () => {
   };
 
   return (
-    <div className="relative w-full h-[850px] overflow-hidden bg-[#001524] font-sans mt-32">
+    <div className="relative w-full h-[850px] overflow-hidden bg-[#001524] font-sans mt-20 md:mt-32 ">
       <img
         data-aos="fade-up"
-        data-aos-delay="600"
+        data-aos-delay="200"
         src={CornerBanner}
         alt="banner"
-        className="absolute bottom-0 left-0 z-100 w-32 md:w-48 opacity-80"
+        className="hidden md:block absolute bottom-0 left-0 z-70 w-32 md:w-48 opacity-80"
       />
+
       {/* --- CINEMATIC BACKGROUND --- */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -74,17 +76,17 @@ const HeroBanner = () => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 h-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* --- LEFT SIDE (Text with AOS) --- */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 min-h-screen grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center overflow-hidden">
+        {/* --- LEFT SIDE (Text) --- */}
         <div className="text-white">
           <div
             data-aos="fade-right"
-            className="flex items-center space-x-3 mb-6"
+            className="flex items-center space-x-2 mb-4"
           >
             <span className="bg-red-600 p-1 rounded-sm">
-              <Zap size={16} fill="white" />
+              <Zap size={14} fill="white" />
             </span>
-            <span className="text-red-500 font-black tracking-[0.3em] uppercase text-xs">
+            <span className="text-red-500 font-black tracking-[0.25em] uppercase text-[10px] sm:text-xs">
               Premium Logistics Solution
             </span>
           </div>
@@ -92,7 +94,7 @@ const HeroBanner = () => {
           <h1
             data-aos="zoom-in-right"
             data-aos-delay="200"
-            className="text-7xl lg:text-8xl font-black leading-[0.9] mb-8 italic uppercase"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black italic uppercase leading-tight lg:leading-[0.9] mb-4 lg:mb-8"
           >
             {banners[activeTab].title.split(" ")[0]} <br />
             <span className="text-transparent stroke-text">
@@ -102,96 +104,70 @@ const HeroBanner = () => {
 
           <p
             data-aos="fade-up"
-            data-aos-delay="400"
-            className="text-gray-300 text-xl mb-10 max-w-md border-l-4 border-red-600 pl-6 leading-relaxed"
+            data-aos-delay="200"
+            className="text-gray-300 text-sm sm:text-base lg:text-xl mb-6 lg:mb-10 max-w-md border-l-4 border-red-600 pl-4 lg:pl-6 leading-relaxed"
           >
             {banners[activeTab].desc}
           </p>
 
-          <div data-aos="fade-up" data-aos-delay="600" className="flex gap-6">
-            <button className="bg-red-600 hover:bg-white hover:text-red-600 text-white px-10 py-5 font-black transition-all group flex items-center shadow-[0_0_20px_rgba(220,38,38,0.4)]">
-              SHIP NOW{" "}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
+            <Link
+              to="/contact"
+              className="bg-red-600 hover:bg-white hover:text-red-600 text-white px-6 py-3 sm:px-10 sm:py-5 font-black transition-all group flex items-center justify-center shadow-[0_0_20px_rgba(220,38,38,0.4)]"
+            >
+              Contact Us
               <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />
-            </button>
-            <button className="border border-white/30 backdrop-blur-md px-10 py-5 font-black hover:bg-white hover:text-black transition-all uppercase">
+            </Link>
+
+            <Link
+              to="/track"
+              className="border border-white/30 backdrop-blur-md px-6 py-3 sm:px-10 sm:py-5 font-black hover:bg-white hover:text-black transition-all uppercase text-center"
+            >
               Track Order
-            </button>
+            </Link>
           </div>
         </div>
 
-        {/* --- RIGHT SIDE: THE HEAVY ANIMATION --- */}
-        <div className="relative h-full flex items-center justify-center">
-          {/* 1. Radar Effect Background */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              animate={{ scale: [1, 1.5], opacity: [0.3, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="w-96 h-96 border-2 border-red-600/30 rounded-full absolute"
-            />
-            <div className="w-[500px] h-[500px] border border-white/5 rounded-full animate-spin-slow absolute"></div>
-          </div>
+        {/* --- RIGHT SIDE ANIMATION (DESKTOP ONLY) --- */}
+        <div className="hidden lg:flex relative h-full items-center justify-center">
+          <div className="relative w-full h-[360px]">
+            {/* Radar */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div
+                animate={{ scale: [1, 1.4], opacity: [0.3, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="w-80 h-80 border-2 border-red-600/30 rounded-full absolute"
+              />
+              <div className="w-[420px] h-[420px] border border-white/5 rounded-full animate-spin-slow absolute"></div>
+            </div>
 
-          {/* 2. Parachute & Bike Journey */}
-          <div className="relative w-full h-[400px]">
-            {/* Parachute Landing (Top to Mid) */}
+            {/* Parachute */}
             <motion.div
-              key={activeTab + "-drop"}
-              initial={{ y: -500, opacity: 0, rotate: -15 }}
-              animate={{ y: 150, opacity: [0, 1, 1, 0], rotate: 0 }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                times: [0, 0.2, 0.8, 1],
-              }}
+              initial={{ y: -400, opacity: 0 }}
+              animate={{ y: 120, opacity: [0, 1, 1, 0] }}
+              transition={{ duration: 4, repeat: Infinity }}
               className="absolute left-1/4 flex flex-col items-center"
             >
-              <div className="w-20 h-16 bg-red-600 rounded-t-full shadow-2xl relative">
-                <div className="absolute -bottom-4 left-2 w-[1px] h-6 bg-white/40 rotate-12"></div>
-                <div className="absolute -bottom-4 right-2 w-[1px] h-6 bg-white/40 -rotate-12"></div>
-              </div>
+              <div className="w-16 h-14 bg-red-600 rounded-t-full" />
               <Package
-                size={40}
-                className="text-white mt-4 bg-red-600 p-1 rounded shadow-lg"
+                size={32}
+                className="text-white mt-3 bg-red-600 p-1 rounded"
               />
             </motion.div>
 
-            {/* Bike Express Delivery (Left to Right) */}
+            {/* Bike */}
             <motion.div
-              animate={{ x: [-100, 400] }}
+              animate={{ x: [-80, 350] }}
               transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-              className="absolute bottom-10 flex flex-col items-center"
+              className="absolute bottom-8"
             >
-              <div className="relative">
-                {/* Speed Lines */}
-                <div className="absolute -left-10 top-1/2 space-y-1">
-                  <div className="h-1 w-10 bg-red-500 rounded-full animate-pulse"></div>
-                  <div className="h-[2px] w-14 bg-white/30 rounded-full"></div>
-                </div>
-
-                <div className="flex flex-col items-center">
-                  <span className="text-[10px] font-bold text-red-500 bg-white px-2 py-0.5 rounded-full mb-1">
-                    EXPRESS
-                  </span>
-                  <Bike
-                    size={80}
-                    className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]"
-                  />
-                </div>
-              </div>
+              <Bike size={70} className="text-white drop-shadow-lg" />
             </motion.div>
 
-            {/* Home Icon (Fixed Goal) */}
-            <div className="absolute right-0 bottom-10 flex flex-col items-center text-white">
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-              >
-                <Home
-                  size={60}
-                  className="text-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.6)]"
-                />
-              </motion.div>
-              <span className="text-xs font-black mt-2 tracking-widest uppercase">
+            {/* Home */}
+            <div className="absolute right-0 bottom-8 text-white text-center">
+              <Home size={50} className="text-red-600" />
+              <span className="text-xs font-black mt-2 block">
                 Safe Delivery
               </span>
             </div>

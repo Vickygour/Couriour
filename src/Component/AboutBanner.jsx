@@ -4,7 +4,7 @@ import { Globe, ShieldCheck, Zap, Users, ArrowRight } from "lucide-react";
 
 const AboutHero = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#050b18] py-20 px-6 mt-32">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#050b18] py-20 px-6 mt-20 md:mt-32">
       {/* --- Background High-Tech Elements --- */}
       <div className="absolute inset-0 z-0">
         {/* Animated Gradient Glow */}
@@ -29,7 +29,7 @@ const AboutHero = () => {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black text-white italic leading-[1.1] mb-8 uppercase tracking-tighter">
+          <h1 className="text-4xl md:text-6xl font-black text-white italic leading-[1.1] mb-8 uppercase tracking-tighter">
             We Don’t Just <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
               Move Parcels.
@@ -38,10 +38,11 @@ const AboutHero = () => {
             We Move <span className="text-white">Trust.</span>
           </h1>
 
-          <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed mb-10 max-w-xl italic">
-            Har delivery ke peeche ek umeed hoti hai. Hamara network har gali,
-            har shehar aur har border ko cross karke aapki umeedon ko sahi waqt
-            par manzil tak pahunchata hai.
+          <p className="text-gray-400 text-md md:text-lg font-medium leading-relaxed mb-10 max-w-xl italic">
+            At Localmate, every shipment represents responsibility and trust.
+            Our integrated logistics network connects local routes, major
+            cities, and international borders to ensure fast, secure, and
+            reliable deliveries— exactly when your business needs them.
           </p>
 
           <div className="flex flex-wrap gap-6">

@@ -4,7 +4,7 @@ import { Globe, ShieldCheck, Users, ArrowRight } from "lucide-react";
 
 const ContactHero = () => {
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-[#050b18] px-6 py-24 mt-32">
+    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-[#050b18] px-6 py-24 mt-20 md:mt-32">
       {/* --- Background Effects --- */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-red-600/10 blur-[140px] rounded-full animate-pulse"></div>

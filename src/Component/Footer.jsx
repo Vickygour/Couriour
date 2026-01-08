@@ -20,19 +20,19 @@ const EnhancedFooter = () => {
         <div className="max-w-7xl mx-auto px-6 py-3 grid grid-cols-1 md:grid-cols-4 gap-4 text-[11px] font-bold">
           <div className="flex items-center gap-2">
             <MapPin size={14} className="text-red-600" />
-            <span>55 Main Street, Malborne, Australia</span>
+            <span>Kamal Vihar, Burari, North Delhi-110084</span>
           </div>
           <div className="flex items-center gap-2">
             <Mail size={14} className="text-red-600" />
-            <span>support@example.com</span>
+            <span>localmate2025@gmail.com</span>
           </div>
           <div className="flex items-center gap-2">
-            <Mail size={14} className="text-red-600" />
-            <span>contact@gmail.com</span>
+            <Phone size={14} className="text-red-600" />
+            <span>+91 8826262858</span>
           </div>
           <div className="flex items-center gap-2">
             <MapPin size={14} className="text-red-600" />
-            <span>734 H, Bryan Burlington, NC</span>
+            <span>Kamal Vihar, Burari, North Delhi-110084</span>
           </div>
         </div>
       </div>
@@ -58,12 +58,13 @@ const EnhancedFooter = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <Phone size={18} className="text-red-600" />
-              <span className="font-bold">+91 (450) 8822 11</span>
+              <span className="font-bold">+91 8826262858</span>
             </div>
             <div className="flex items-center gap-3">
-              <MapPin size={18} className="text-red-600" />
+              <MapPin size={24} className="text-red-600" />
               <span className="text-sm text-slate-400">
-                Sector 62, Logistics Hub, New Delhi
+                Kh. No-11/14/1 And 14/1 (2nd Floor), Street No-03 Block A, Kamal
+                Vihar, Burari, North Delhi-110084
               </span>
             </div>
           </div>

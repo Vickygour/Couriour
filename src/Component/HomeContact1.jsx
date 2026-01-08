@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { Headset, ArrowRight, Play, Globe, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const FinalLogisticsTemplate = () => {
-  // Animation Variants
+  const videoRef = useRef(null);
+
+  const handleVideoToggle = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.pause();
+    }
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
   };
 
   const itemVariants = {
@@ -23,7 +31,6 @@ const FinalLogisticsTemplate = () => {
 
   return (
     <div className="bg-white font-sans overflow-hidden">
-      {/* --- REFINED BOTTOM CTA SECTION --- */}
       <motion.section
         variants={containerVariants}
         initial="hidden"
@@ -31,10 +38,10 @@ const FinalLogisticsTemplate = () => {
         viewport={{ once: true, amount: 0.2 }}
         className="flex flex-wrap lg:flex-nowrap min-h-[450px] w-full"
       >
-        {/* Block 1: The Ambient Visual */}
+        {/* BLOCK 1 */}
         <motion.div
           variants={itemVariants}
-          className="w-full lg:w-1/4 relative group overflow-hidden cursor-crosshair"
+          className="w-full lg:w-1/4 relative group overflow-hidden"
         >
           <motion.img
             whileHover={{ scale: 1.15 }}
@@ -42,119 +49,89 @@ const FinalLogisticsTemplate = () => {
             src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=800"
             className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
           />
-          {/* Overlay with subtle pattern */}
-          <div className="absolute inset-0 bg-[#0a1d37]/50 mix-blend-multiply group-hover:bg-transparent transition-colors duration-700" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1d37] to-transparent opacity-60" />
-
-          <div className="absolute bottom-8 left-8 text-white opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">
-            <p className="text-[10px] font-black uppercase tracking-[0.3em]">
-              Global Logistics
-            </p>
-            <h5 className="text-xl font-black italic italic uppercase tracking-tighter">
-              01. Efficiency
-            </h5>
-          </div>
+          <div className="absolute inset-0 bg-[#0a1d37]/50 mix-blend-multiply" />
         </motion.div>
 
-        {/* Block 2: Service CTA (Deep Dark) */}
+        {/* BLOCK 2 – Explore Solutions → /contact */}
         <motion.div
           variants={itemVariants}
-          whileHover={{ zIndex: 10 }}
-          className="w-full lg:w-1/4 bg-[#04152d] p-12 flex flex-col justify-center items-center text-center group relative overflow-hidden cursor-pointer"
+          className="w-full lg:w-1/4 bg-[#04152d] p-12 flex flex-col justify-center items-center text-center relative"
         >
-          {/* Background Animated Glow */}
-          <div className="absolute -top-24 -right-24 w-48 h-48 bg-red-600/10 blur-[80px] group-hover:bg-red-600/20 transition-all duration-500" />
+          <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-8 border border-white/10">
+            <Globe className="text-red-600" size={40} />
+          </div>
 
-          <motion.div
-            whileHover={{ rotate: 15, scale: 1.1 }}
-            className="relative z-10 w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-8 border border-white/10 group-hover:border-red-600/50 transition-colors"
-          >
-            <Globe
-              className="text-red-600 group-hover:animate-pulse"
-              size={40}
-            />
-          </motion.div>
-
-          <h4 className="relative z-10 text-white text-4xl font-black uppercase italic mb-6 leading-[0.9] tracking-tighter">
+          <h4 className="text-white text-4xl font-black uppercase italic mb-6 leading-[0.9]">
             Need Our <br /> <span className="text-red-600">Services?</span>
           </h4>
 
-          <motion.div
-            whileHover={{ x: 10 }}
-            className="relative z-10 flex items-center gap-3 text-red-500 font-black uppercase text-[11px] tracking-widest group"
+          <Link
+            to="/contact"
+            className="flex items-center gap-3 text-red-500 font-black uppercase text-[11px] tracking-widest hover:translate-x-2 transition-transform"
           >
             Explore Solutions
-            <span className="w-8 h-[1px] bg-red-600 group-hover:w-12 transition-all" />
             <ArrowRight size={18} />
-          </motion.div>
-
-          {/* Decorative numbering */}
-          <span className="absolute top-10 right-10 text-white/5 font-black italic text-6xl">
-            02
-          </span>
+          </Link>
         </motion.div>
 
-        {/* Block 3: Video Interaction (Dynamic Center) */}
+        {/* BLOCK 3 – VIDEO SECTION */}
         <motion.div
           variants={itemVariants}
-          className="w-full lg:w-1/4 relative group cursor-pointer overflow-hidden"
+          className="w-full lg:w-1/4 relative group overflow-hidden cursor-pointer"
+          onClick={handleVideoToggle}
         >
-          <motion.img
-            whileHover={{ scale: 1.1 }}
-            src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=800"
-            className="w-full h-full object-cover brightness-75 group-hover:brightness-100 transition-all duration-700"
-          />
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#0a1d37]/80 via-transparent to-transparent opacity-60" />
+          <video
+            ref={videoRef}
+            className="w-full h-full object-cover"
+            poster="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=800"
+            muted
+            loop
+          >
+            <source
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              type="video/mp4"
+            />
+          </video>
+
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#0a1d37]/70 via-transparent to-transparent" />
 
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <motion.div
               whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center text-black shadow-[0_0_50px_rgba(250,204,21,0.3)] relative"
+              className="w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(250,204,21,0.4)]"
             >
-              {/* Spinning Ring Animation */}
-              <div className="absolute inset-0 border-2 border-dashed border-yellow-400 rounded-full animate-[spin_8s_linear_infinite]" />
               <Play fill="currentColor" size={32} className="ml-1" />
             </motion.div>
-            <p className="text-white font-black italic uppercase text-xs mt-6 tracking-[0.4em] opacity-0 group-hover:opacity-100 transition-opacity">
-              Watch Process
+
+            <p className="text-white font-black uppercase text-xs mt-6 tracking-[0.4em]">
+              Play Video
             </p>
           </div>
         </motion.div>
 
-        {/* Block 4: Agent Connect (High Energy) */}
+        {/* BLOCK 4 – Request Callback → CALL */}
         <motion.div
           variants={itemVariants}
-          className="w-full lg:w-1/4 bg-red-600 p-12 flex flex-col justify-center items-center text-center group relative overflow-hidden cursor-pointer"
+          className="w-full lg:w-1/4 bg-red-600 p-12 flex flex-col justify-center items-center text-center relative"
         >
-          {/* Subtle Texture Overlay */}
-          <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ repeat: Infinity, duration: 3 }}
-            className="bg-white p-5 rounded-3xl shadow-2xl mb-8 group-hover:bg-[#0a1d37] transition-colors duration-500"
+            className="bg-white p-5 rounded-3xl shadow-2xl mb-8"
           >
-            <Headset
-              className="text-red-600 group-hover:text-white transition-colors"
-              size={42}
-            />
+            <Headset className="text-red-600" size={42} />
           </motion.div>
 
-          <h4 className="text-white text-4xl font-black uppercase italic mb-6 leading-[0.9] tracking-tighter">
+          <h4 className="text-white text-4xl font-black uppercase italic mb-6 leading-[0.9]">
             Discuss With <br /> <span className="text-[#0a1d37]">Agents</span>
           </h4>
 
-          <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: "#0a1d37" }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white text-red-600 font-black italic uppercase px-8 py-3 rounded-full text-[10px] tracking-widest flex items-center gap-3 shadow-xl transition-all"
+          <a
+            href="tel:+918826262858"
+            className="bg-white text-red-600 font-black italic uppercase px-8 py-3 rounded-full text-[10px] tracking-widest flex items-center gap-3 shadow-xl hover:bg-[#0a1d37] hover:text-white transition-all"
           >
             Request Callback <ExternalLink size={14} />
-          </motion.button>
-
-          {/* Ambient Lighting */}
-          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-white/20 blur-[50px] rounded-full" />
+          </a>
         </motion.div>
       </motion.section>
     </div>

@@ -26,7 +26,7 @@ const PartTruckloadPage = () => {
   }, []);
 
   return (
-    <div className="bg-[#020617] mt-16 md:mt-32 text-slate-200 font-sans antialiased selection:bg-red-600 selection:text-white overflow-x-hidden">
+    <div className="bg-[#020617] mt-20 md:mt-32 text-slate-200 font-sans antialiased selection:bg-red-600 selection:text-white overflow-x-hidden">
       {/* --- SECTION 1: MASTER BANNER --- */}
       <section className="relative h-[70vh] md:h-[85vh] flex items-center justify-center overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 z-0">
@@ -237,22 +237,52 @@ const PartTruckloadPage = () => {
               cost-optimized part-truckload nodes.
             </p>
             <div className="space-y-4 md:space-y-6">
-              <ContactInfo
-                icon={<MapPin size={16} className="text-red-600" />}
-                text="Logistics Plaza, Level 4, New Delhi, India"
-              />
-              <ContactInfo
-                icon={<Phone size={16} className="text-red-600" />}
-                text="+91 4500 7766 55"
-              />
-              <ContactInfo
-                icon={<Mail size={16} className="text-red-600" />}
-                text="freight.support@localmate.com"
-              />
+              {/* ADDRESS */}
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Kh+No+11/14/1+And+14/1+Street+No+03+Block+A+Kamal+Vihar+Burari+Delhi+110084"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 text-slate-300 hover:text-red-600 transition-colors"
+              >
+                <MapPin size={16} className="text-red-600 mt-1" />
+                <span className="text-sm leading-relaxed">
+                  Kh No 11/14/1 And 14/1 (2nd Floor), Street No-03, Block A,
+                  Kamal Vihar, Burari, North Delhi-110084
+                </span>
+              </a>
+
+              {/* PHONE */}
+              <a
+                href="tel:+918826262858"
+                className="flex items-center gap-3 text-slate-300 hover:text-red-600 transition-colors"
+              >
+                <Phone size={16} className="text-red-600" />
+                <span className="text-sm font-semibold">+91 8826262858</span>
+              </a>
+
+              {/* EMAIL */}
+              <a
+                href="mailto:localmate2025@gmail.com"
+                className="flex items-center gap-3 text-slate-300 hover:text-red-600 transition-colors"
+              >
+                <Mail size={16} className="text-red-600" />
+                <span className="text-sm font-semibold">
+                  localmate2025@gmail.com
+                </span>
+              </a>
+
+              {/* ENQUIRY BUTTON */}
+              <button
+                type="button"
+                onClick={() =>
+                  (window.location.href =
+                    "mailto:localmate2025@gmail.com?subject=Service Enquiry - Localmate&body=Hello Localmate Team,%0D%0A%0D%0AI would like to enquire about your logistics services.%0D%0A%0D%0AName:%0D%0APhone:%0D%0AService Required:%0D%0ACity:%0D%0A%0D%0AThank you.")
+                }
+                className="mt-8 md:mt-12 w-full bg-red-600 text-white py-5 md:py-6 rounded-xl md:rounded-2xl font-black uppercase italic tracking-widest text-[10px] hover:bg-white hover:text-black transition-all shadow-xl"
+              >
+                Send Enquiry
+              </button>
             </div>
-            <button className="mt-8 md:mt-12 w-full bg-red-600 text-white py-4 md:py-5 rounded-xl md:rounded-2xl font-black uppercase italic tracking-widest text-[10px] hover:bg-white hover:text-black transition-all">
-              Calculate Freight Cost
-            </button>
           </div>
         </div>
       </section>
