@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom"; // useNavigate add kiya
 import {
   Menu,
   X,
@@ -11,13 +11,24 @@ import {
   Twitter,
   Facebook,
   Instagram,
+  LogOut, // Icon for logout
+  User as UserIcon,
 } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false); // Dropdown control state
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Image ke basis par dropdown items
+  // Auth States
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  const handleLogout = () => {
+    localStorage.clear(); // Saara data saaf (token, login status etc)
+    navigate("/logins");
+  };
+
   const serviceItems = [
     { name: "Bike Service", path: "/services/Bike-service" },
     { name: "Express Parcel", path: "/services/express" },
@@ -36,6 +47,7 @@ const Navbar = () => {
       dropdownItems: serviceItems,
     },
     { name: "Tracking", path: "/tracking" },
+    { name: "Create Shipment", path: "/CreateShipment" }, // Naya Link Add Kiya
     { name: "Contact", path: "/contact" },
   ];
 
@@ -45,24 +57,18 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-full fixed top-0 z-[100] font-sans">
+    <header className="w-full fixed top-0 z-[100] font-sans ">
       {/* --- TOP WHITE BAR --- */}
       <div className="bg-white border-b border-gray-100 hidden lg:block">
         <div className="flex justify-between items-center h-12 max-w-[1400px] mx-auto px-4">
-          {/* LEFT SIDE */}
           <div className="flex items-center space-x-8 ml-40">
-            {/* ADDRESS */}
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Kh+No+11/14/1+And+14/1+Street+No+03+Block+A+Kamal+Vihar+Burari+Delhi+110084"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#"
               className="flex items-center text-[13px] text-gray-600 hover:text-red-600 transition-colors"
             >
               <MapPin size={14} className="text-red-600 mr-2" />
               Kh No 11/14/1, Kamal Vihar, Burari, Delhi
             </a>
-
-            {/* EMAIL */}
             <a
               href="mailto:localmate2025@gmail.com"
               className="flex items-center text-[13px] text-gray-600 hover:text-red-600 transition-colors"
@@ -72,15 +78,37 @@ const Navbar = () => {
             </a>
           </div>
 
-          {/* RIGHT SIDE – SUPPORT */}
-          <a href="tel:+918826262858" className="flex items-center">
-            <div className="bg-red-600 text-white text-[13px] px-6 h-12 flex items-center transform skew-x-[-20deg] mr-[-20px] hover:bg-red-700 transition-colors">
-              <div className="transform skew-x-[20deg] flex items-center font-bold">
-                <MapPin size={14} className="mr-2" />
-                Quick Support: +91 8826262858
+          <div className="flex items-center space-x-4">
+            {/* LOGIN / LOGOUT BUTTON (TOP BAR) */}
+            {isLoggedIn ? (
+              <div className="flex items-center gap-3">
+                <span className="text-[11px] font-black uppercase text-red-600 bg-red-50 px-2 py-1 rounded border border-red-100 italic">
+                  {user.role || "Partner"} Mode
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="text-[12px] font-bold text-gray-700 hover:text-red-600 flex items-center gap-1 transition-colors"
+                >
+                  <LogOut size={14} /> Logout
+                </button>
               </div>
-            </div>
-          </a>
+            ) : (
+              <Link
+                to="/logins"
+                className="text-[12px] font-bold text-gray-700 hover:text-red-600 flex items-center gap-1 transition-colors"
+              >
+                <UserIcon size={14} /> Partner Login
+              </Link>
+            )}
+
+            <a href="tel:+918826262858" className="flex items-center">
+              <div className="bg-red-600 text-white text-[13px] px-6 h-12 flex items-center transform skew-x-[-20deg] mr-[-20px] hover:bg-red-700 transition-colors">
+                <div className="transform skew-x-[20deg] flex items-center font-bold">
+                  Quick Support: +91 8826262858
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -110,7 +138,7 @@ const Navbar = () => {
 
           {/* DESKTOP MENU ITEMS */}
           <div className="hidden lg:flex items-center space-x-8 ml-48">
-            {menuLinks.map((link, i) => (
+            {menuLinks.map((link) => (
               <div
                 key={link.name}
                 className="relative group h-full flex items-center"
@@ -142,7 +170,7 @@ const Navbar = () => {
                   )}
                 </NavLink>
 
-                {/* DROPDOWN MENU FOR SERVICES */}
+                {/* DROPDOWN MENU */}
                 <AnimatePresence>
                   {link.hasDropdown &&
                     link.name === "Services" &&
@@ -151,7 +179,7 @@ const Navbar = () => {
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 15 }}
-                        className="absolute top-[100%] left-0 w-40 bg-white shadow-2xl border-t-4 border-red-600 py-4 z-50 rounded-b-xl"
+                        className="absolute top-[100%] left-0 w-48 bg-white shadow-2xl border-t-4 border-red-600 py-4 z-50 rounded-b-xl"
                       >
                         {link.dropdownItems.map((subItem) => (
                           <Link
@@ -165,17 +193,6 @@ const Navbar = () => {
                       </motion.div>
                     )}
                 </AnimatePresence>
-
-                {/* Underline Animation */}
-                <NavLink to={link.path}>
-                  {({ isActive }) => (
-                    <div
-                      className={`absolute bottom-0 left-0 h-[3px] bg-red-600 transition-all duration-300 ${
-                        isActive ? "w-full" : "w-0 group-hover:w-full"
-                      }`}
-                    ></div>
-                  )}
-                </NavLink>
               </div>
             ))}
           </div>
@@ -242,7 +259,7 @@ const Navbar = () => {
             </div>
 
             <div className="flex flex-col p-8 space-y-6 overflow-y-auto">
-              {menuLinks.map((link, i) => (
+              {menuLinks.map((link) => (
                 <div key={link.name}>
                   <div className="flex justify-between items-center">
                     <NavLink
@@ -256,43 +273,37 @@ const Navbar = () => {
                     >
                       {link.name}
                     </NavLink>
-                    {link.hasDropdown && (
-                      <button
-                        onClick={() =>
-                          setIsServicesOpen(
-                            isServicesOpen === link.name ? "" : link.name
-                          )
-                        }
-                      >
-                        <ChevronDown
-                          className={`text-white transition-transform ${
-                            isServicesOpen === link.name ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-                    )}
                   </div>
-                  {link.hasDropdown && isServicesOpen === link.name && (
-                    <div className="ml-6 mt-4 flex flex-col space-y-4 border-l border-white/10 pl-4">
-                      {link.dropdownItems.map((sub) => (
-                        <Link
-                          key={sub.name}
-                          to={sub.path}
-                          onClick={closeMenu}
-                          className="text-white/70 font-bold uppercase text-lg italic"
-                        >
-                          {sub.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
                 </div>
               ))}
+
+              {/* MOBILE LOGIN/LOGOUT */}
+              <div className="pt-6 border-t border-white/10">
+                {isLoggedIn ? (
+                  <button
+                    onClick={handleLogout}
+                    className="text-2xl font-black text-red-600 uppercase italic"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to="/logins"
+                    onClick={closeMenu}
+                    className="text-2xl font-black text-white/50 hover:text-red-600 uppercase italic transition-all"
+                  >
+                    Partner Login
+                  </Link>
+                )}
+              </div>
             </div>
+
             <div className="mt-auto p-8 bg-red-600">
-              <p className="text-white font-bold mb-2">Need help?</p>
+              <p className="text-white font-bold mb-2 uppercase text-xs tracking-widest">
+                Active Partner: {user.name || "Guest"}
+              </p>
               <h3 className="text-2xl font-black text-white italic">
-                +91 98765 43210
+                +91 8826262858
               </h3>
             </div>
           </motion.div>
