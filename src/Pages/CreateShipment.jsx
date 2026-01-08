@@ -4,7 +4,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import API from "../../utils/api"; // Import your API instance
+import API from "../../utils/api";
 import Payment from "../assets/Payment.jpeg";
 
 import {
@@ -84,7 +84,6 @@ const CreateShipment = () => {
         total: subtotal + tax,
       });
     };
-
     calculateEstimate();
   }, [formData.weight, formData.method]);
 
@@ -136,22 +135,15 @@ const CreateShipment = () => {
 
   const nextStep = () => {
     if (!validateStep()) return;
-
-    if (step === 4) {
-      createShipment();
-    } else if (step === 5) {
-      verifyPayment();
-    } else {
-      setStep((prev) => prev + 1);
-    }
+    if (step === 4) createShipment();
+    else if (step === 5) verifyPayment();
+    else setStep((prev) => prev + 1);
   };
 
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
-  // UPDATED: Create Shipment with API
   const createShipment = async () => {
     setLoading(true);
-
     try {
       const payload = {
         sender: {
@@ -185,17 +177,13 @@ const CreateShipment = () => {
         deliveryMethod: formData.method,
       };
 
-      // API Call - No need to write full URL
       const response = await API.post("/shipment/create", payload);
-
       if (response.data.success) {
         const { trackingCode, shipment, qrCode } = response.data.data;
-
         setTrackingCode(trackingCode);
         setShipmentData(shipment);
         setPaymentQR(qrCode || Payment);
         setPricing(shipment.pricing);
-
         toast.success("Shipment created successfully!");
         setStep(5);
       } else {
@@ -203,13 +191,10 @@ const CreateShipment = () => {
       }
     } catch (error) {
       console.error("Create Shipment Error:", error);
-
-      // Fallback to demo mode if backend not ready
       const demoTrackingCode = `LM-${Math.random()
         .toString(36)
         .substring(2, 8)
         .toUpperCase()}-IN`;
-
       setTrackingCode(demoTrackingCode);
       setShipmentData({
         pricing: pricing,
@@ -217,7 +202,6 @@ const CreateShipment = () => {
         receiver: formData.receiverName,
       });
       setPaymentQR(Payment);
-
       toast.success("Shipment created! (Demo Mode)");
       setStep(5);
     } finally {
@@ -225,16 +209,12 @@ const CreateShipment = () => {
     }
   };
 
-  // UPDATED: Verify Payment with API
   const verifyPayment = async () => {
     setLoading(true);
-
     try {
       const fakeTransactionId = `TXN${Date.now()}${Math.floor(
         Math.random() * 1000
       )}`;
-
-      // API Call - Simple route
       const response = await API.post(
         `/shipment/${trackingCode}/verify-payment`,
         {
@@ -242,7 +222,6 @@ const CreateShipment = () => {
           paymentMethod: "upi",
         }
       );
-
       if (response.data.success) {
         toast.success("Payment verified successfully! 🎉");
         setStep(6);
@@ -251,8 +230,6 @@ const CreateShipment = () => {
       }
     } catch (error) {
       console.error("Payment Verification Error:", error);
-
-      // Auto success for demo mode
       toast.success("Payment completed! (Demo Mode) 💳");
       setStep(6);
     } finally {
@@ -265,14 +242,11 @@ const CreateShipment = () => {
       toast.error("No shipment data available!");
       return;
     }
-
     try {
       const doc = new jsPDF();
-
       doc.setFontSize(22);
       doc.setTextColor(220, 38, 38);
       doc.text("LOCAL MATE LOGISTICS", 14, 20);
-
       doc.setFontSize(10);
       doc.setTextColor(100);
       doc.text(`Tracking ID: ${trackingCode}`, 14, 28);
@@ -317,17 +291,9 @@ const CreateShipment = () => {
         headStyles: { fillColor: [220, 38, 38] },
         theme: "grid",
       });
-
-      const finalY = doc.lastAutoTable.finalY + 10;
-      doc.setFontSize(8);
-      doc.setTextColor(150);
-      doc.text("Thank you for choosing LocalMate Logistics!", 14, finalY);
-      doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, finalY + 5);
-
       doc.save(`LocalMate_Invoice_${trackingCode}.pdf`);
-      toast.success("Invoice downloaded successfully!");
+      toast.success("Invoice downloaded!");
     } catch (e) {
-      console.error("PDF Error:", e);
       toast.error("PDF generation failed.");
     }
   };
@@ -346,38 +312,53 @@ const CreateShipment = () => {
   ];
 
   return (
-    <section className="min-h-screen bg-[#010409] pt-32 pb-20 px-6 font-sans relative">
-      <ToastContainer theme="dark" position="top-right" />
+    <section className="min-h-screen bg-slate-100 pt-32 pb-20 px-6 font-sans relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-red-600/5 blur-[140px] rounded-full" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-slate-400/10 blur-[120px] rounded-full" />
+      </div>
+
+      <ToastContainer theme="light" position="top-right" />
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
+        {/* Sidebar */}
         <div className="lg:col-span-4 space-y-10">
           <div>
-            <h2 className="text-white text-5xl font-black italic uppercase tracking-tighter leading-tight">
-              Shipment <br /> <span className="text-red-600">Console.</span>
+            <p className="text-red-600 text-[10px] uppercase tracking-[0.4em] font-black mb-2">
+              Network Topology
+            </p>
+            <h2 className="text-slate-900 text-5xl font-black italic uppercase tracking-tighter leading-tight">
+              Shipment <br /> <span className="text-slate-400">Console.</span>
             </h2>
           </div>
-          <div className="space-y-6">
+          <div className="space-y-4">
             {steps.map((s) => (
               <div
                 key={s.id}
-                className={`flex items-center gap-5 transition-all ${
-                  step >= s.id ? "opacity-100" : "opacity-20"
+                className={`flex items-center gap-5 transition-all p-3 rounded-2xl ${
+                  step >= s.id
+                    ? "bg-white/70 border border-slate-200 shadow-sm"
+                    : "opacity-30"
                 }`}
               >
                 <div
                   className={`w-12 h-12 rounded-xl flex items-center justify-center border-2 ${
                     step > s.id
-                      ? "bg-green-600 border-green-600 text-white shadow-lg shadow-green-600/20"
+                      ? "bg-green-500 border-green-500 text-white"
                       : step === s.id
                       ? "bg-red-600 border-red-600 text-white shadow-lg shadow-red-600/20"
-                      : "border-white/10 text-white"
+                      : "border-slate-300 text-slate-400"
                   }`}
                 >
                   {step > s.id ? <CheckCircle size={20} /> : s.icon}
                 </div>
                 <div>
-                  <p className="text-white font-black italic uppercase text-sm">
+                  <p className="text-slate-900 font-black italic uppercase text-sm">
                     {s.name}
+                  </p>
+                  <p className="text-[9px] text-slate-500 uppercase tracking-widest font-bold">
+                    Phase 0{s.id}
                   </p>
                 </div>
               </div>
@@ -385,7 +366,8 @@ const CreateShipment = () => {
           </div>
         </div>
 
-        <div className="lg:col-span-8 bg-white/[0.02] border border-white/5 rounded-[3rem] p-10 lg:p-16 backdrop-blur-3xl shadow-2xl relative">
+        {/* Main Console */}
+        <div className="lg:col-span-8 bg-white/70 border border-slate-200 rounded-[3rem] p-8 lg:p-14 backdrop-blur shadow-xl relative overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
@@ -395,10 +377,10 @@ const CreateShipment = () => {
               transition={{ duration: 0.3 }}
               className="space-y-8"
             >
-              {/* STEP 1: ORIGIN */}
+              {/* Step Renderers */}
               {step === 1 && (
                 <div className="space-y-6">
-                  <Header title="Origin Setup" sub="Pickup Details" />
+                  <Header title="Origin Setup" sub="Pickup Location Data" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <CustomInput
                       label="SENDER NAME"
@@ -435,7 +417,6 @@ const CreateShipment = () => {
                       label="PINCODE"
                       placeholder="6 Digits"
                       type="number"
-                      maxLength={6}
                       value={formData.originPincode}
                       onChange={(v) =>
                         setFormData({ ...formData, originPincode: v })
@@ -443,27 +424,9 @@ const CreateShipment = () => {
                       required
                     />
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <CustomInput
-                      label="CITY"
-                      placeholder="City Name"
-                      value={formData.originCity}
-                      onChange={(v) =>
-                        setFormData({ ...formData, originCity: v })
-                      }
-                    />
-                    <CustomInput
-                      label="STATE"
-                      placeholder="State Name"
-                      value={formData.originState}
-                      onChange={(v) =>
-                        setFormData({ ...formData, originState: v })
-                      }
-                    />
-                  </div>
                   <CustomTextarea
                     label="PICKUP ADDRESS"
-                    placeholder="House No, Street, Landmark, Area"
+                    placeholder="Full Address Details..."
                     value={formData.originAddress}
                     onChange={(v) =>
                       setFormData({ ...formData, originAddress: v })
@@ -473,10 +436,9 @@ const CreateShipment = () => {
                 </div>
               )}
 
-              {/* STEP 2: DESTINATION */}
               {step === 2 && (
                 <div className="space-y-6">
-                  <Header title="Destination" sub="Drop-off Details" />
+                  <Header title="Destination" sub="Drop-off Target Node" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <CustomInput
                       label="RECEIVER NAME"
@@ -501,47 +463,35 @@ const CreateShipment = () => {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <CustomInput
-                      label="EMAIL (Optional)"
-                      placeholder="receiver@example.com"
-                      type="email"
-                      value={formData.receiverEmail}
-                      onChange={(v) =>
-                        setFormData({ ...formData, receiverEmail: v })
-                      }
-                    />
-                    <CustomInput
                       label="PINCODE"
                       placeholder="6 Digits"
                       type="number"
-                      maxLength={6}
                       value={formData.destPincode}
                       onChange={(v) =>
                         setFormData({ ...formData, destPincode: v })
                       }
                       required
                     />
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <CustomInput
-                      label="CITY"
-                      placeholder="City Name"
-                      value={formData.destCity}
-                      onChange={(v) =>
-                        setFormData({ ...formData, destCity: v })
-                      }
-                    />
-                    <CustomInput
-                      label="STATE"
-                      placeholder="State Name"
-                      value={formData.destState}
-                      onChange={(v) =>
-                        setFormData({ ...formData, destState: v })
-                      }
-                    />
+                    <div className="grid grid-cols-2 gap-2">
+                      <CustomInput
+                        label="CITY"
+                        value={formData.destCity}
+                        onChange={(v) =>
+                          setFormData({ ...formData, destCity: v })
+                        }
+                      />
+                      <CustomInput
+                        label="STATE"
+                        value={formData.destState}
+                        onChange={(v) =>
+                          setFormData({ ...formData, destState: v })
+                        }
+                      />
+                    </div>
                   </div>
                   <CustomTextarea
                     label="DELIVERY ADDRESS"
-                    placeholder="House No, Street, Landmark, Area"
+                    placeholder="House No, Street, Area..."
                     value={formData.destAddress}
                     onChange={(v) =>
                       setFormData({ ...formData, destAddress: v })
@@ -551,14 +501,13 @@ const CreateShipment = () => {
                 </div>
               )}
 
-              {/* STEP 3: PACKAGE */}
               {step === 3 && (
                 <div className="space-y-8">
-                  <Header title="Cargo Specs" sub="Package Information" />
-                  <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
+                  <Header title="Cargo Specs" sub="Technical Package Data" />
+                  <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200">
                     <Weight className="text-red-600 mb-4" size={32} />
-                    <label className="text-white font-black text-xs block mb-4 uppercase tracking-widest">
-                      Weight: {formData.weight} KG
+                    <label className="text-slate-900 font-black text-xs block mb-4 uppercase tracking-widest">
+                      Weight Matrix: {formData.weight} KG
                     </label>
                     <input
                       type="range"
@@ -572,25 +521,20 @@ const CreateShipment = () => {
                           weight: parseFloat(e.target.value),
                         })
                       }
-                      className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-red-600"
+                      className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-red-600"
                     />
-                    <div className="flex justify-between text-[10px] text-gray-500 mt-2">
-                      <span>0.1 KG</span>
-                      <span>100 KG</span>
-                    </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <CustomInput
-                      label="PACKAGE DESCRIPTION"
-                      placeholder="e.g., Books, Electronics"
+                      label="DESCRIPTION"
+                      placeholder="e.g., Electronics"
                       value={formData.packageDescription}
                       onChange={(v) =>
                         setFormData({ ...formData, packageDescription: v })
                       }
                     />
                     <CustomInput
-                      label="PACKAGE VALUE (INR)"
-                      placeholder="Declared Value"
+                      label="DECLARED VALUE (INR)"
                       type="number"
                       value={formData.packageValue}
                       onChange={(v) =>
@@ -598,27 +542,9 @@ const CreateShipment = () => {
                       }
                     />
                   </div>
-                  <div className="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
-                    <input
-                      type="checkbox"
-                      id="fragile"
-                      checked={formData.fragile}
-                      onChange={(e) =>
-                        setFormData({ ...formData, fragile: e.target.checked })
-                      }
-                      className="w-5 h-5 accent-red-600 cursor-pointer"
-                    />
-                    <label
-                      htmlFor="fragile"
-                      className="text-white font-black text-xs uppercase tracking-wider cursor-pointer"
-                    >
-                      Fragile / Handle with Care
-                    </label>
-                  </div>
                 </div>
               )}
 
-              {/* STEP 4: METHOD */}
               {step === 4 && (
                 <div className="space-y-6">
                   <Header title="Transit Mode" sub="Select Delivery Channel" />
@@ -643,226 +569,134 @@ const CreateShipment = () => {
                       id="cargo_ship"
                       name="Cargo Ship"
                       icon={<Ship size={32} />}
-                      duration="10-14 Days"
+                      duration="14 Days"
                       active={formData.method}
                       onClick={(id) => setFormData({ ...formData, method: id })}
                     />
                   </div>
-                  <div className="bg-red-600/10 p-6 rounded-2xl border border-red-600/20">
-                    <p className="text-[10px] text-gray-400 font-bold uppercase mb-4">
-                      Estimated Charges
+                  <div className="bg-slate-900 p-8 rounded-[2rem] text-white shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                      <Send size={100} />
+                    </div>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase mb-4 tracking-widest">
+                      Pricing Matrix
                     </p>
                     <div className="space-y-2 text-sm">
-                      <div className="flex justify-between text-gray-300">
-                        <span>Base Price:</span>
-                        <span>₹{pricing.basePrice.toFixed(2)}</span>
+                      <div className="flex justify-between">
+                        <span>Base + Weight:</span>
+                        <span>
+                          ₹
+                          {(pricing.basePrice + pricing.weightCharges).toFixed(
+                            2
+                          )}
+                        </span>
                       </div>
-                      <div className="flex justify-between text-gray-300">
-                        <span>Weight Charges:</span>
-                        <span>₹{pricing.weightCharges.toFixed(2)}</span>
-                      </div>
-                      <div className="flex justify-between text-gray-300">
+                      <div className="flex justify-between text-slate-400">
                         <span>Tax (18% GST):</span>
                         <span>₹{pricing.tax.toFixed(2)}</span>
                       </div>
-                      <div className="h-[1px] bg-white/10 my-3"></div>
-                      <div className="flex justify-between text-white font-black text-lg">
-                        <span>Estimated Total:</span>
-                        <span className="flex items-center gap-1">
-                          <IndianRupee size={18} />
+                      <div className="h-[1px] bg-white/10 my-4"></div>
+                      <div className="flex justify-between items-end">
+                        <span className="text-xl font-black italic">
+                          ESTIMATED TOTAL
+                        </span>
+                        <span className="text-4xl font-black text-red-500 italic flex items-center gap-1">
+                          <IndianRupee size={24} />
                           {pricing.total.toFixed(2)}
                         </span>
                       </div>
                     </div>
-                    <p className="text-[8px] text-gray-500 mt-3 italic">
-                      * Final amount will be calculated after shipment creation
-                    </p>
                   </div>
                 </div>
               )}
 
-              {/* STEP 5: PAYMENT */}
               {step === 5 && (
                 <div className="space-y-6">
-                  <Header title="Payment" sub="Review & Complete Payment" />
-                  {trackingCode && (
-                    <div className="bg-white/5 p-4 rounded-xl border border-white/10 mb-6">
-                      <p className="text-[10px] text-gray-400 font-bold uppercase mb-2">
-                        Tracking Code Generated
-                      </p>
-                      <p className="text-white font-black text-lg tracking-wider">
-                        {trackingCode}
-                      </p>
-                    </div>
-                  )}
+                  <Header title="Security" sub="Final Payment Verification" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div className="p-6 rounded-[2rem] border-2 border-red-600/50 bg-white/5">
-                      <p className="text-center text-[10px] font-black text-white mb-4 uppercase tracking-widest">
-                        PAYMENT QR CODE
+                    <div className="p-8 rounded-[2rem] border-2 border-red-600 bg-white shadow-xl flex flex-col items-center">
+                      <p className="text-[10px] font-black text-slate-400 mb-4 uppercase tracking-widest">
+                        SCAN TO AUTHORIZE
                       </p>
                       <img
                         src={paymentQR || Payment}
-                        alt="Payment QR"
-                        className="w-40 h-40 mx-auto rounded-lg border border-white/10"
+                        alt="QR"
+                        className="w-44 h-44 rounded-xl border border-slate-100"
                       />
-                      <p className="text-center text-[8px] text-gray-500 mt-3">
-                        Scan to pay (Optional - Demo Mode)
-                      </p>
                     </div>
-                    <div className="bg-red-600/5 p-8 rounded-2xl border border-red-600/20">
-                      <p className="text-[10px] text-gray-400 font-bold uppercase mb-2">
-                        Final Payable Amount
-                      </p>
-                      <p className="text-4xl text-white font-black italic flex items-center gap-2 mb-6">
-                        <IndianRupee size={28} />
-                        {shipmentData
-                          ? shipmentData.pricing.total.toFixed(2)
-                          : pricing.total.toFixed(2)}
-                      </p>
-                      <div className="space-y-2 text-xs">
-                        <div className="flex justify-between text-gray-400">
-                          <span>Base + Weight:</span>
-                          <span>
-                            ₹
-                            {shipmentData
-                              ? (
-                                  shipmentData.pricing.basePrice +
-                                  shipmentData.pricing.weightCharges
-                                ).toFixed(2)
-                              : (
-                                  pricing.basePrice + pricing.weightCharges
-                                ).toFixed(2)}
-                          </span>
-                        </div>
-                        <div className="flex justify-between text-gray-400">
-                          <span>Distance:</span>
-                          <span>
-                            ₹
-                            {shipmentData
-                              ? shipmentData.pricing.distanceCharges.toFixed(2)
-                              : "0.00"}
-                          </span>
-                        </div>
-                        <div className="flex justify-between text-gray-400">
-                          <span>GST (18%):</span>
-                          <span>
-                            ₹
-                            {shipmentData
-                              ? shipmentData.pricing.tax.toFixed(2)
-                              : pricing.tax.toFixed(2)}
-                          </span>
-                        </div>
+                    <div className="space-y-4">
+                      <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <p className="text-[9px] text-slate-400 font-black uppercase mb-1">
+                          Generated Tracking Code
+                        </p>
+                        <p className="text-xl font-black italic text-slate-900 tracking-wider">
+                          {trackingCode}
+                        </p>
+                      </div>
+                      <div className="bg-red-600 p-6 rounded-2xl text-white">
+                        <p className="text-[9px] font-black uppercase mb-1 opacity-70">
+                          Payable Amount
+                        </p>
+                        <p className="text-3xl font-black italic">
+                          ₹{pricing.total.toFixed(2)}
+                        </p>
                       </div>
                     </div>
-                  </div>
-                  <div className="bg-green-600/10 border border-green-600/30 rounded-xl p-4">
-                    <p className="text-green-500 text-[10px] font-bold uppercase tracking-wide">
-                      ✓ Demo Mode Active: Click "Verify & Confirm" to proceed
-                      instantly
-                    </p>
                   </div>
                 </div>
               )}
 
-              {/* STEP 6: SUCCESS */}
               {step === 6 && (
                 <div className="text-center py-10">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", duration: 0.6 }}
-                    className="text-green-500 mx-auto mb-6 flex justify-center"
-                  >
-                    <CheckCircle size={80} />
-                  </motion.div>
-                  <h3 className="text-white text-4xl font-black italic uppercase mb-2">
+                  <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle size={56} />
+                  </div>
+                  <h3 className="text-slate-900 text-5xl font-black italic uppercase">
                     Dispatch Confirmed
                   </h3>
-                  <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-8">
-                    Your shipment is ready for transit
+                  <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-2 mb-10">
+                    Global Node Updated Successfully
                   </p>
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-8 mb-10 inline-block">
-                    <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.3em] mb-3">
-                      Official Dispatch Code
+                  <div className="bg-white border border-slate-200 rounded-[2.5rem] p-10 mb-10 shadow-lg inline-block min-w-[320px]">
+                    <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.3em] mb-3">
+                      Unique Dispatch Key
                     </p>
-                    <div className="flex items-center gap-4 bg-[#010409] px-8 py-4 rounded-xl border-2 border-red-600/50 mb-4">
-                      <span className="text-2xl font-black text-white tracking-widest">
+                    <div className="flex items-center gap-4 bg-slate-50 px-8 py-4 rounded-xl border border-slate-200 mb-2">
+                      <span className="text-2xl font-black text-slate-900 tracking-widest">
                         {trackingCode}
                       </span>
                       <Copy
                         onClick={copyToClipboard}
                         size={20}
-                        className="text-red-600 cursor-pointer hover:scale-110 transition-all"
+                        className="text-red-600 cursor-pointer"
                       />
                     </div>
-                    <p className="text-[10px] text-red-500 font-bold italic">
-                      Save this code for tracking
-                    </p>
                   </div>
-                  {shipmentData && (
-                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 text-left max-w-md mx-auto">
-                      <h4 className="text-white font-black text-sm uppercase mb-4 border-b border-white/10 pb-2">
-                        Shipment Summary
-                      </h4>
-                      <div className="space-y-3 text-xs">
-                        <div className="flex justify-between">
-                          <span className="text-gray-400">From:</span>
-                          <span className="text-white font-bold">
-                            {formData.senderName}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-400">To:</span>
-                          <span className="text-white font-bold">
-                            {formData.receiverName}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-400">Weight:</span>
-                          <span className="text-white font-bold">
-                            {formData.weight} KG
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-400">Method:</span>
-                          <span className="text-white font-bold uppercase">
-                            {formData.method.replace("_", " ")}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-400">Amount Paid:</span>
-                          <span className="text-green-500 font-black">
-                            ₹{shipmentData.pricing.total.toFixed(2)}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
                       onClick={downloadInvoice}
-                      className="bg-red-600 text-white px-10 py-5 rounded-2xl font-black uppercase italic text-xs flex items-center justify-center gap-3 shadow-xl hover:bg-white hover:text-black transition-all"
+                      className="bg-red-600 text-white px-10 py-5 rounded-2xl font-black uppercase italic text-xs flex items-center gap-3 shadow-xl hover:bg-slate-900 transition-all"
                     >
-                      <Download size={16} /> Get Invoice PDF
+                      <Download size={16} /> Export Receipt
                     </button>
                     <button
                       onClick={() => window.location.reload()}
-                      className="bg-white/5 border border-white/10 text-white/70 hover:text-white hover:border-white/30 font-black uppercase text-[10px] tracking-widest px-10 py-5 rounded-2xl transition-all"
+                      className="bg-white border border-slate-200 text-slate-900 px-10 py-5 rounded-2xl font-black uppercase text-xs"
                     >
-                      New Dispatch
+                      New Request
                     </button>
                   </div>
                 </div>
               )}
 
-              {/* NAVIGATION BUTTONS */}
+              {/* Navigation Bar */}
               {step < 6 && (
-                <div className="pt-10 flex items-center justify-between border-t border-white/5">
+                <div className="pt-10 flex items-center justify-between border-t border-slate-100">
                   {step > 1 && (
                     <button
                       onClick={prevStep}
                       disabled={loading}
-                      className="text-white/30 font-black uppercase tracking-widest text-[10px] flex items-center gap-2 hover:text-white transition-all disabled:opacity-30"
+                      className="text-slate-400 font-black uppercase tracking-widest text-[10px] flex items-center gap-2 hover:text-slate-900 transition-all"
                     >
                       <ArrowLeft size={14} /> Back
                     </button>
@@ -870,22 +704,17 @@ const CreateShipment = () => {
                   <button
                     onClick={nextStep}
                     disabled={loading}
-                    className={`bg-red-600 text-white px-10 py-5 rounded-2xl font-black uppercase italic text-[10px] flex items-center gap-3 shadow-lg hover:bg-red-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
-                      step === 1 ? "ml-auto" : ""
-                    }`}
+                    className="bg-red-600 text-white px-10 py-5 rounded-2xl font-black uppercase italic text-[10px] flex items-center gap-3 shadow-lg shadow-red-600/20 hover:scale-105 transition-all ml-auto disabled:opacity-50"
                   >
                     {loading ? (
-                      <>
-                        <Loader2 className="animate-spin" size={16} />
-                        Processing...
-                      </>
+                      <Loader2 className="animate-spin" size={16} />
                     ) : (
                       <>
                         {step === 4
-                          ? "CREATE SHIPMENT"
+                          ? "GENERATE SHIPMENT"
                           : step === 5
-                          ? "VERIFY & CONFIRM"
-                          : "NEXT PHASE"}
+                          ? "SYNC & VERIFY"
+                          : "NEXT PHASE"}{" "}
                         <ArrowRight size={16} />
                       </>
                     )}
@@ -900,13 +729,13 @@ const CreateShipment = () => {
   );
 };
 
-// HELPER COMPONENTS
+// Sub-components
 const Header = ({ title, sub }) => (
   <div className="border-l-4 border-red-600 pl-6 text-left">
-    <h3 className="text-white text-3xl font-black italic uppercase tracking-tighter">
+    <h3 className="text-slate-900 text-3xl font-black italic uppercase tracking-tighter">
       {title}
     </h3>
-    <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest mt-1">
+    <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-1">
       {sub}
     </p>
   </div>
@@ -922,8 +751,8 @@ const CustomInput = ({
   required,
 }) => (
   <div className="space-y-2 text-left">
-    <label className="text-[9px] text-gray-400 font-black uppercase tracking-widest ml-1">
-      {label} {required && <span className="text-red-500">*</span>}
+    <label className="text-[9px] text-slate-400 font-black uppercase tracking-widest ml-1">
+      {label} {required && "*"}
     </label>
     <input
       value={value}
@@ -931,21 +760,21 @@ const CustomInput = ({
       type={type}
       placeholder={placeholder}
       maxLength={maxLength}
-      className="w-full bg-white/5 border-b border-white/10 p-4 text-white outline-none focus:border-red-600 transition-all font-bold text-xs placeholder:text-white/20"
+      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-900 outline-none focus:border-red-600 focus:bg-white transition-all font-bold text-xs"
     />
   </div>
 );
 
 const CustomTextarea = ({ label, placeholder, value, onChange, required }) => (
   <div className="space-y-2 text-left">
-    <label className="text-[9px] text-gray-400 font-black uppercase tracking-widest ml-1">
-      {label} {required && <span className="text-red-500">*</span>}
+    <label className="text-[9px] text-slate-400 font-black uppercase tracking-widest ml-1">
+      {label} {required && "*"}
     </label>
     <textarea
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full bg-white/5 border-b border-white/10 p-4 text-white h-24 outline-none focus:border-red-600 font-bold text-xs resize-none placeholder:text-white/20"
+      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-900 h-24 outline-none focus:border-red-600 focus:bg-white transition-all font-bold text-xs resize-none"
     />
   </div>
 );
@@ -953,23 +782,21 @@ const CustomTextarea = ({ label, placeholder, value, onChange, required }) => (
 const MethodCard = ({ id, name, icon, duration, active, onClick }) => (
   <div
     onClick={() => onClick(id)}
-    className={`p-6 rounded-3xl border-2 cursor-pointer transition-all text-center flex flex-col items-center gap-3 hover:scale-105 ${
+    className={`p-6 rounded-3xl border-2 cursor-pointer transition-all text-center flex flex-col items-center gap-3 ${
       active === id
-        ? "bg-red-600 border-red-600 shadow-xl shadow-red-600/20"
-        : "bg-white/5 border-white/10 opacity-60 hover:opacity-100"
+        ? "bg-white border-red-600 shadow-xl scale-105"
+        : "bg-slate-50 border-transparent opacity-60 hover:opacity-100"
     }`}
   >
-    <div className={active === id ? "text-white" : "text-red-600"}>{icon}</div>
-    <div>
-      <span className="text-white font-black italic uppercase text-xs tracking-widest block">
-        {name}
-      </span>
-      {duration && (
-        <span className="text-white/60 text-[8px] font-bold uppercase block mt-1">
-          {duration}
-        </span>
-      )}
+    <div className={active === id ? "text-red-600" : "text-slate-400"}>
+      {icon}
     </div>
+    <span className="text-slate-900 font-black italic uppercase text-xs tracking-widest block">
+      {name}
+    </span>
+    <span className="text-slate-400 text-[8px] font-bold uppercase block mt-1">
+      {duration}
+    </span>
   </div>
 );
 
@@ -980,7 +807,7 @@ const NavigationIcon = ({ size }) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="3"
     strokeLinecap="round"
     strokeLinejoin="round"
   >

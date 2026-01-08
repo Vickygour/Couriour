@@ -74,39 +74,6 @@ const TrackingBanner = () => {
           </p>
 
           {/* --- THE INPUT CONSOLE --- */}
-          <div
-            className={`relative max-w-xl transition-all duration-500 ${
-              isFocused ? "scale-105" : "scale-100"
-            }`}
-          >
-            {/* Glow effect on focus */}
-            <div
-              className={`absolute -inset-1 bg-red-600 rounded-2xl blur-lg transition-opacity duration-500 ${
-                isFocused ? "opacity-20" : "opacity-0"
-              }`}
-            ></div>
-
-            <div className="relative bg-[#0a0f1a] border border-white/10 rounded-2xl flex items-center p-2 backdrop-blur-xl group">
-              <div className="p-4 text-red-600">
-                <Radar
-                  size={24}
-                  className={`${isFocused ? "animate-spin" : "animate-pulse"}`}
-                />
-              </div>
-
-              <input
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-                type="text"
-                placeholder="INPUT TRACKING CODE (EX: LM-X900)"
-                className="w-full bg-transparent border-none outline-none text-white font-black italic tracking-widest placeholder:text-slate-700 text-sm"
-              />
-
-              <button className="bg-red-600 hover:bg-white text-white hover:text-black transition-all px-10 py-4 rounded-xl font-black uppercase italic text-xs flex items-center gap-3 shadow-[0_10px_30px_rgba(220,38,38,0.3)]">
-                LOCATE <Crosshair size={16} />
-              </button>
-            </div>
-          </div>
         </motion.div>
 
         {/* --- RIGHT: DATA HUD VISUAL (5 Cols) --- */}

@@ -11,12 +11,14 @@ import HomeCarousel from "../Component/HomeCarousel";
 import TrackingDashboard from "../Component/TrackingPage";
 import SupportBrand from "../Component/SupportBrand";
 import ContactUs from "../Component/ContactUs";
+import CreateShipment from "./CreateShipment";
 
 const HomePage = () => {
   return (
     <>
       <HomeBanner />
       <ServicesSection />
+      <CreateShipment />
       <AboutExperience />
       <Services1 />
       <BestLogisticsSection />
