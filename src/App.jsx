@@ -4,9 +4,9 @@ import {
   Routes,
   Route,
   useLocation,
+  Navigate,
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { MessageCircle } from "lucide-react"; // Import WhatsApp icon
 
 // Components & Pages
 import Preloader from "./Pages/PreLoader";
@@ -34,13 +34,16 @@ const ScrollToTop = () => {
   return null;
 };
 
-// 2. WhatsApp Floating Button Component
+// 2. Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = localStorage.getItem("isLoggedIn") === "true";
+  return isAuthenticated ? children : <Navigate to="/logins" replace />;
+};
+
+// 3. WhatsApp Floating Button
 const WhatsAppButton = () => {
   const phoneNumber = "918826262858";
-  const message = encodeURIComponent(
-    "Hello LocalMate Logistics, I have a query regarding a shipment."
-  );
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+  const whatsappUrl = `https://wa.me/${phoneNumber}`;
 
   return (
     <a
@@ -48,10 +51,8 @@ const WhatsAppButton = () => {
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-[999] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center group"
-      aria-label="Contact on WhatsApp"
     >
       <i className="fa fa-whatsapp text-[30px]"></i>
-
       <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-500 font-bold uppercase text-xs whitespace-nowrap">
         Chat with us
       </span>
@@ -66,7 +67,6 @@ function App() {
   useEffect(() => {
     const deliveryTimer = setTimeout(() => setIsDelivered(true), 2000);
     const finalTimer = setTimeout(() => setIsLoading(false), 6500);
-
     return () => {
       clearTimeout(deliveryTimer);
       clearTimeout(finalTimer);
@@ -75,19 +75,14 @@ function App() {
 
   return (
     <Router>
-      {/* Ensures every page starts at the top */}
       <ScrollToTop />
-
       <AnimatePresence mode="wait">
         {isLoading ? (
           <Preloader isDelivered={isDelivered} key="preloader" />
         ) : (
           <div className="flex flex-col min-h-screen bg-white">
             <Navbar />
-
-            {/* Floating WhatsApp UI */}
             <WhatsAppButton />
-
             <main className="flex-grow">
               <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -95,7 +90,17 @@ function App() {
                 <Route path="/logins" element={<Logins />} />
                 <Route path="/tracking" element={<Tracking />} />
                 <Route path="/track" element={<OrderTrack />} />
-                <Route path="/CreateShipment" element={<CreateShipment />} />
+
+                {/* Protected Route for CreateShipment */}
+                <Route
+                  path="/CreateShipment"
+                  element={
+                    <ProtectedRoute>
+                      <CreateShipment />
+                    </ProtectedRoute>
+                  }
+                />
+
                 <Route path="/services/express" element={<ExpressParcel />} />
                 <Route path="/services/warehousing" element={<WareHousing />} />
                 <Route
@@ -110,7 +115,6 @@ function App() {
                 <Route path="/contact" element={<ContactPage />} />
               </Routes>
             </main>
-
             <Footer />
           </div>
         )}
