@@ -1,13 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Plus } from "lucide-react";
+import Aman from "../assets/Aman.png";
 
 const TeamSection = () => {
   const teamMembers = [
     {
       name: "Aman Kumar Mahto",
       role: "CEO & Founder",
-      img: "https://i.pravatar.cc/600?img=11",
+      img: Aman,
     },
     {
       name: "Karan Meena",

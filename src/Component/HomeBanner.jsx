@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import CornerBanner from "../assets/CornerBanner.png";
+import BikeBanner from "../assets/BikeBanner.jpg";
 import "aos/dist/aos.css";
 import {
   Bike,
@@ -18,17 +19,17 @@ import {
 } from "lucide-react";
 
 const HeroBanner = () => {
-  const [activeTab, setActiveTab] = useState("Air");
+  const [activeTab, setActiveTab] = useState("Bike");
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
   }, []);
 
   const banners = {
-    Air: {
-      title: "Global Sky Logistics",
-      desc: "Fastest air cargo network connecting continents in hours, not days.",
-      img: "https://images.unsplash.com/photo-1570710891163-6d3b5c47248b?auto=format&fit=crop&q=80&w=1600",
+    Bike: {
+      title: "Bike Express Logistics",
+      desc: "High-speed bike deliveries for urgent, same-day and hyper-local shipments.",
+      img: BikeBanner,
       color: "from-blue-900/95",
     },
     Ocean: {
@@ -178,7 +179,7 @@ const HeroBanner = () => {
       {/* --- FOOTER TABS --- */}
       <div className="absolute bottom-0 w-full bg-black/50 backdrop-blur-2xl border-t border-white/10 z-50">
         <div className="max-w-7xl mx-auto flex">
-          {["Air", "Ocean", "Land"].map((type) => (
+          {["Bike", "Ocean", "Land"].map((type) => (
             <button
               key={type}
               onClick={() => setActiveTab(type)}
@@ -189,7 +190,7 @@ const HeroBanner = () => {
               }`}
             >
               <div className="flex items-center space-x-3 text-xl font-black uppercase italic tracking-tighter">
-                {type === "Air" && <Plane size={24} className="text-red-600" />}
+                {type === "Bike" && <Bike size={24} className="text-red-600" />}
                 {type === "Ocean" && (
                   <Ship size={24} className="text-red-600" />
                 )}

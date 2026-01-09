@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavLink, Link, useNavigate } from "react-router-dom"; // useNavigate add kiya
+import logo from "../assets/logo.png";
 import {
   Menu,
   X,
@@ -123,15 +124,19 @@ const Navbar = () => {
           >
             <Link to="/">
               <div
-                className="bg-red-600 w-32 lg:w-40 h-[150px] lg:h-[160px] flex flex-col items-center pt-16 shadow-2xl transition-transform hover:scale-105"
+                className="bg-red-600 w-32 lg:w-40 h-[150px] lg:h-[160px]
+                 flex flex-col items-center pt-2
+                 shadow-2xl transition-transform hover:scale-105"
                 style={{ clipPath: "polygon(0 0, 100% 0, 100% 90%, 0% 100%)" }}
               >
-                <div className="bg-white p-2 rounded-lg rotate-45 mb-2 shadow-inner">
-                  <div className="w-5 h-5 bg-red-600 rounded-sm"></div>
+                {/* LOGO */}
+                <div className=" rounded-xl shadow-inner mb-2">
+                  <img
+                    src={logo}
+                    alt="Localmate Logo"
+                    className="w-50 h-50 object-contain"
+                  />
                 </div>
-                <h1 className="text-white font-black text-xl lg:text-2xl tracking-tighter italic">
-                  Localmate
-                </h1>
               </div>
             </Link>
           </motion.div>

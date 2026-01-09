@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"; // Link import karna na bhulein
+import logo from "../assets/logo.png";
 import {
   Phone,
   MapPin,
@@ -50,15 +51,23 @@ const EnhancedFooter = () => {
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* BRAND SECTION */}
         <div className="lg:col-span-4 space-y-6">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Truck size={20} className="text-white" />
+          <Link to="/" className="flex items-center gap-4 group">
+            {/* CONTAINER: Fixed height/width hata di, ab ye image ke size par depend karega */}
+            <div className="flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+              <img
+                src={logo}
+                alt="Localmate"
+                /* w-32 ya w-40 se aap logo ki base width control kar sakte hain bina kisi extra box ke */
+                className="w-32 lg:w-40 h-auto object-contain"
+              />
             </div>
-            <span className="text-2xl font-black italic uppercase">
+
+            <span className="text-3xl font-black italic uppercase tracking-tighter">
               Local<span className="text-red-600">mate</span>
             </span>
           </Link>
-          <p className="text-slate-400 text-sm leading-relaxed">
+
+          <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
             Smart logistics solutions with global reach, engineered for speed,
             security and reliability. Delivering excellence across India.
           </p>
@@ -191,7 +200,7 @@ const EnhancedFooter = () => {
           </div>
           <div className="flex items-center gap-3 text-xs text-slate-400">
             <ShieldCheck size={16} className="text-green-500" />
-            ISO 9001:2015 Certified Operations
+            ISO 9001:2026 Certified Operations
           </div>
           <p className="text-[11px] text-slate-500">
             © {currentYear} Localmate Logistics. All Rights Reserved.
