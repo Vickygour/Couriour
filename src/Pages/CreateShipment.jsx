@@ -54,38 +54,61 @@ const CreateShipment = () => {
     method: "surface",
   });
 
+  // 1. Pehle state ko replace karein (agar same hai toh rehne dein)
   const [pricing, setPricing] = useState({
-    basePrice: 0,
     weightCharges: 0,
     distanceCharges: 0,
     tax: 0,
     total: 0,
   });
 
+  // 2. Is naye useEffect ko replace karein
   useEffect(() => {
     const calculateEstimate = () => {
-      const basePrice = 50;
-      const weightPrice = formData.weight * 20;
+      // --- WEIGHT CALCULATION ---
+      // Agar weight 10 se kam hai toh fix 30 rupee, aur badhne par per kg 5 rupee
+      let weightPrice = 30;
+      if (formData.weight > 10) {
+        weightPrice = 30 + (formData.weight - 10) * 5;
+      }
+
+      // --- DISTANCE CALCULATION ---
+      // Pincode difference se ek dummy distance nikal rahe hain (₹20 per KM)
+      const p1 = parseInt(formData.originPincode) || 0;
+      const p2 = parseInt(formData.destPincode) || 0;
+
+      // Agar pincode nahi dala toh default distance 10km maan rahe hain
+      const estimatedDistance = Math.abs(p1 - p2) % 500 || 10;
+      const distancePrice = estimatedDistance * 20;
+
+      // --- METHOD MULTIPLIER ---
       const methodMultiplier = {
         surface: 1,
-        express_air: 2.5,
+        express_air: 2, // Express ke liye rates double
         cargo_ship: 1.5,
       };
 
       const subtotal =
-        (basePrice + weightPrice) * methodMultiplier[formData.method];
-      const tax = subtotal * 0.18;
+        (weightPrice + distancePrice) *
+        (methodMultiplier[formData.method] || 1);
+      const tax = subtotal * 0.18; // 18% GST
 
       setPricing({
-        basePrice,
         weightCharges: weightPrice,
-        distanceCharges: 0,
-        tax,
+        distanceCharges: distancePrice,
+        tax: tax,
         total: subtotal + tax,
       });
     };
+
     calculateEstimate();
-  }, [formData.weight, formData.method]);
+    // In dependencies ka matlab hai ki jab bhi inme badlav hoga, price update ho jayega
+  }, [
+    formData.weight,
+    formData.method,
+    formData.originPincode,
+    formData.destPincode,
+  ]);
 
   const validateStep = () => {
     if (step === 1) {
