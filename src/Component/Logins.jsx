@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import API from "../../utils/api";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import API from '../../utils/api';
 import {
   Mail,
   Lock,
@@ -10,16 +10,16 @@ import {
   ShieldCheck,
   Truck,
   Loader2,
-} from "lucide-react";
+} from 'lucide-react';
 
 const Logins = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
   });
 
   const navigate = useNavigate();
@@ -30,10 +30,10 @@ const Logins = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError('');
 
     try {
-      const endpoint = isLogin ? "/login" : "/register";
+      const endpoint = isLogin ? '/login' : '/register';
 
       const payload = isLogin
         ? {
@@ -49,24 +49,30 @@ const Logins = () => {
       const response = await API.post(endpoint, payload);
 
       if (response.data.success) {
-        // --- LOGIC UPDATED FOR ROUTE PROTECTION ---
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("accessToken", response.data.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.data.refreshToken);
-        localStorage.setItem("user", JSON.stringify(response.data.data.user));
+        // ✅ FIXED - SAB localStorage properly set ho raha hai
+        const { accessToken, refreshToken, user } = response.data.data;
+
+        // Tera public app ke liye
+        localStorage.setItem('isLoggedIn', 'true');
+
+        // Tera admin app ke liye bhi
+        localStorage.setItem('token', accessToken);
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
 
         setTimeout(() => {
           setLoading(false);
-          const userRole = response.data.data.user.role;
+          const userRole = user.role;
 
-          // Successful login ke baad redirection
-          if (userRole === "admin") {
-            navigate("/admin/dashboard");
-          } else if (userRole === "deliveryman") {
-            navigate("/delivery/dashboard");
+          // ✅ Perfect role-based redirection
+          if (userRole === 'admin') {
+            navigate('/admin/dashboard');
+          } else if (userRole === 'deliveryman') {
+            navigate('/delivery/dashboard');
           } else {
-            // Seedha Create Shipment page par redirect
-            navigate("/CreateShipment");
+            // Customer - CreateShipment page
+            navigate('/CreateShipment');
           }
         }, 1000);
       } else {
@@ -75,7 +81,7 @@ const Logins = () => {
       }
     } catch (err) {
       setError(
-        err.response?.data?.message || "Connection failed. Please try again."
+        err.response?.data?.message || 'Connection failed. Please try again.',
       );
       setLoading(false);
     }
@@ -88,7 +94,7 @@ const Logins = () => {
       opacity: 0,
       scale: 0.95,
       y: -20,
-      transition: { duration: 0.4, ease: "easeInOut" },
+      transition: { duration: 0.4, ease: 'easeInOut' },
     },
   };
 
@@ -129,15 +135,15 @@ const Logins = () => {
               <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-[0_10px_20px_rgba(220,38,38,0.4)] group-hover:rotate-12 transition-transform">
                 <Truck size={20} className="text-white" />
               </div>
-              <span className="text-xl font-black   uppercase shining-text tracking-tighter">
+              <span className="text-xl font-black uppercase shining-text tracking-tighter">
                 Localmate
               </span>
             </div>
-            <h2 className="text-5xl font-black   uppercase leading-[0.85] tracking-tighter mb-6">
-              The <br /> Golden <br />{" "}
+            <h2 className="text-5xl font-black uppercase leading-[0.85] tracking-tighter mb-6">
+              The <br /> Golden <br />{' '}
               <span className="text-red-600">Route.</span>
             </h2>
-            <p className="text-gray-400 text-xs   border-l-2 border-red-600 pl-4 mt-8 leading-relaxed max-w-[200px]">
+            <p className="text-gray-400 text-xs border-l-2 border-red-600 pl-4 mt-8 leading-relaxed max-w-[200px]">
               Global standard logistics and agency network since 1990.
             </p>
           </div>
@@ -148,7 +154,7 @@ const Logins = () => {
                 <p className="text-[10px] font-black text-white/40 uppercase tracking-widest">
                   System Status
                 </p>
-                <p className="text-sm font-bold text-green-400 uppercase   tracking-tighter">
+                <p className="text-sm font-bold text-green-400 uppercase tracking-tighter">
                   Encrypted & Active
                 </p>
               </div>
@@ -159,15 +165,15 @@ const Logins = () => {
         <div className="md:col-span-7 p-10 lg:p-14 bg-white/[0.02] flex flex-col justify-center relative">
           <AnimatePresence mode="wait">
             <motion.div
-              key={isLogin ? "login" : "signup"}
+              key={isLogin ? 'login' : 'signup'}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.5 }}
             >
               <div className="mb-12">
-                <h3 className="text-4xl font-black text-white   uppercase tracking-tighter leading-none mb-3">
-                  {isLogin ? "Portal Access" : "Create Registry"}
+                <h3 className="text-4xl font-black text-white uppercase tracking-tighter leading-none mb-3">
+                  {isLogin ? 'Portal Access' : 'Create Registry'}
                 </h3>
                 <div className="flex items-center gap-2">
                   <div className="h-[2px] w-8 bg-red-600" />
@@ -243,19 +249,19 @@ const Logins = () => {
                     disabled={loading}
                     whileHover={{
                       scale: loading ? 1 : 1.02,
-                      letterSpacing: loading ? "0.3em" : "0.5em",
+                      letterSpacing: loading ? '0.3em' : '0.5em',
                     }}
                     whileTap={{ scale: loading ? 1 : 0.98 }}
-                    className="w-full bg-red-600 text-white py-6 rounded-full font-black uppercase   tracking-[0.3em] flex items-center justify-center gap-4 transition-all duration-700 text-xs shadow-[0_20px_40px_rgba(220,38,38,0.3)] relative overflow-hidden group/btn disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full bg-red-600 text-white py-6 rounded-full font-black uppercase tracking-[0.3em] flex items-center justify-center gap-4 transition-all duration-700 text-xs shadow-[0_20px_40px_rgba(220,38,38,0.3)] relative overflow-hidden group/btn disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {loading ? (
                       <span className="flex items-center gap-2 relative z-10">
                         <Loader2 className="animate-spin" size={20} />
-                        {isLogin ? "Authenticating..." : "Registering..."}
+                        {isLogin ? 'Authenticating...' : 'Registering...'}
                       </span>
                     ) : (
                       <span className="flex items-center gap-2 relative z-10">
-                        {isLogin ? "Authenticate" : "Register Unit"}{" "}
+                        {isLogin ? 'Authenticate' : 'Register Unit'}{' '}
                         <ArrowRight size={16} />
                       </span>
                     )}
@@ -267,13 +273,13 @@ const Logins = () => {
                 <button
                   onClick={() => {
                     setIsLogin(!isLogin);
-                    setError("");
+                    setError('');
                   }}
                   disabled={loading}
                   className="group text-white/30 text-[10px] font-black uppercase tracking-widest hover:text-white transition-all duration-500 flex items-center justify-center gap-3 w-full"
                 >
                   <span className="h-[1px] w-6 bg-white/5 group-hover:w-12 group-hover:bg-red-600 transition-all" />
-                  {isLogin ? "Request New Registry" : "Return to Console"}
+                  {isLogin ? 'Request New Registry' : 'Return to Console'}
                   <span className="h-[1px] w-6 bg-white/5 group-hover:w-12 group-hover:bg-red-600 transition-all" />
                 </button>
               </div>
@@ -284,7 +290,7 @@ const Logins = () => {
 
       <div className="absolute bottom-10 right-10 flex items-center gap-4 opacity-20 pointer-events-none">
         <div className="text-right">
-          <p className="text-white font-black   uppercase text-[10px] tracking-widest leading-none">
+          <p className="text-white font-black uppercase text-[10px] tracking-widest leading-none">
             Security Protocol
           </p>
           <p className="text-red-600 font-bold uppercase text-[8px] tracking-[0.4em] mt-1">
