@@ -51,20 +51,26 @@ const EnhancedFooter = () => {
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* BRAND SECTION */}
         <div className="lg:col-span-4 space-y-6">
-          <Link to="/" className="flex items-center gap-4 group">
-            {/* CONTAINER: Fixed height/width hata di, ab ye image ke size par depend karega */}
-            <div className="flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+          <Link to="/" className="flex items-center gap-2 lg:gap-3 group">
+            {/* LOGO CONTAINER: Added a subtle shadow and better scaling */}
+            <div className="relative flex items-center justify-center transition-all duration-300 transform group-hover:rotate-3 group-hover:scale-110">
               <img
                 src={logo}
                 alt="Localmate"
-                /* w-32 ya w-40 se aap logo ki base width control kar sakte hain bina kisi extra box ke */
-                className="w-32 lg:w-40 h-auto object-contain"
+                className="w-22 lg:w-32 h-auto object-contain drop-shadow-md"
               />
             </div>
 
-            <span className="text-3xl font-black italic uppercase tracking-tighter">
-              Local<span className="text-red-600">mate</span>
-            </span>
+            {/* TEXT BRANDING: Better font weight and spacing */}
+            <div className="flex flex-col leading-none">
+              <span className="text-2xl lg:text-3xl font-black italic tracking-tighter text-white">
+                LOCAL<span className="text-red-600">MATE</span>
+              </span>
+              {/* Optional Tagline: Branding ko complete karne ke liye */}
+              <span className="text-[10px] lg:text-xs font-bold tracking-[0.2em] text-gray-400 uppercase">
+                Fast Delivery
+              </span>
+            </div>
           </Link>
 
           <p className="text-slate-400 text-sm leading-relaxed max-w-sm">

@@ -29,16 +29,16 @@ const AboutHero = () => {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-black text-white italic leading-[1.1] mb-8 uppercase tracking-tighter">
+          <h1 className="text-4xl md:text-6xl font-black text-white  leading-[1.1] mb-8 uppercase tracking-tighter">
             We Don’t Just <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
+            <span className="text-transparent bg-clip-text bg-red-600">
               Move Parcels.
             </span>
             <br />
             We Move <span className="text-white">Trust.</span>
           </h1>
 
-          <p className="text-gray-400 text-md md:text-lg font-medium leading-relaxed mb-10 max-w-xl italic">
+          <p className="text-gray-400 text-md md:text-lg font-medium leading-relaxed mb-10 max-w-xl">
             At Localmate, every shipment represents responsibility and trust.
             Our integrated logistics network connects local routes, major
             cities, and international borders to ensure fast, secure, and
@@ -46,7 +46,7 @@ const AboutHero = () => {
           </p>
 
           <div className="flex flex-wrap gap-6">
-            <button className="px-10 py-5 bg-red-600 text-white font-black italic uppercase tracking-widest rounded-2xl hover:bg-white hover:text-black transition-all duration-300 shadow-[0_20px_40px_-10px_rgba(220,38,38,0.5)] flex items-center gap-3">
+            <button className="px-10 py-5 bg-red-600 text-white font-black  uppercase tracking-widest rounded-2xl hover:bg-white hover:text-black transition-all duration-300 shadow-[0_20px_40px_-10px_rgba(220,38,38,0.5)] flex items-center gap-3">
               Learn Our Story <ArrowRight size={20} />
             </button>
             <div className="flex items-center gap-4">

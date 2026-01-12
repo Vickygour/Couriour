@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Shield,
   Lock,
@@ -10,20 +10,20 @@ import {
   AlertCircle,
   CheckCircle2,
   Loader2,
-} from 'lucide-react';
-import { toast } from 'react-toastify';
-import API from '../../utils/api'; // Your API instance
+} from "lucide-react";
+import { toast } from "react-toastify";
+import API from "../../utils/api"; // Your API instance
 
 const CyberVaultLogin = () => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   // Handle Input Change
@@ -33,26 +33,26 @@ const CyberVaultLogin = () => {
       ...prev,
       [name]: value,
     }));
-    setError(''); // Clear error on typing
+    setError(""); // Clear error on typing
   };
 
   // Handle Login Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
 
     // Basic Validation
     if (!formData.email || !formData.password) {
-      setError('All fields are required!');
+      setError("All fields are required!");
       setLoading(false);
-      toast.error('Please fill all fields');
+      toast.error("Please fill all fields");
       return;
     }
 
     try {
       // API Call
-      const response = await API.post('/auth/login', {
+      const response = await API.post("/auth/login", {
         email: formData.email,
         password: formData.password,
       });
@@ -61,41 +61,41 @@ const CyberVaultLogin = () => {
         const { token, user } = response.data;
 
         // Store token and user data
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("user", JSON.stringify(user));
 
         setSuccess(true);
         toast.success(`Welcome back, ${user.name}!`);
 
         // Redirect based on role
         setTimeout(() => {
-          if (user.role === 'superadmin') {
-            navigate('/admin/dashboard');
-          } else if (user.role === 'staff') {
-            navigate('/staff/dashboard');
+          if (user.role === "superadmin") {
+            navigate("/admin/dashboard");
+          } else if (user.role === "staff") {
+            navigate("/staff/dashboard");
           } else {
-            navigate('/dashboard');
+            navigate("/dashboard");
           }
         }, 1500);
       } else {
-        setError(response.data.message || 'Login failed');
-        toast.error(response.data.message || 'Login failed');
+        setError(response.data.message || "Login failed");
+        toast.error(response.data.message || "Login failed");
       }
     } catch (err) {
-      console.error('Login Error:', err);
+      console.error("Login Error:", err);
 
       if (err.response) {
         // Server responded with error
-        const errorMsg = err.response.data?.message || 'Invalid credentials';
+        const errorMsg = err.response.data?.message || "Invalid credentials";
         setError(errorMsg);
         toast.error(errorMsg);
       } else if (err.request) {
         // Network error
-        setError('Network error. Please check your connection.');
-        toast.error('Network error!');
+        setError("Network error. Please check your connection.");
+        toast.error("Network error!");
       } else {
-        setError('Something went wrong. Please try again.');
-        toast.error('Login failed!');
+        setError("Something went wrong. Please try again.");
+        toast.error("Login failed!");
       }
     } finally {
       setLoading(false);
@@ -113,7 +113,7 @@ const CyberVaultLogin = () => {
       <div className="absolute top-20 left-10 w-96 h-96 bg-red-600/10 rounded-full blur-[120px] animate-pulse" />
       <div
         className="absolute bottom-20 right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] animate-pulse"
-        style={{ animationDelay: '1s' }}
+        style={{ animationDelay: "1s" }}
       />
 
       {/* Terminal Header */}
@@ -146,7 +146,7 @@ const CyberVaultLogin = () => {
 
           {/* Title */}
           <div className="text-center mb-8">
-            <h2 className="text-white text-3xl font-black italic uppercase tracking-tighter mb-2">
+            <h2 className="text-white text-3xl font-black   uppercase tracking-tighter mb-2">
               Cyber <span className="text-red-600">Vault</span>
             </h2>
             <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">
@@ -244,7 +244,7 @@ const CyberVaultLogin = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-red-600 to-blue-600 text-white py-5 rounded-2xl font-black uppercase italic text-sm flex items-center justify-center gap-3 shadow-lg hover:shadow-red-600/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
+              className="w-full bg-gradient-to-r from-red-600 to-blue-600 text-white py-5 rounded-2xl font-black uppercase   text-sm flex items-center justify-center gap-3 shadow-lg hover:shadow-red-600/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
             >
               {loading ? (
                 <>
@@ -266,9 +266,9 @@ const CyberVaultLogin = () => {
           {/* Footer */}
           <div className="mt-8 pt-6 border-t border-white/10 text-center">
             <p className="text-gray-600 text-xs">
-              Don't have access?{' '}
+              Don't have access?{" "}
               <button
-                onClick={() => navigate('/register')}
+                onClick={() => navigate("/register")}
                 className="text-red-600 font-bold hover:underline"
               >
                 Request Access

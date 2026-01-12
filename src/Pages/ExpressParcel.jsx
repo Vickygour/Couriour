@@ -43,7 +43,7 @@ const LocalmatePremium = () => {
             className="flex items-center justify-center gap-3 mb-6"
           >
             <div className="w-10 h-[1px] bg-red-600" />
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-red-600 italic">
+            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-red-600  ">
               Premium Dispatch Hub
             </span>
             <div className="w-10 h-[1px] bg-red-600" />
@@ -55,10 +55,10 @@ const LocalmatePremium = () => {
             className="text-6xl md:text-9xl font-black uppercase leading-none tracking-tighter mb-8"
           >
             LOCAL<span className="text-red-600">MATE</span> <br />
-            <span className="italic font-light opacity-80">LOGISTICS.</span>
+            <span className="  font-light opacity-80">LOGISTICS.</span>
           </motion.h1>
 
-          <p className="max-w-2xl mx-auto text-slate-400 text-lg md:text-xl font-medium italic leading-relaxed">
+          <p className="max-w-2xl mx-auto text-slate-400 text-lg md:text-xl font-medium   leading-relaxed">
             Reliable transportation and quality delivery systems for Bharat's
             fastest growing enterprises.
           </p>
@@ -97,7 +97,7 @@ const LocalmatePremium = () => {
                       <Zap size={32} className="text-white fill-white" />
                     </div>
                     <div>
-                      <h4 className="text-white font-black italic uppercase text-xl tracking-tighter leading-none">
+                      <h4 className="text-white font-black   uppercase text-xl tracking-tighter leading-none">
                         Instant Transit
                       </h4>
                       <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-1">
@@ -116,14 +116,14 @@ const LocalmatePremium = () => {
             >
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-8 h-[2px] bg-red-600"></span>
-                <h2 className="text-[11px] font-black uppercase tracking-[0.5em] text-red-600 italic">
+                <h2 className="text-[11px] font-black uppercase tracking-[0.5em] text-red-600  ">
                   Elite Operational Tier
                 </h2>
               </div>
 
               <h3 className="text-5xl md:text-6xl font-black uppercase leading-[0.95] tracking-tighter text-[#020617] mb-10">
                 Unpacking <br />
-                <span className="text-red-600 italic">Express</span> <br />
+                <span className="text-red-600  ">Express</span> <br />
                 <span className="relative inline-block mt-2">
                   Intelligence.
                   <svg
@@ -141,7 +141,7 @@ const LocalmatePremium = () => {
                 </span>
               </h3>
 
-              <p className="text-slate-500 text-lg leading-relaxed mb-12 italic font-medium max-w-lg border-l-4 border-red-600/10 pl-8">
+              <p className="text-slate-500 text-lg leading-relaxed mb-12   font-medium max-w-lg border-l-4 border-red-600/10 pl-8">
                 Localmate Express is not just a delivery service; it's a
                 high-velocity logistics ecosystem. Designed for critical cargo
                 where{" "}
@@ -177,7 +177,7 @@ const LocalmatePremium = () => {
                       />
                     </div>
                     <div>
-                      <h5 className="font-black uppercase italic text-sm tracking-tight text-[#020617]">
+                      <h5 className="font-black uppercase   text-sm tracking-tight text-[#020617]">
                         {item.title}
                       </h5>
                       <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">
@@ -189,7 +189,7 @@ const LocalmatePremium = () => {
               </div>
 
               {/* Tactical Button */}
-              <button className="mt-12 group flex items-center gap-4 bg-[#020617] text-white px-10 py-5 rounded-2xl font-black uppercase italic tracking-widest text-[10px] hover:bg-red-600 transition-all self-start shadow-xl">
+              <button className="mt-12 group flex items-center gap-4 bg-[#020617] text-white px-10 py-5 rounded-2xl font-black uppercase   tracking-widest text-[10px] hover:bg-red-600 transition-all self-start shadow-xl">
                 Learn System Capabilities
                 <ArrowRight
                   size={16}
@@ -205,7 +205,7 @@ const LocalmatePremium = () => {
       <section className="py-32 bg-slate-50 text-[#020617]">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
-            <h3 className="text-4xl font-black uppercase tracking-tighter italic">
+            <h3 className="text-4xl font-black uppercase tracking-tighter  ">
               Key Capabilities of{" "}
               <span className="text-red-600">Localmate Express.</span>
             </h3>
@@ -235,7 +235,7 @@ const LocalmatePremium = () => {
         <div className="container mx-auto px-6 grid lg:grid-cols-12 gap-20">
           {/* FAQ SIDE */}
           <div className="lg:col-span-7" data-aos="fade-right">
-            <h4 className="text-red-600 font-black uppercase tracking-[0.4em] text-[10px] mb-10 italic border-l-2 border-red-600 pl-4">
+            <h4 className="text-red-600 font-black uppercase tracking-[0.4em] text-[10px] mb-10   border-l-2 border-red-600 pl-4">
               Support & FAQ
             </h4>
             <div className="space-y-4">
@@ -263,10 +263,10 @@ const LocalmatePremium = () => {
             className="lg:col-span-5 bg-white/5 p-12 rounded-[3rem] border border-white/10"
             data-aos="fade-left"
           >
-            <h4 className="text-white font-black uppercase italic text-2xl mb-8 tracking-tighter">
+            <h4 className="text-white font-black uppercase   text-2xl mb-8 tracking-tighter">
               Localmate <span className="text-red-600">Corporate.</span>
             </h4>
-            <p className="text-slate-400 text-sm italic leading-relaxed mb-10 font-medium uppercase tracking-wide">
+            <p className="text-slate-400 text-sm   leading-relaxed mb-10 font-medium uppercase tracking-wide">
               Founded in 2026, Localmate Logistics is a tactical supply-chain
               firm. We bridge the gap between complex industrial logistics and
               simple, reliable user experiences.
@@ -313,7 +313,7 @@ const LocalmatePremium = () => {
                   (window.location.href =
                     "mailto:localmate2025@gmail.com?subject=Service Enquiry - Localmate&body=Hello Localmate Team,%0D%0A%0D%0AI would like to enquire about your logistics services.%0D%0A%0D%0AName:%0D%0APhone:%0D%0AService Required:%0D%0ACity:%0D%0A%0D%0AThank you.")
                 }
-                className="mt-8 md:mt-12 w-full bg-red-600 text-white py-5 md:py-6 rounded-xl md:rounded-2xl font-black uppercase italic tracking-widest text-[10px] hover:bg-white hover:text-black transition-all shadow-xl"
+                className="mt-8 md:mt-12 w-full bg-red-600 text-white py-5 md:py-6 rounded-xl md:rounded-2xl font-black uppercase   tracking-widest text-[10px] hover:bg-white hover:text-black transition-all shadow-xl"
               >
                 Send Enquiry
               </button>
@@ -336,10 +336,10 @@ const SpecCard = ({ icon, title, desc }) => (
     <div className="text-red-600 mb-8 p-4 bg-slate-50 rounded-2xl w-fit group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
       {icon}
     </div>
-    <h4 className="text-xl font-black uppercase italic mb-4 text-[#020617]">
+    <h4 className="text-xl font-black uppercase   mb-4 text-[#020617]">
       {title}
     </h4>
-    <p className="text-slate-500 text-sm font-medium italic leading-relaxed uppercase tracking-wider">
+    <p className="text-slate-500 text-sm font-medium   leading-relaxed uppercase tracking-wider">
       {desc}
     </p>
   </div>
@@ -353,7 +353,7 @@ const FAQItem = ({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex justify-between items-center text-left"
       >
-        <span className="font-black uppercase italic tracking-wider text-sm">
+        <span className="font-black uppercase   tracking-wider text-sm">
           {question}
         </span>
         {isOpen ? (
@@ -370,7 +370,7 @@ const FAQItem = ({ question, answer }) => {
             exit={{ height: 0 }}
             className="pb-6"
           >
-            <p className="text-slate-400 text-xs italic font-medium uppercase tracking-widest">
+            <p className="text-slate-400 text-xs   font-medium uppercase tracking-widest">
               {answer}
             </p>
           </motion.div>

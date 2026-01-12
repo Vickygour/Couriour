@@ -107,7 +107,7 @@ const PremiumLogisticsV2 = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-6xl font-black text-white italic uppercase leading-[0.85]"
+            className="text-3xl md:text-6xl font-black text-white   uppercase leading-[0.85]"
           >
             The Modern <span className="text-red-600">Standard</span>
             <br />
@@ -129,7 +129,7 @@ const PremiumLogisticsV2 = () => {
                   <div className="text-white">{step.icon}</div>
                 </div>
 
-                <h4 className="text-3xl font-black text-white uppercase italic mb-6">
+                <h4 className="text-3xl font-black text-white uppercase   mb-6">
                   {step.title}
                 </h4>
                 <p className="text-gray-400 text-sm leading-relaxed mb-12">
@@ -137,7 +137,7 @@ const PremiumLogisticsV2 = () => {
                 </p>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-5xl font-black italic opacity-20">
+                  <span className="text-5xl font-black   opacity-20">
                     {step.id}
                   </span>
                   <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white">
@@ -152,11 +152,11 @@ const PremiumLogisticsV2 = () => {
         {/* FEATURES */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
           <div className="lg:col-span-5">
-            <h3 className="text-5xl md:text-7xl font-black text-white italic uppercase mb-10">
+            <h3 className="text-5xl md:text-7xl font-black text-white   uppercase mb-10">
               Why <span className="text-red-600">Localmate</span>
               <br /> Leads the Industry
             </h3>
-            <p className="text-gray-400 text-xl italic leading-relaxed max-w-md">
+            <p className="text-gray-400 text-xl   leading-relaxed max-w-md">
               “Localmate delivers more than shipments — we build reliable,
               scalable logistics ecosystems that power long-term business
               growth.”
@@ -173,7 +173,7 @@ const PremiumLogisticsV2 = () => {
                   {item.icon}
                 </div>
                 <div>
-                  <h5 className="text-white font-black italic uppercase text-sm tracking-widest">
+                  <h5 className="text-white font-black   uppercase text-sm tracking-widest">
                     {item.title}
                   </h5>
                   <p className="text-[9px] text-gray-500 uppercase font-black mt-2">

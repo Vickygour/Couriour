@@ -6,6 +6,7 @@ import { Plane, Ship, Check, Star } from "lucide-react";
 import About1 from "../assets/About1.png";
 import DeliveryPng from "../assets/delivery.png";
 import { Link } from "react-router-dom";
+import Aman from "../assets/Aman.png";
 
 const AboutExperience = () => {
   useEffect(() => {
@@ -82,7 +83,7 @@ const AboutExperience = () => {
               data-aos="fade-up"
               data-aos-delay="400"
             >
-              <span className="text-5xl font-black italic">25+</span>
+              <span className="text-5xl font-black  ">25+</span>
               <p className="text-sm font-bold uppercase tracking-widest leading-tight">
                 Years of <br /> Industry Experience
               </p>
@@ -97,14 +98,14 @@ const AboutExperience = () => {
           {/* RIGHT CONTENT */}
           <div className="lg:pl-10">
             <div data-aos="fade-left">
-              <h4 className="text-red-600 font-black uppercase tracking-widest text-sm mb-4 italic flex items-center gap-2">
+              <h4 className="text-red-600 font-black uppercase tracking-widest text-sm mb-4   flex items-center gap-2">
                 <span className="w-10 h-[2px] bg-red-600"></span>
                 About Localmate
               </h4>
 
               <h2
                 id="about-localmate-heading"
-                className="text-5xl font-black text-slate-900 leading-[1.1] mb-8 uppercase italic"
+                className="text-5xl font-black text-slate-900 leading-[1.1] mb-8 uppercase  "
               >
                 Trusted logistics solutions <br />
                 <span className="text-red-600">
@@ -119,7 +120,7 @@ const AboutExperience = () => {
                   <div className="p-3 bg-slate-100 text-red-600 hover:bg-red-600 hover:text-white transition-all rounded-lg">
                     <Plane size={32} />
                   </div>
-                  <h5 className="font-black uppercase italic text-slate-900">
+                  <h5 className="font-black uppercase   text-slate-900">
                     Air Freight <br /> Services
                   </h5>
                 </div>
@@ -130,7 +131,7 @@ const AboutExperience = () => {
                   <div className="p-3 bg-slate-100 text-red-600 hover:bg-red-600 hover:text-white transition-all rounded-lg">
                     <Ship size={32} />
                   </div>
-                  <h5 className="font-black uppercase italic text-slate-900">
+                  <h5 className="font-black uppercase   text-slate-900">
                     Ocean Freight <br /> Solutions
                   </h5>
                 </div>
@@ -165,7 +166,7 @@ const AboutExperience = () => {
             >
               <Link
                 to="/about"
-                className="bg-slate-900 text-white px-10 py-5 font-black uppercase italic flex items-center gap-3 hover:bg-red-600 transition-all shadow-xl"
+                className="bg-slate-900 text-white px-10 py-5 font-black uppercase   flex items-center gap-3 hover:bg-red-600 transition-all shadow-xl"
               >
                 View Services
                 <Check size={16} strokeWidth={3} />
@@ -173,12 +174,12 @@ const AboutExperience = () => {
 
               <div className="flex items-center gap-4 border-l-2 border-gray-100 pl-8">
                 <img
-                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  src={Aman}
                   alt="Founder of Localmate"
                   className="w-14 h-14 rounded-full border-2 border-red-600 p-1"
                 />
                 <div>
-                  <h6 className="font-black text-slate-900 italic uppercase">
+                  <h6 className="font-black text-slate-900   uppercase">
                     Aman Mahto
                   </h6>
                   <p className="text-xs text-red-600 font-bold uppercase">

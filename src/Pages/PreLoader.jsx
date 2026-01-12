@@ -97,7 +97,7 @@ const Preloader = ({ isDelivered }) => {
                   transition={{ delay: 0.3 }}
                   className="mt-8 text-center"
                 >
-                  <h1 className="text-white text-4xl font-black tracking-tighter italic">
+                  <h1 className="text-white text-4xl font-black tracking-tighter  ">
                     ARRIVED.
                   </h1>
                   <p className="text-green-400 text-xs tracking-[0.5em] font-bold uppercase mt-2">
@@ -117,7 +117,7 @@ const Preloader = ({ isDelivered }) => {
           }}
           className="mt-12 text-center"
         >
-          <h2 className="text-white font-black italic uppercase tracking-[1em] text-2xl ml-[1em]">
+          <h2 className="text-white font-black   uppercase tracking-[1em] text-2xl ml-[1em]">
             LOCAL<span className="text-red-600">MATE</span>
           </h2>
           <div className="mt-8 flex flex-col items-center">

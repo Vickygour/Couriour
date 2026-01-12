@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { Headset, ArrowRight, Play, Globe, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import localMate from "../assets/localMatevideo.mp4";
 
 const FinalLogisticsTemplate = () => {
   const videoRef = useRef(null);
@@ -61,7 +62,7 @@ const FinalLogisticsTemplate = () => {
             <Globe className="text-red-600" size={40} />
           </div>
 
-          <h4 className="text-white text-4xl font-black uppercase italic mb-6 leading-[0.9]">
+          <h4 className="text-white text-4xl font-black uppercase   mb-6 leading-[0.9]">
             Need Our <br /> <span className="text-red-600">Services?</span>
           </h4>
 
@@ -87,10 +88,7 @@ const FinalLogisticsTemplate = () => {
             muted
             loop
           >
-            <source
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
-              type="video/mp4"
-            />
+            <source src={localMate} type="video/mp4" />
           </video>
 
           <div className="absolute inset-0 bg-gradient-to-tr from-[#0a1d37]/70 via-transparent to-transparent" />
@@ -122,13 +120,13 @@ const FinalLogisticsTemplate = () => {
             <Headset className="text-red-600" size={42} />
           </motion.div>
 
-          <h4 className="text-white text-4xl font-black uppercase italic mb-6 leading-[0.9]">
+          <h4 className="text-white text-4xl font-black uppercase   mb-6 leading-[0.9]">
             Discuss With <br /> <span className="text-[#0a1d37]">Agents</span>
           </h4>
 
           <a
             href="tel:+918826262858"
-            className="bg-white text-red-600 font-black italic uppercase px-8 py-3 rounded-full text-[10px] tracking-widest flex items-center gap-3 shadow-xl hover:bg-[#0a1d37] hover:text-white transition-all"
+            className="bg-white text-red-600 font-black   uppercase px-8 py-3 rounded-full text-[10px] tracking-widest flex items-center gap-3 shadow-xl hover:bg-[#0a1d37] hover:text-white transition-all"
           >
             Request Callback <ExternalLink size={14} />
           </a>

@@ -103,7 +103,7 @@ const TacticalTrackingView = () => {
             <p className="text-red-600 text-[10px] uppercase tracking-[0.4em] font-black mb-2">
               Satellite Sync Online
             </p>
-            <h2 className="text-slate-900 text-6xl font-black italic uppercase tracking-tighter mb-8 leading-none">
+            <h2 className="text-slate-900 text-6xl font-black   uppercase tracking-tighter mb-8 leading-none">
               Tactical <span className="text-slate-400">Trace.</span>
             </h2>
 
@@ -121,12 +121,12 @@ const TacticalTrackingView = () => {
                   value={searchId}
                   onChange={(e) => setSearchId(e.target.value.toUpperCase())}
                   disabled={isSearching}
-                  className="w-full bg-transparent border-none outline-none text-slate-900 font-black italic tracking-widest placeholder:text-slate-300 uppercase disabled:opacity-50"
+                  className="w-full bg-transparent border-none outline-none text-slate-900 font-black   tracking-widest placeholder:text-slate-300 uppercase disabled:opacity-50"
                 />
                 <button
                   type="submit"
                   disabled={isSearching || !searchId}
-                  className="bg-red-600 hover:bg-slate-900 text-white px-10 py-5 rounded-2xl font-black uppercase italic text-xs transition-all flex items-center gap-3 shadow-lg shadow-red-600/20"
+                  className="bg-red-600 hover:bg-slate-900 text-white px-10 py-5 rounded-2xl font-black uppercase   text-xs transition-all flex items-center gap-3 shadow-lg shadow-red-600/20"
                 >
                   {isSearching ? (
                     <Loader2 size={16} className="animate-spin" />
@@ -158,7 +158,7 @@ const TacticalTrackingView = () => {
                     <p className="text-red-600 text-[10px] font-black uppercase tracking-[0.4em] mb-2">
                       Origin Authority
                     </p>
-                    <h3 className="text-slate-900 text-4xl font-black italic uppercase leading-none">
+                    <h3 className="text-slate-900 text-4xl font-black   uppercase leading-none">
                       {shipmentData.sender.name}
                     </h3>
                     <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-2">
@@ -171,7 +171,7 @@ const TacticalTrackingView = () => {
                       <p className="text-slate-400 text-[8px] font-black uppercase tracking-widest">
                         Est. Completion
                       </p>
-                      <p className="text-slate-900 font-black text-2xl italic tracking-tighter">
+                      <p className="text-slate-900 font-black text-2xl   tracking-tighter">
                         02:44:00
                       </p>
                     </div>
@@ -180,7 +180,7 @@ const TacticalTrackingView = () => {
                       <span className="text-[8px] font-black text-white/80 uppercase">
                         Progress
                       </span>
-                      <span className="text-sm font-black text-white italic">
+                      <span className="text-sm font-black text-white  ">
                         {getProgress()}%
                       </span>
                     </div>
@@ -218,7 +218,7 @@ const TacticalTrackingView = () => {
                   <div className="flex justify-between items-center mb-8">
                     <div className="flex items-center gap-3">
                       <FileText className="text-red-600" />
-                      <h4 className="text-slate-900 font-black italic uppercase text-sm tracking-widest">
+                      <h4 className="text-slate-900 font-black   uppercase text-sm tracking-widest">
                         Shipment Manifest
                       </h4>
                     </div>
@@ -230,7 +230,7 @@ const TacticalTrackingView = () => {
                   <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 text-slate-700 font-mono relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-50/90 z-10" />
                     <div className="flex justify-between border-b-2 border-slate-300 pb-4 mb-6">
-                      <span className="font-black italic text-slate-900">
+                      <span className="font-black   text-slate-900">
                         LOCALMATE OPS
                       </span>
                       <span className="text-[8px] font-bold text-slate-400 tracking-widest">
@@ -286,7 +286,7 @@ const TacticalTrackingView = () => {
                       alt="agent"
                     />
                     <div>
-                      <p className="text-white font-black italic uppercase text-2xl leading-none">
+                      <p className="text-white font-black   uppercase text-2xl leading-none">
                         {shipmentData.assignedTo?.name || "STANDBY"}
                       </p>
                       <p className="text-white/60 text-[8px] font-black uppercase tracking-widest mt-2">
@@ -295,10 +295,10 @@ const TacticalTrackingView = () => {
                     </div>
                   </div>
                   <div className="space-y-4">
-                    <button className="w-full bg-white text-red-600 py-5 rounded-3xl font-black uppercase italic text-[10px] tracking-widest flex items-center justify-center gap-3 hover:bg-slate-900 hover:text-white transition-all">
+                    <button className="w-full bg-white text-red-600 py-5 rounded-3xl font-black uppercase   text-[10px] tracking-widest flex items-center justify-center gap-3 hover:bg-slate-900 hover:text-white transition-all">
                       <PhoneCall size={16} /> Satellite Comm
                     </button>
-                    <button className="w-full bg-red-700/50 border border-white/20 text-white py-5 rounded-3xl font-black uppercase italic text-[10px] tracking-widest flex items-center justify-center gap-3 hover:bg-white hover:text-red-600 transition-all">
+                    <button className="w-full bg-red-700/50 border border-white/20 text-white py-5 rounded-3xl font-black uppercase   text-[10px] tracking-widest flex items-center justify-center gap-3 hover:bg-white hover:text-red-600 transition-all">
                       <MessageSquare size={16} /> Secure Text
                     </button>
                   </div>
@@ -312,7 +312,7 @@ const TacticalTrackingView = () => {
                       className="w-full h-full object-cover grayscale opacity-30 contrast-125"
                       alt="map"
                     />
-                    <div className="absolute top-4 left-4 bg-red-600 px-3 py-1 rounded-full text-[8px] font-black text-white uppercase italic animate-pulse">
+                    <div className="absolute top-4 left-4 bg-red-600 px-3 py-1 rounded-full text-[8px] font-black text-white uppercase   animate-pulse">
                       Live Telemetry Active
                     </div>
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -355,9 +355,7 @@ const StatusPill = ({ icon, label, value, color = "text-slate-900" }) => (
     <p className="text-slate-400 text-[8px] font-black uppercase tracking-widest mb-1">
       {label}
     </p>
-    <p
-      className={`${color} text-sm font-black italic uppercase tracking-tighter`}
-    >
+    <p className={`${color} text-sm font-black   uppercase tracking-tighter`}>
       {value}
     </p>
   </div>

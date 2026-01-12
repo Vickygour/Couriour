@@ -56,7 +56,7 @@ const ServicesSection = () => {
             </p>
             <h2
               id="localmate-services-heading"
-              className="text-4xl md:text-5xl font-black text-slate-900 italic uppercase"
+              className="text-4xl md:text-5xl font-black text-slate-900   uppercase"
             >
               Our Core <span className="text-red-600">Services</span>
             </h2>
@@ -88,7 +88,7 @@ const ServicesSection = () => {
               <div className="absolute top-0 left-0 w-full h-0 bg-red-600 transition-all duration-500 group-hover:h-1"></div>
 
               <span
-                className={`absolute top-0 right-0 font-black text-2xl italic opacity-20 ${
+                className={`absolute top-0 right-0 font-black text-2xl   opacity-20 ${
                   service.active
                     ? "text-white"
                     : "text-slate-400 group-hover:text-white"
@@ -107,7 +107,7 @@ const ServicesSection = () => {
                 {service.icon}
               </div>
 
-              <h3 className="text-xl font-black uppercase italic mb-4 tracking-tighter">
+              <h3 className="text-xl font-black uppercase   mb-4 tracking-tighter">
                 {service.title}
               </h3>
 

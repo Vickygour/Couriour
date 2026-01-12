@@ -129,15 +129,15 @@ const Logins = () => {
               <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-[0_10px_20px_rgba(220,38,38,0.4)] group-hover:rotate-12 transition-transform">
                 <Truck size={20} className="text-white" />
               </div>
-              <span className="text-xl font-black italic uppercase shining-text tracking-tighter">
+              <span className="text-xl font-black   uppercase shining-text tracking-tighter">
                 Localmate
               </span>
             </div>
-            <h2 className="text-5xl font-black italic uppercase leading-[0.85] tracking-tighter mb-6">
+            <h2 className="text-5xl font-black   uppercase leading-[0.85] tracking-tighter mb-6">
               The <br /> Golden <br />{" "}
               <span className="text-red-600">Route.</span>
             </h2>
-            <p className="text-gray-400 text-xs italic border-l-2 border-red-600 pl-4 mt-8 leading-relaxed max-w-[200px]">
+            <p className="text-gray-400 text-xs   border-l-2 border-red-600 pl-4 mt-8 leading-relaxed max-w-[200px]">
               Global standard logistics and agency network since 1990.
             </p>
           </div>
@@ -148,7 +148,7 @@ const Logins = () => {
                 <p className="text-[10px] font-black text-white/40 uppercase tracking-widest">
                   System Status
                 </p>
-                <p className="text-sm font-bold text-green-400 uppercase italic tracking-tighter">
+                <p className="text-sm font-bold text-green-400 uppercase   tracking-tighter">
                   Encrypted & Active
                 </p>
               </div>
@@ -166,7 +166,7 @@ const Logins = () => {
               transition={{ duration: 0.5 }}
             >
               <div className="mb-12">
-                <h3 className="text-4xl font-black text-white italic uppercase tracking-tighter leading-none mb-3">
+                <h3 className="text-4xl font-black text-white   uppercase tracking-tighter leading-none mb-3">
                   {isLogin ? "Portal Access" : "Create Registry"}
                 </h3>
                 <div className="flex items-center gap-2">
@@ -246,7 +246,7 @@ const Logins = () => {
                       letterSpacing: loading ? "0.3em" : "0.5em",
                     }}
                     whileTap={{ scale: loading ? 1 : 0.98 }}
-                    className="w-full bg-red-600 text-white py-6 rounded-full font-black uppercase italic tracking-[0.3em] flex items-center justify-center gap-4 transition-all duration-700 text-xs shadow-[0_20px_40px_rgba(220,38,38,0.3)] relative overflow-hidden group/btn disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full bg-red-600 text-white py-6 rounded-full font-black uppercase   tracking-[0.3em] flex items-center justify-center gap-4 transition-all duration-700 text-xs shadow-[0_20px_40px_rgba(220,38,38,0.3)] relative overflow-hidden group/btn disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {loading ? (
                       <span className="flex items-center gap-2 relative z-10">
@@ -284,7 +284,7 @@ const Logins = () => {
 
       <div className="absolute bottom-10 right-10 flex items-center gap-4 opacity-20 pointer-events-none">
         <div className="text-right">
-          <p className="text-white font-black italic uppercase text-[10px] tracking-widest leading-none">
+          <p className="text-white font-black   uppercase text-[10px] tracking-widest leading-none">
             Security Protocol
           </p>
           <p className="text-red-600 font-bold uppercase text-[8px] tracking-[0.4em] mt-1">

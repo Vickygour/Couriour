@@ -50,7 +50,7 @@ const BikeLogisticsPage = () => {
             className="flex items-center justify-center gap-2 md:gap-3 mb-4 md:mb-6"
           >
             <div className="w-6 md:w-10 h-[1px] bg-red-600" />
-            <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.5em] text-red-600 italic">
+            <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.5em] text-red-600  ">
               Hyper-Local Intra-city Hub
             </span>
             <div className="w-6 md:w-10 h-[1px] bg-red-600" />
@@ -61,9 +61,9 @@ const BikeLogisticsPage = () => {
             className="text-4xl sm:text-6xl md:text-9xl font-black uppercase leading-none tracking-tighter mb-4 md:mb-8"
           >
             BIKE<span className="text-red-600">COURIER</span> <br />
-            <span className="italic font-light opacity-80">INSTANT.</span>
+            <span className="  font-light opacity-80">INSTANT.</span>
           </motion.h1>
-          <p className="max-w-xl md:max-w-2xl mx-auto text-slate-400 text-sm md:text-xl font-medium italic leading-relaxed px-4">
+          <p className="max-w-xl md:max-w-2xl mx-auto text-slate-400 text-sm md:text-xl font-medium   leading-relaxed px-4">
             Anything, Anywhere in the city. Our bike partners pick up your
             documents, keys, or parcels and deliver them in under 60 minutes.
           </p>
@@ -94,7 +94,7 @@ const BikeLogisticsPage = () => {
                       <Timer size={24} className="text-white md:w-8 md:h-8" />
                     </div>
                     <div>
-                      <h4 className="text-white font-black italic uppercase text-lg md:text-xl">
+                      <h4 className="text-white font-black   uppercase text-lg md:text-xl">
                         Flash Dispatch
                       </h4>
                       <p className="text-slate-400 text-[8px] md:text-[10px] font-bold uppercase tracking-widest mt-1">
@@ -113,16 +113,16 @@ const BikeLogisticsPage = () => {
             >
               <div className="flex items-center gap-3 mb-4 md:mb-6">
                 <span className="w-8 h-[2px] bg-red-600"></span>
-                <h2 className="text-[9px] md:text-[11px] font-black uppercase tracking-[0.3em] md:tracking-[0.5em] text-red-600 italic">
+                <h2 className="text-[9px] md:text-[11px] font-black uppercase tracking-[0.3em] md:tracking-[0.5em] text-red-600  ">
                   Last-Mile Precision
                 </h2>
               </div>
               <h3 className="text-4xl md:text-6xl font-black uppercase leading-[0.95] tracking-tighter text-[#020617] mb-6 md:mb-10">
                 Instant <br />
-                <span className="text-red-600 italic">Door-to-Door</span> <br />
+                <span className="text-red-600  ">Door-to-Door</span> <br />
                 Connectivity.
               </h3>
-              <p className="text-slate-500 text-sm md:text-lg leading-relaxed mb-8 md:mb-12 italic font-medium border-l-4 border-red-600/10 pl-4 md:pl-8">
+              <p className="text-slate-500 text-sm md:text-lg leading-relaxed mb-8 md:mb-12   font-medium border-l-4 border-red-600/10 pl-4 md:pl-8">
                 Skip the traffic. Our fleet of 10,000+ bike partners ensures
                 your small parcels and documents move across the city at{" "}
                 <span className="font-black text-[#020617]">
@@ -157,7 +157,7 @@ const BikeLogisticsPage = () => {
                       />
                     </div>
                     <div>
-                      <h5 className="font-black uppercase italic text-xs md:text-sm text-[#020617]">
+                      <h5 className="font-black uppercase   text-xs md:text-sm text-[#020617]">
                         {item.title}
                       </h5>
                       <p className="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1">
@@ -175,7 +175,7 @@ const BikeLogisticsPage = () => {
       {/* --- SECTION 3: BIKE SERVICE SPECS --- */}
       <section className="py-16 md:py-32 bg-slate-50 text-[#020617]">
         <div className="container mx-auto px-4 md:px-6 text-center mb-12 md:mb-20">
-          <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter italic">
+          <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter  ">
             City <span className="text-red-600">Flash Features.</span>
           </h3>
         </div>
@@ -202,7 +202,7 @@ const BikeLogisticsPage = () => {
       <section className="py-16 md:py-24 px-4 sm:px-10 bg-[#020617] border-y border-white/5">
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           <div className="lg:col-span-7" data-aos="fade-up">
-            <h4 className="text-red-600 font-black uppercase tracking-[0.4em] text-[10px] mb-6 md:mb-10 italic border-l-2 border-red-600 pl-4">
+            <h4 className="text-red-600 font-black uppercase tracking-[0.4em] text-[10px] mb-6 md:mb-10   border-l-2 border-red-600 pl-4">
               Hyper-Local FAQ
             </h4>
             <div className="space-y-2">
@@ -233,10 +233,10 @@ const BikeLogisticsPage = () => {
             className="lg:col-span-5 bg-white/5 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-white/10"
             data-aos="fade-up"
           >
-            <h4 className="text-white font-black uppercase italic text-xl md:text-2xl mb-6 md:mb-8 tracking-tighter">
+            <h4 className="text-white font-black uppercase   text-xl md:text-2xl mb-6 md:mb-8 tracking-tighter">
               Delivery <span className="text-red-600">Handshake.</span>
             </h4>
-            <p className="text-slate-400 text-xs md:text-sm italic leading-relaxed mb-8 uppercase tracking-wide">
+            <p className="text-slate-400 text-xs md:text-sm   leading-relaxed mb-8 uppercase tracking-wide">
               Localmate Bike-Courier is the backbone of city movement. From
               small business owners to busy professionals, we deliver peace of
               mind.
@@ -283,7 +283,7 @@ const BikeLogisticsPage = () => {
                   (window.location.href =
                     "mailto:localmate2025@gmail.com?subject=Service Enquiry - Localmate&body=Hello Localmate Team,%0D%0A%0D%0AI would like to enquire about your logistics services.%0D%0A%0D%0AName:%0D%0APhone:%0D%0AService Required:%0D%0ACity:%0D%0A%0D%0AThank you.")
                 }
-                className="mt-8 md:mt-12 w-full bg-red-600 text-white py-5 md:py-6 rounded-xl md:rounded-2xl font-black uppercase italic tracking-widest text-[10px] hover:bg-white hover:text-black transition-all shadow-xl"
+                className="mt-8 md:mt-12 w-full bg-red-600 text-white py-5 md:py-6 rounded-xl md:rounded-2xl font-black uppercase   tracking-widest text-[10px] hover:bg-white hover:text-black transition-all shadow-xl"
               >
                 Send Enquiry
               </button>
@@ -305,10 +305,10 @@ const SpecCard = ({ icon, title, desc }) => (
     <div className="text-red-600 mb-6 md:mb-8 p-3 md:p-4 bg-slate-50 rounded-xl md:rounded-2xl w-fit group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
       {React.cloneElement(icon, { size: 24 })}
     </div>
-    <h4 className="text-lg md:text-xl font-black uppercase italic mb-3 md:mb-4 text-[#020617]">
+    <h4 className="text-lg md:text-xl font-black uppercase   mb-3 md:mb-4 text-[#020617]">
       {title}
     </h4>
-    <p className="text-slate-500 text-[10px] md:text-sm font-medium italic leading-relaxed uppercase tracking-wider">
+    <p className="text-slate-500 text-[10px] md:text-sm font-medium   leading-relaxed uppercase tracking-wider">
       {desc}
     </p>
   </div>
@@ -322,7 +322,7 @@ const FAQItem = ({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-4 md:py-6 flex justify-between items-center text-left"
       >
-        <span className="font-black uppercase italic tracking-wider text-xs md:text-sm pr-4">
+        <span className="font-black uppercase   tracking-wider text-xs md:text-sm pr-4">
           {question}
         </span>
         {isOpen ? (
@@ -339,7 +339,7 @@ const FAQItem = ({ question, answer }) => {
             exit={{ height: 0 }}
             className="pb-4 md:pb-6 overflow-hidden"
           >
-            <p className="text-slate-400 text-[10px] md:text-xs italic font-medium uppercase tracking-widest">
+            <p className="text-slate-400 text-[10px] md:text-xs   font-medium uppercase tracking-widest">
               {answer}
             </p>
           </motion.div>

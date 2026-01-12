@@ -87,7 +87,7 @@ const HeroBanner = () => {
             <span className="bg-red-600 p-1 rounded-sm">
               <Zap size={14} fill="white" />
             </span>
-            <span className="text-red-500 font-black tracking-[0.25em] uppercase text-[10px] sm:text-xs">
+            <span className="text-white font-black tracking-[0.25em] uppercase text-[10px] sm:text-xs">
               Premium Logistics Solution
             </span>
           </div>
@@ -95,7 +95,7 @@ const HeroBanner = () => {
           <h1
             data-aos="zoom-in-right"
             data-aos-delay="200"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black italic uppercase leading-tight lg:leading-[0.9] mb-4 lg:mb-8"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black   uppercase leading-tight lg:leading-[0.9] mb-4 lg:mb-8"
           >
             {banners[activeTab].title.split(" ")[0]} <br />
             <span className="text-transparent stroke-text">
@@ -189,7 +189,7 @@ const HeroBanner = () => {
                   : "text-gray-500 hover:text-white"
               }`}
             >
-              <div className="flex items-center space-x-3 text-xl font-black uppercase italic tracking-tighter">
+              <div className="flex items-center space-x-3 text-xl font-black uppercase   tracking-tighter">
                 {type === "Bike" && <Bike size={24} className="text-red-600" />}
                 {type === "Ocean" && (
                   <Ship size={24} className="text-red-600" />

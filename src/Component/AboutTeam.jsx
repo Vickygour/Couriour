@@ -36,7 +36,7 @@ const TeamSection = () => {
     <section className="bg-white py-32 px-6 relative overflow-hidden">
       {/* Cinematic Background Text */}
       <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
-        <h1 className="text-[25vw] font-black uppercase italic leading-none">
+        <h1 className="text-[25vw] font-black uppercase  leading-none">
           Localmate
         </h1>
       </div>
@@ -52,13 +52,13 @@ const TeamSection = () => {
               className="flex items-center gap-3 mb-4"
             >
               <div className="w-10 h-[2px] bg-red-600"></div>
-              <span className="text-red-600 font-black uppercase tracking-[0.3em] text-[10px] italic">
+              <span className="text-red-600 font-black uppercase tracking-[0.3em] text-[10px] md:text-[12px]">
                 Our Elite Force
               </span>
             </motion.div>
 
             {/* Balanced Headline */}
-            <h2 className="text-4xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight uppercase italic">
+            <h2 className="text-4xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight uppercase ">
               Behind the scenes <br />
               <span className="text-red-600">Driving Excellence</span>
             </h2>
@@ -71,11 +71,11 @@ const TeamSection = () => {
             className="flex flex-col items-start lg:items-end space-y-6"
           >
             <p className="text-slate-500 text-sm font-medium max-w-[320px] lg:text-right leading-relaxed">
-              Industry experts ki aisi team jo global logistics ko naye tareeke
-              se define kar rahi hai.
+              A team of industry experts redefining global logistics through
+              innovation
             </p>
 
-            <button className="group relative flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-xl font-black uppercase italic tracking-widest text-[11px] hover:bg-red-600 transition-all duration-300 shadow-xl overflow-hidden">
+            <button className="group relative flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-xl font-black uppercase  tracking-widest text-[11px] hover:bg-red-600 transition-all duration-300 shadow-xl overflow-hidden">
               <span className="relative z-10 flex items-center gap-2">
                 Meet the squad
                 <ArrowUpRight
@@ -120,7 +120,7 @@ const TeamSection = () => {
 
                 {/* Info Inside Card (Hover Only) */}
                 <div className="absolute bottom-10 left-8 z-20 translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                  <p className="text-red-500 font-bold uppercase text-[10px] tracking-[0.3em] mb-2 italic">
+                  <p className="text-red-500 font-bold uppercase text-[10px] tracking-[0.3em] mb-2">
                     Official Profile
                   </p>
                   <div className="h-1 w-10 bg-white mb-4"></div>
@@ -129,7 +129,7 @@ const TeamSection = () => {
 
               {/* Text Label (Below Card - Normal Font Style) */}
               <div className="mt-8 px-4 transition-transform duration-500 group-hover:translate-x-2">
-                <h4 className="text-2xl font-black italic uppercase text-slate-900 leading-tight tracking-tight">
+                <h4 className="text-2xl font-black  uppercase text-slate-900 leading-tight tracking-tight">
                   {member.name.split(" ")[0]} <br />
                   <span className="text-red-600">
                     {member.name.split(" ")[1]}

@@ -65,7 +65,7 @@ const GlobalNetwork = () => {
                   <Activity size={20} className="animate-pulse" />
                 </div>
                 <div>
-                  <h4 className="font-black italic uppercase text-sm text-slate-800">
+                  <h4 className="font-black   uppercase text-sm text-slate-800">
                     Live Feed
                   </h4>
                   <p className="text-[9px] text-slate-500 uppercase tracking-widest">
@@ -108,7 +108,7 @@ const GlobalNetwork = () => {
                       {ship.icon}
                     </div>
                     <div className="flex-grow">
-                      <div className="flex justify-between text-[10px] font-black uppercase italic tracking-widest mb-1 text-slate-700">
+                      <div className="flex justify-between text-[10px] font-black uppercase   tracking-widest mb-1 text-slate-700">
                         <span>{ship.from}</span>
                         <Zap size={10} className="text-red-600" />
                         <span>{ship.to}</span>
@@ -130,7 +130,7 @@ const GlobalNetwork = () => {
               ))}
             </div>
 
-            <button className="mt-8 py-5 bg-red-600 text-white rounded-2xl font-black uppercase italic text-[10px] tracking-[0.4em] hover:bg-red-700 transition-all shadow-md">
+            <button className="mt-8 py-5 bg-red-600 text-white rounded-2xl font-black uppercase   text-[10px] tracking-[0.4em] hover:bg-red-700 transition-all shadow-md">
               Initialize Global Search
             </button>
           </div>
@@ -145,7 +145,7 @@ const GlobalNetwork = () => {
                 <p className="text-red-600 text-[10px] uppercase tracking-[0.4em] font-black">
                   Network Topology
                 </p>
-                <h3 className="text-6xl font-black italic uppercase leading-none mt-2 text-slate-900">
+                <h3 className="text-6xl font-black   uppercase leading-none mt-2 text-slate-900">
                   Global <br />
                   <span className="text-slate-400">Control</span>
                 </h3>
@@ -160,7 +160,7 @@ const GlobalNetwork = () => {
                     key={activeUnits}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-3xl font-black italic text-slate-900"
+                    className="text-3xl font-black   text-slate-900"
                   >
                     {activeUnits.toLocaleString()}
                     <span className="text-red-600">+</span>
@@ -198,7 +198,7 @@ const Stat = ({ label, value }) => (
       {label}
     </p>
     <div className="flex items-end gap-2">
-      <p className="text-4xl font-black italic text-slate-900">{value}</p>
+      <p className="text-4xl font-black   text-slate-900">{value}</p>
       <span className="w-2 h-2 bg-red-600 rounded-full mb-1" />
     </div>
   </div>

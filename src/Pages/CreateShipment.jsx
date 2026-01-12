@@ -351,7 +351,7 @@ const CreateShipment = () => {
             <p className="text-red-600 text-[10px] uppercase tracking-[0.4em] font-black mb-2">
               Network Topology
             </p>
-            <h2 className="text-slate-900 text-5xl font-black italic uppercase tracking-tighter leading-tight">
+            <h2 className="text-slate-900 text-5xl font-black   uppercase tracking-tighter leading-tight">
               Shipment <br /> <span className="text-slate-400">Console.</span>
             </h2>
           </div>
@@ -377,7 +377,7 @@ const CreateShipment = () => {
                   {step > s.id ? <CheckCircle size={20} /> : s.icon}
                 </div>
                 <div>
-                  <p className="text-slate-900 font-black italic uppercase text-sm">
+                  <p className="text-slate-900 font-black   uppercase text-sm">
                     {s.name}
                   </p>
                   <p className="text-[9px] text-slate-500 uppercase tracking-widest font-bold">
@@ -620,10 +620,10 @@ const CreateShipment = () => {
                       </div>
                       <div className="h-[1px] bg-white/10 my-4"></div>
                       <div className="flex justify-between items-end">
-                        <span className="text-xl font-black italic">
+                        <span className="text-xl font-black  ">
                           ESTIMATED TOTAL
                         </span>
-                        <span className="text-4xl font-black text-red-500 italic flex items-center gap-1">
+                        <span className="text-4xl font-black text-red-500   flex items-center gap-1">
                           <IndianRupee size={24} />
                           {pricing.total.toFixed(2)}
                         </span>
@@ -652,7 +652,7 @@ const CreateShipment = () => {
                         <p className="text-[9px] text-slate-400 font-black uppercase mb-1">
                           Generated Tracking Code
                         </p>
-                        <p className="text-xl font-black italic text-slate-900 tracking-wider">
+                        <p className="text-xl font-black   text-slate-900 tracking-wider">
                           {trackingCode}
                         </p>
                       </div>
@@ -660,7 +660,7 @@ const CreateShipment = () => {
                         <p className="text-[9px] font-black uppercase mb-1 opacity-70">
                           Payable Amount
                         </p>
-                        <p className="text-3xl font-black italic">
+                        <p className="text-3xl font-black  ">
                           ₹{pricing.total.toFixed(2)}
                         </p>
                       </div>
@@ -674,7 +674,7 @@ const CreateShipment = () => {
                   <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle size={56} />
                   </div>
-                  <h3 className="text-slate-900 text-5xl font-black italic uppercase">
+                  <h3 className="text-slate-900 text-5xl font-black   uppercase">
                     Dispatch Confirmed
                   </h3>
                   <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-2 mb-10">
@@ -698,7 +698,7 @@ const CreateShipment = () => {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
                       onClick={downloadInvoice}
-                      className="bg-red-600 text-white px-10 py-5 rounded-2xl font-black uppercase italic text-xs flex items-center gap-3 shadow-xl hover:bg-slate-900 transition-all"
+                      className="bg-red-600 text-white px-10 py-5 rounded-2xl font-black uppercase   text-xs flex items-center gap-3 shadow-xl hover:bg-slate-900 transition-all"
                     >
                       <Download size={16} /> Export Receipt
                     </button>
@@ -727,7 +727,7 @@ const CreateShipment = () => {
                   <button
                     onClick={nextStep}
                     disabled={loading}
-                    className="bg-red-600 text-white px-10 py-5 rounded-2xl font-black uppercase italic text-[10px] flex items-center gap-3 shadow-lg shadow-red-600/20 hover:scale-105 transition-all ml-auto disabled:opacity-50"
+                    className="bg-red-600 text-white px-10 py-5 rounded-2xl font-black uppercase   text-[10px] flex items-center gap-3 shadow-lg shadow-red-600/20 hover:scale-105 transition-all ml-auto disabled:opacity-50"
                   >
                     {loading ? (
                       <Loader2 className="animate-spin" size={16} />
@@ -755,7 +755,7 @@ const CreateShipment = () => {
 // Sub-components
 const Header = ({ title, sub }) => (
   <div className="border-l-4 border-red-600 pl-6 text-left">
-    <h3 className="text-slate-900 text-3xl font-black italic uppercase tracking-tighter">
+    <h3 className="text-slate-900 text-3xl font-black   uppercase tracking-tighter">
       {title}
     </h3>
     <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-1">
@@ -814,7 +814,7 @@ const MethodCard = ({ id, name, icon, duration, active, onClick }) => (
     <div className={active === id ? "text-red-600" : "text-slate-400"}>
       {icon}
     </div>
-    <span className="text-slate-900 font-black italic uppercase text-xs tracking-widest block">
+    <span className="text-slate-900 font-black   uppercase text-xs tracking-widest block">
       {name}
     </span>
     <span className="text-slate-400 text-[8px] font-bold uppercase block mt-1">

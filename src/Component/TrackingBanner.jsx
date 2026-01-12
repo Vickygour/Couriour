@@ -48,7 +48,7 @@ const TrackingBanner = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
               </span>
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-red-500 italic">
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-red-500  ">
                 Satellite Link: Active
               </span>
             </div>
@@ -58,7 +58,7 @@ const TrackingBanner = () => {
             </p>
           </div>
 
-          <h2 className="text-5xl md:text-7xl font-black text-white italic leading-[0.9] mb-6 uppercase tracking-tighter">
+          <h2 className="text-5xl md:text-7xl font-black text-white   leading-[0.9] mb-6 uppercase tracking-tighter">
             Real-Time <br />
             <span
               className="text-transparent"
@@ -68,7 +68,7 @@ const TrackingBanner = () => {
             </span>
           </h2>
 
-          <p className="text-slate-400 text-base md:text-lg font-medium leading-relaxed mb-10 max-w-lg italic">
+          <p className="text-slate-400 text-base md:text-lg font-medium leading-relaxed mb-10 max-w-lg  ">
             Synchronize with the Localmate neural network to trace your assets
             across 190+ sovereign territories.
           </p>
@@ -119,7 +119,7 @@ const TrackingBanner = () => {
             </div>
             <div className="absolute bottom-10 right-10 flex items-center gap-2">
               <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-[10px] font-black text-white italic uppercase tracking-widest">
+              <span className="text-[10px] font-black text-white   uppercase tracking-widest">
                 Live Flow
               </span>
             </div>
@@ -138,7 +138,7 @@ const TrackingBanner = () => {
               <p className="text-[10px] font-black text-black uppercase tracking-tighter">
                 Current Vector
               </p>
-              <p className="text-xs font-bold text-red-600 italic">
+              <p className="text-xs font-bold text-red-600  ">
                 TRANS-ATLANTIC 09
               </p>
             </div>

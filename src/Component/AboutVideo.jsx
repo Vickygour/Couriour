@@ -63,11 +63,11 @@ const AboutVideo = () => {
                 Live Operations
               </span>
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 italic uppercase tracking-tighter leading-none">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900   uppercase tracking-tighter leading-none">
               The Future of <span className="text-red-600">Logistics</span>
             </h2>
           </div>
-          <p className="text-slate-500 text-sm font-bold max-w-xs italic uppercase tracking-wider border-l-2 border-slate-100 pl-4">
+          <p className="text-slate-500 text-sm font-bold max-w-xs   uppercase tracking-wider border-l-2 border-slate-100 pl-4">
             Experience the motion behind every successful delivery across the
             globe.
           </p>
@@ -142,7 +142,7 @@ const AboutVideo = () => {
               </div>
 
               <div className="hidden md:block">
-                <button className="px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-black italic uppercase text-[10px] tracking-[0.2em] hover:bg-white/20 transition-all">
+                <button className="px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-black   uppercase text-[10px] tracking-[0.2em] hover:bg-white/20 transition-all">
                   Expand Experience
                 </button>
               </div>
@@ -179,7 +179,7 @@ const AboutVideo = () => {
               <div className="text-red-600 mb-4 transform group-hover:-translate-y-1 transition-transform">
                 {item.icon}
               </div>
-              <h4 className="text-slate-900 font-black italic uppercase text-sm mb-1">
+              <h4 className="text-slate-900 font-black   uppercase text-sm mb-1">
                 {item.title}
               </h4>
               <p className="text-slate-500 text-xs font-medium leading-relaxed">

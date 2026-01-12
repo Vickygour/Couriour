@@ -76,14 +76,14 @@ ${formData.message}
               <div className="p-2 bg-red-600 rounded-lg">
                 <Truck className="text-white" size={20} />
               </div>
-              <span className="text-xl font-black text-white uppercase italic">
+              <span className="text-xl font-black text-white uppercase  ">
                 Localmate
               </span>
             </div>
 
             <div className="flex items-center gap-6">
               <div>
-                <h1 className="text-5xl font-black text-white uppercase italic leading-none mb-4">
+                <h1 className="text-5xl font-black text-white uppercase   leading-none mb-4">
                   CONTACT <br />
                   <span className="text-red-600">OUR</span>
                   <br />
@@ -121,9 +121,7 @@ ${formData.message}
 
         {/* RIGHT FORM */}
         <div className="lg:col-span-6 bg-white p-8 lg:p-12 flex flex-col justify-center">
-          <h2 className="text-2xl font-black uppercase italic mb-2">
-            Contact Us
-          </h2>
+          <h2 className="text-2xl font-black uppercase   mb-2">Contact Us</h2>
           <p className="text-gray-400 text-[9px] font-bold uppercase tracking-widest mb-8">
             We usually reply within 24 hours
           </p>
@@ -178,7 +176,7 @@ ${formData.message}
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="w-full bg-[#0D1B2A] text-white py-4 rounded-2xl font-black uppercase italic tracking-[0.2em] flex items-center justify-center gap-3"
+              className="w-full bg-[#0D1B2A] text-white py-4 rounded-2xl font-black uppercase   tracking-[0.2em] flex items-center justify-center gap-3"
             >
               Send Message <ArrowRight size={18} />
             </motion.button>

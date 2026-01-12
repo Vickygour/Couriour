@@ -89,12 +89,12 @@ const LuxuryProjectsSlider = () => {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <h2 className="text-white text-4xl lg:text-6xl font-black uppercase italic leading-[0.9] mb-8">
+                  <h2 className="text-white text-4xl lg:text-6xl font-black uppercase   leading-[0.9] mb-8">
                     Powering <br />
                     <span className="text-red-600">Global Logistics</span>
                   </h2>
 
-                  <p className="text-gray-400 text-sm italic leading-relaxed border-l-2 border-red-600 pl-4">
+                  <p className="text-gray-400 text-sm   leading-relaxed border-l-2 border-red-600 pl-4">
                     Project {projects[activeIndex].id} —{" "}
                     {projects[activeIndex].stats}
                   </p>
@@ -105,14 +105,14 @@ const LuxuryProjectsSlider = () => {
             <div className="grid grid-cols-2 gap-6 pt-10 border-t border-white/5 relative z-10">
               <div>
                 <Globe className="text-red-600 mb-1" size={20} />
-                <p className="text-white font-black text-xl italic">190+</p>
+                <p className="text-white font-black text-xl  ">190+</p>
                 <p className="text-white/30 text-[8px] uppercase tracking-widest">
                   Countries Served
                 </p>
               </div>
               <div>
                 <ShieldCheck className="text-red-600 mb-1" size={20} />
-                <p className="text-white font-black text-xl italic">100%</p>
+                <p className="text-white font-black text-xl  ">100%</p>
                 <p className="text-white/30 text-[8px] uppercase tracking-widest">
                   Secure Delivery
                 </p>
@@ -161,7 +161,7 @@ const LuxuryProjectsSlider = () => {
                         <p className="text-red-500 text-[10px] uppercase tracking-[0.4em] font-black mb-2">
                           {item.category}
                         </p>
-                        <h3 className="text-white text-2xl lg:text-3xl font-black uppercase italic max-w-md">
+                        <h3 className="text-white text-2xl lg:text-3xl font-black uppercase   max-w-md">
                           {item.title}
                         </h3>
                       </div>
@@ -180,7 +180,7 @@ const LuxuryProjectsSlider = () => {
               </button>
             </div>
 
-            <div className="absolute top-10 right-20 z-30 text-black/10 text-6xl font-black italic">
+            <div className="absolute top-10 right-20 z-30 text-black/10 text-6xl font-black  ">
               0{activeIndex + 1}
             </div>
           </div>

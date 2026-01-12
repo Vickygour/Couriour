@@ -41,7 +41,7 @@ const PartnerLogos = () => {
           <div className="h-[1px] bg-gradient-to-r from-transparent via-white/10 to-red-600/50 flex-grow hidden md:block"></div>
 
           <div className="text-center px-4">
-            <h2 className="text-white font-black italic uppercase text-xs md:text-sm tracking-[0.4em] mb-2">
+            <h2 className="text-white font-black   uppercase text-xs md:text-sm tracking-[0.4em] mb-2">
               Strategic <span className="text-red-600">Alliances</span>
             </h2>
             <p className="text-slate-500 font-bold text-[10px] uppercase tracking-widest">
@@ -84,7 +84,7 @@ const PartnerLogos = () => {
         <div className="mt-16 flex justify-center">
           <div className="px-6 py-2 rounded-full border border-white/5 bg-white/[0.02] flex items-center gap-3">
             <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping" />
-            <span className="text-[8px] font-black uppercase tracking-[0.3em] text-slate-500 italic">
+            <span className="text-[8px] font-black uppercase tracking-[0.3em] text-slate-500  ">
               Network Status: Fully Synchronized
             </span>
           </div>

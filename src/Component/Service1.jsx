@@ -56,7 +56,7 @@ const PremiumServiceSection = () => {
       aria-labelledby="premium-logistics-heading"
     >
       {/* Background Branding */}
-      <div className="absolute top-0 right-0 text-[12rem] font-black text-white/[0.02] select-none pointer-events-none uppercase italic leading-none">
+      <div className="absolute top-0 right-0 text-[12rem] font-black text-white/[0.02] select-none pointer-events-none uppercase   leading-none">
         Localmate
       </div>
       <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-red-600/10 blur-[150px] rounded-full"></div>
@@ -78,7 +78,7 @@ const PremiumServiceSection = () => {
 
             <h2
               id="premium-logistics-heading"
-              className="text-2xl md:text-4xl lg:text-6xl font-black text-white uppercase italic leading-[1.1]"
+              className="text-2xl md:text-4xl lg:text-6xl font-black text-white uppercase   leading-[1.1]"
             >
               Smart{" "}
               <span
@@ -92,7 +92,7 @@ const PremiumServiceSection = () => {
           </div>
 
           <div className="lg:max-w-xs border-l-2 border-red-600 pl-6 py-2">
-            <p className="text-gray-400 text-sm leading-relaxed italic">
+            <p className="text-gray-400 text-sm leading-relaxed  ">
               “At Localmate, we don’t just move cargo — we deliver trust,
               reliability, and long-term logistics partnerships.”
             </p>
@@ -125,7 +125,7 @@ const PremiumServiceSection = () => {
 
                   <div className="flex-1">
                     <h4
-                      className={`text-2xl font-black uppercase italic ${
+                      className={`text-2xl font-black uppercase   ${
                         activeId === item.id ? "text-white" : "text-gray-500"
                       }`}
                     >
@@ -202,13 +202,13 @@ const PremiumServiceSection = () => {
               <div className="absolute bottom-10 left-10 flex gap-4">
                 <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
                   <Zap className="text-red-500 mb-2" size={20} />
-                  <p className="text-white font-black text-xs italic">
+                  <p className="text-white font-black text-xs  ">
                     99.9% On-Time
                   </p>
                 </div>
                 <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
                   <Globe className="text-red-500 mb-2" size={20} />
-                  <p className="text-white font-black text-xs italic">
+                  <p className="text-white font-black text-xs  ">
                     Global Coverage
                   </p>
                 </div>
