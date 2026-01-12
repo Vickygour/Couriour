@@ -2,7 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Plus } from "lucide-react";
 import Aman from "../assets/Aman.png";
-
+import Badal from "../assets/Badal.png";
+import Kartik from "../assets/Kartik.png";
+import Prabhat from "../assets/Prabhat.png";
+import Vector from "../assets/Vector.jpg";
 const TeamSection = () => {
   const teamMembers = [
     {
@@ -13,22 +16,22 @@ const TeamSection = () => {
     {
       name: "Karan Meena",
       role: "Marketing Head",
-      img: "https://i.pravatar.cc/600?img=12",
+      img: Vector,
     },
     {
       name: "Prabhat Kumar",
       role: "COO",
-      img: "https://i.pravatar.cc/600?img=13",
+      img: Prabhat,
     },
     {
       name: "Badal",
       role: "HR Head",
-      img: "https://i.pravatar.cc/600?img=14",
+      img: Badal,
     },
     {
       name: "Kartik Kumar",
       role: "Marketing Head",
-      img: "https://i.pravatar.cc/600?img=15",
+      img: Kartik,
     },
   ];
 
