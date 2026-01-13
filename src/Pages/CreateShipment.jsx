@@ -1,4 +1,4 @@
-// src/Component/CreateShipment.jsx - COMPLETE FIXED VERSION
+// src/Component/CreateShipment.jsx - FINAL FIXED VERSION
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import jsPDF from 'jspdf';
@@ -25,7 +25,7 @@ import {
   Copy,
 } from 'lucide-react';
 
-// ✅ FIXED QR Code Component
+// ✅ QR Code Component
 const QRCode = ({ size = 180 }) => {
   const canvasRef = useRef(null);
 
@@ -37,17 +37,14 @@ const QRCode = ({ size = 180 }) => {
     canvas.width = size;
     canvas.height = size;
 
-    // White background
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, size, size);
 
     const moduleSize = size / 25;
     const modules = 21;
-
     const offsetX = (size - modules * moduleSize) / 2;
     const offsetY = (size - modules * moduleSize) / 2;
 
-    // Draw random QR modules
     ctx.fillStyle = '#000000';
     for (let i = 1; i < modules - 1; i++) {
       for (let j = 1; j < modules - 1; j++) {
@@ -62,20 +59,13 @@ const QRCode = ({ size = 180 }) => {
       }
     }
 
-    // Fixed finder patterns
     const drawFinder = (x, y) => {
       const s = 7 * moduleSize;
       const ms = moduleSize;
-
-      // Outer black square
       ctx.fillStyle = '#000000';
       ctx.fillRect(x, y, s, s);
-
-      // Inner white square
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(x + ms, y + ms, s - 2 * ms, s - 2 * ms);
-
-      // Center black square
       ctx.fillStyle = '#000000';
       ctx.fillRect(x + 3 * ms, y + 3 * ms, ms, ms);
     };
@@ -84,7 +74,6 @@ const QRCode = ({ size = 180 }) => {
     drawFinder(offsetX + (modules - 7) * moduleSize, offsetY);
     drawFinder(offsetX, offsetY + (modules - 7) * moduleSize);
 
-    // Timing patterns
     ctx.fillStyle = '#000000';
     for (let i = 7; i < modules - 7; i += 2) {
       ctx.fillRect(
@@ -115,7 +104,6 @@ const CreateShipment = () => {
   const [loading, setLoading] = useState(false);
   const [shipmentData, setShipmentData] = useState(null);
   const [trackingCode, setTrackingCode] = useState('');
-  const [paymentQR, setPaymentQR] = useState('');
 
   const [formData, setFormData] = useState({
     senderName: '',
@@ -139,57 +127,69 @@ const CreateShipment = () => {
     method: 'surface',
   });
 
+  // ✅ FIXED: Correct pricing state structure
   const [pricing, setPricing] = useState({
-    basePrice: 0,
-    weightCharges: 0,
-    distanceCharges: 0,
-    tax: 0,
-    total: 0,
+    basePrice: 50,
+    weightCharges: 30,
+    subtotalBeforeMultiplier: 80,
+    methodMultiplier: 1,
+    subtotalAfterMultiplier: 80,
+    tax: 14.4,
+    total: 94.4,
   });
 
+  // ✅ FIXED: CORRECT CALCULATION LOGIC
   useEffect(() => {
     const calculateEstimate = () => {
-      // ✅ FIXED PRICING LOGIC AS PER YOUR REQUIREMENT
-      let weightPrice = 0;
-      const weight = parseFloat(formData.weight);
+      const weight = parseFloat(formData.weight) || 1;
 
-      // Logic: 10kg tak ₹30 fix, uske baad har extra kg ₹5
+      // Weight charges: 10kg tak ₹30, uske baad ₹5 per extra kg
+      let weightPrice = 0;
       if (weight <= 10) {
-        // 10kg ya usse kam: ₹30 fix
         weightPrice = 30;
       } else {
-        // 10kg se jyada:
-        // First 10kg = ₹30 + remaining weight × ₹5 per kg
         const extraWeight = weight - 10;
         weightPrice = 30 + extraWeight * 5;
       }
 
-      // Base delivery charges
       const basePrice = 50;
 
       // Method multipliers
-      const methodMultiplier = {
-        surface: 1,
-        express_air: 2.5,
-        cargo_ship: 1.5,
-      };
+      const methodMultiplier =
+        {
+          surface: 1,
+          express_air: 2.5,
+          cargo_ship: 1.5,
+        }[formData.method] || 1;
 
-      // Calculate subtotal
-      const subtotal =
-        (basePrice + weightPrice) * methodMultiplier[formData.method];
-      const tax = subtotal * 0.18; // 18% GST
+      // ✅ CORRECT CALCULATION:
+      const subtotalBeforeMultiplier = basePrice + weightPrice;
+      const subtotalAfterMultiplier =
+        subtotalBeforeMultiplier * methodMultiplier;
+      const tax = subtotalAfterMultiplier * 0.18;
+      const total = subtotalAfterMultiplier + tax;
 
       setPricing({
         basePrice,
         weightCharges: weightPrice,
-        distanceCharges: 0,
-        tax,
-        total: subtotal + tax,
+        subtotalBeforeMultiplier: parseFloat(
+          subtotalBeforeMultiplier.toFixed(2),
+        ),
+        methodMultiplier,
+        subtotalAfterMultiplier: parseFloat(subtotalAfterMultiplier.toFixed(2)),
+        tax: parseFloat(tax.toFixed(2)),
+        total: parseFloat(total.toFixed(2)),
       });
     };
 
     calculateEstimate();
   }, [formData.weight, formData.method]);
+
+  // ✅ Format price helper
+  const formatPrice = (price) => {
+    const num = typeof price === 'number' ? price : parseFloat(price) || 0;
+    return `₹${num.toFixed(2)}`;
+  };
 
   const validateStep = () => {
     if (step === 1) {
@@ -286,8 +286,6 @@ const CreateShipment = () => {
         const { trackingCode, shipment } = response.data.data;
         setTrackingCode(trackingCode);
         setShipmentData(shipment);
-        setPaymentQR('generated'); // ✅ Trigger QR display
-        setPricing(shipment.pricing);
         toast.success('Shipment created successfully!');
         setStep(5);
       } else {
@@ -300,12 +298,6 @@ const CreateShipment = () => {
         .substring(2, 8)
         .toUpperCase()}-IN`;
       setTrackingCode(demoTrackingCode);
-      setShipmentData({
-        pricing: pricing,
-        sender: formData.senderName,
-        receiver: formData.receiverName,
-      });
-      setPaymentQR('generated'); // ✅ Trigger QR display
       toast.success('Shipment created! (Demo Mode)');
       setStep(5);
     } finally {
@@ -386,11 +378,12 @@ const CreateShipment = () => {
         startY,
         head: [['Description', 'Amount (INR)']],
         body: [
-          ['Base Delivery Charges', `₹${pricing.basePrice.toFixed(2)}`],
-          ['Weight Charges', `₹${pricing.weightCharges.toFixed(2)}`],
-          ['Distance Charges', `₹${pricing.distanceCharges.toFixed(2)}`],
-          ['Tax (18% GST)', `₹${pricing.tax.toFixed(2)}`],
-          ['Total Amount', `₹${pricing.total.toFixed(2)}`],
+          ['Base Delivery Charges', formatPrice(pricing.basePrice)],
+          ['Weight Charges', formatPrice(pricing.weightCharges)],
+          ['Method Multiplier', `${pricing.methodMultiplier}x`],
+          ['Subtotal', formatPrice(pricing.subtotalAfterMultiplier)],
+          ['Tax (18% GST)', formatPrice(pricing.tax)],
+          ['Total Amount', formatPrice(pricing.total)],
         ],
         headStyles: { fillColor: [220, 38, 38] },
         theme: 'grid',
@@ -417,7 +410,6 @@ const CreateShipment = () => {
 
   return (
     <section className="min-h-screen bg-slate-100 pt-32 pb-20 px-6 font-sans relative overflow-hidden">
-      {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-red-600/5 blur-[140px] rounded-full" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-slate-400/10 blur-[120px] rounded-full" />
@@ -629,7 +621,6 @@ const CreateShipment = () => {
                       }
                       className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-red-600"
                     />
-                    {/* ✅ Weight Pricing Display */}
                     <div className="mt-6 p-4 bg-white rounded-xl border border-slate-200">
                       <p className="text-[10px] text-slate-500 font-bold uppercase mb-2">
                         Weight Charges Breakdown
@@ -641,7 +632,7 @@ const CreateShipment = () => {
                             : 'First 10kg + Additional weight'}
                         </span>
                         <span className="text-red-600 font-bold">
-                          ₹{pricing.weightCharges.toFixed(2)}
+                          {formatPrice(pricing.weightCharges)}
                         </span>
                       </div>
                       {formData.weight > 10 && (
@@ -673,7 +664,7 @@ const CreateShipment = () => {
                 </div>
               )}
 
-              {/* Step 4: Method */}
+              {/* ✅ Step 4: Method - FIXED CALCULATION DISPLAY */}
               {step === 4 && (
                 <div className="space-y-6">
                   <Header title="Transit Mode" sub="Select Delivery Channel" />
@@ -713,15 +704,25 @@ const CreateShipment = () => {
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span>Base Delivery:</span>
-                        <span>₹{pricing.basePrice.toFixed(2)}</span>
+                        <span>{formatPrice(pricing.basePrice)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Weight Charges:</span>
-                        <span>₹{pricing.weightCharges.toFixed(2)}</span>
+                        <span>{formatPrice(pricing.weightCharges)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Method Multiplier ({formData.method}):</span>
+                        <span>{pricing.methodMultiplier}x</span>
+                      </div>
+                      <div className="flex justify-between font-bold">
+                        <span>Subtotal:</span>
+                        <span>
+                          {formatPrice(pricing.subtotalAfterMultiplier)}
+                        </span>
                       </div>
                       <div className="flex justify-between text-slate-400">
                         <span>Tax (18% GST):</span>
-                        <span>₹{pricing.tax.toFixed(2)}</span>
+                        <span>{formatPrice(pricing.tax)}</span>
                       </div>
                       <div className="h-[1px] bg-white/10 my-4"></div>
                       <div className="flex justify-between items-end">
@@ -730,7 +731,7 @@ const CreateShipment = () => {
                         </span>
                         <span className="text-4xl font-black text-red-500 italic flex items-center gap-1">
                           <IndianRupee size={24} />
-                          {pricing.total.toFixed(2)}
+                          {formatPrice(pricing.total)}
                         </span>
                       </div>
                     </div>
@@ -738,7 +739,7 @@ const CreateShipment = () => {
                 </div>
               )}
 
-              {/* ✅ Step 5: Payment - FIXED QR DISPLAY */}
+              {/* ✅ Step 5: Payment - FIXED */}
               {step === 5 && (
                 <div className="space-y-6">
                   <Header title="Security" sub="Final Payment Verification" />
@@ -747,7 +748,6 @@ const CreateShipment = () => {
                       <p className="text-[10px] font-black text-slate-400 mb-4 uppercase tracking-widest">
                         SCAN TO AUTHORIZE
                       </p>
-                      {/* ✅ FIXED: Canvas-based QR Code */}
                       <QRCode size={176} />
                       <p className="text-xs text-slate-500 mt-2 font-medium">
                         UPI Payment QR
@@ -762,15 +762,16 @@ const CreateShipment = () => {
                           {trackingCode || 'LM-ABC123-IN'}
                         </p>
                       </div>
+
                       <div className="bg-red-600 p-6 rounded-2xl text-white">
                         <p className="text-[9px] font-black uppercase mb-1 opacity-70">
                           Payable Amount
                         </p>
                         <p className="text-3xl font-black italic">
-                          ₹{pricing.total.toFixed(2)}
+                          {formatPrice(pricing.total)}
                         </p>
                       </div>
-                      {/* ✅ Pricing Breakdown */}
+
                       <div className="bg-white p-4 rounded-xl border border-slate-200">
                         <p className="text-xs text-slate-700 mb-2 font-bold">
                           Pricing Breakdown:
@@ -778,25 +779,36 @@ const CreateShipment = () => {
                         <div className="text-xs text-slate-600 space-y-1">
                           <div className="flex justify-between">
                             <span>Base Delivery:</span>
-                            <span>₹{pricing.basePrice.toFixed(2)}</span>
+                            <span>{formatPrice(pricing.basePrice)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span>Weight ({formData.weight}kg):</span>
-                            <span>₹{pricing.weightCharges.toFixed(2)}</span>
+                            <span>{formatPrice(pricing.weightCharges)}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Subtotal (before multiplier):</span>
+                            <span>
+                              {formatPrice(pricing.subtotalBeforeMultiplier)}
+                            </span>
                           </div>
                           <div className="flex justify-between">
                             <span>Method ({formData.method}):</span>
+                            <span>{pricing.methodMultiplier}x</span>
+                          </div>
+                          <div className="flex justify-between font-semibold">
+                            <span>Subtotal (after multiplier):</span>
                             <span>
-                              {formData.method === 'express_air'
-                                ? '2.5x'
-                                : formData.method === 'cargo_ship'
-                                ? '1.5x'
-                                : '1x'}
+                              {formatPrice(pricing.subtotalAfterMultiplier)}
                             </span>
                           </div>
                           <div className="flex justify-between">
                             <span>GST (18%):</span>
-                            <span>₹{pricing.tax.toFixed(2)}</span>
+                            <span>{formatPrice(pricing.tax)}</span>
+                          </div>
+                          <div className="h-[1px] bg-slate-200 my-1"></div>
+                          <div className="flex justify-between font-bold text-slate-900">
+                            <span>Total Amount:</span>
+                            <span>{formatPrice(pricing.total)}</span>
                           </div>
                         </div>
                       </div>
@@ -849,7 +861,7 @@ const CreateShipment = () => {
                 </div>
               )}
 
-              {/* Navigation Bar */}
+              {/* Navigation */}
               {step < 6 && (
                 <div className="pt-10 flex items-center justify-between border-t border-slate-100">
                   {step > 1 && (
@@ -889,7 +901,7 @@ const CreateShipment = () => {
   );
 };
 
-// Sub-components (UNCHANGED)
+// Sub-components
 const Header = ({ title, sub }) => (
   <div className="border-l-4 border-red-600 pl-6 text-left">
     <h3 className="text-slate-900 text-3xl font-black italic uppercase tracking-tighter">
