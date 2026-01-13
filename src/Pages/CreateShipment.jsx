@@ -15,7 +15,7 @@ import {
   CheckCircle,
   ArrowRight,
   ArrowLeft,
-  Truck,
+  Bike,
   Plane,
   Weight,
   Ship,
@@ -681,7 +681,7 @@ const CreateShipment = () => {
                     <MethodCard
                       id="surface"
                       name="Surface"
-                      icon={<Truck size={32} />}
+                      icon={<Bike size={32} />}
                       duration="5-7 Days"
                       active={formData.method}
                       onClick={(id) => setFormData({ ...formData, method: id })}

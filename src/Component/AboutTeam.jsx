@@ -15,7 +15,7 @@ const TeamSection = () => {
     },
     {
       name: "Karan Meena",
-      role: "Marketing Head",
+      role: "CFO",
       img: Vector,
     },
     {
