@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import DeliverBoy from "../assets/DeliverBoy.png";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
+import DeliverBoy from '../assets/DeliverBoy.png';
 import {
   Mail,
   Truck,
@@ -13,39 +14,64 @@ import {
   Activity,
   Phone,
   MessageSquare,
-} from "lucide-react";
+} from 'lucide-react';
 
 const TransportAuth = () => {
+  const formRef = useRef();
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    inquiryType: "",
-    message: "",
+    name: '',
+    email: '',
+    phone: '',
+    inquiryType: '',
+    message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
+
+  // Initialize EmailJS with your Public Key
+  useEffect(() => {
+    emailjs.init('_abpFRcF-VGI29XIC');
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // ✅ MAILTO SUBMIT (REAL WORKING)
-  const handleSubmit = (e) => {
+  // EmailJS submit handler
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('');
 
-    const mailBody = `
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Inquiry Type: ${formData.inquiryType}
+    try {
+      const response = await emailjs.sendForm(
+        'service_ti7v5y5', // Your Service ID
+        'template_lw8gw58', // Replace with your Template ID from EmailJS dashboard
+        formRef.current,
+      );
 
-Message:
-${formData.message}
-    `;
+      console.log('SUCCESS!', response.status, response.text);
+      setSubmitStatus('success');
 
-    window.location.href = `mailto:localmate2025@gmail.com
-?subject=New Contact Enquiry - Localmate
-&body=${encodeURIComponent(mailBody)}`;
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        inquiryType: '',
+        message: '',
+      });
+
+      // Show success message
+      alert("Message sent successfully! We'll get back to you soon.");
+    } catch (error) {
+      console.error('FAILED...', error);
+      setSubmitStatus('error');
+      alert('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -76,21 +102,21 @@ ${formData.message}
               <div className="p-2 bg-red-600 rounded-lg">
                 <Truck className="text-white" size={20} />
               </div>
-              <span className="text-xl font-black text-white uppercase  ">
+              <span className="text-xl font-black text-white uppercase">
                 Localmate
               </span>
             </div>
 
             <div className="flex items-center gap-6">
               <div>
-                <h1 className="text-5xl font-black text-white uppercase   leading-none mb-4">
+                <h1 className="text-5xl font-black text-white uppercase leading-none mb-4">
                   CONTACT <br />
                   <span className="text-red-600">OUR</span>
                   <br />
                   TEAM
                 </h1>
                 <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.3em] border-l-2 border-red-600 pl-4">
-                  We’re here to help you
+                  We're here to help you
                 </p>
               </div>
 
@@ -112,7 +138,7 @@ ${formData.message}
               >
                 <Icon className="text-red-600 mx-auto mb-2" size={20} />
                 <p className="text-white text-[8px] font-black uppercase">
-                  {i === 0 ? "GLOBAL" : i === 1 ? "SECURE" : "24/7"}
+                  {i === 0 ? 'GLOBAL' : i === 1 ? 'SECURE' : '24/7'}
                 </p>
               </div>
             ))}
@@ -121,15 +147,16 @@ ${formData.message}
 
         {/* RIGHT FORM */}
         <div className="lg:col-span-6 bg-white p-8 lg:p-12 flex flex-col justify-center">
-          <h2 className="text-2xl font-black uppercase   mb-2">Contact Us</h2>
+          <h2 className="text-2xl font-black uppercase mb-2">Contact Us</h2>
           <p className="text-gray-400 text-[9px] font-bold uppercase tracking-widest mb-8">
             We usually reply within 24 hours
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <input
                 name="name"
+                value={formData.name}
                 required
                 onChange={handleChange}
                 placeholder="Full Name"
@@ -138,6 +165,7 @@ ${formData.message}
               <input
                 name="email"
                 type="email"
+                value={formData.email}
                 required
                 onChange={handleChange}
                 placeholder="Email Address"
@@ -148,12 +176,14 @@ ${formData.message}
             <div className="grid grid-cols-2 gap-4">
               <input
                 name="phone"
+                value={formData.phone}
                 onChange={handleChange}
                 placeholder="Phone Number"
                 className="border-b-2 py-3 text-xs font-bold uppercase outline-none"
               />
               <select
                 name="inquiryType"
+                value={formData.inquiryType}
                 onChange={handleChange}
                 className="bg-gray-50 py-3 px-3 rounded-xl text-[10px] font-black uppercase outline-none"
               >
@@ -168,17 +198,20 @@ ${formData.message}
             <textarea
               name="message"
               rows="3"
+              value={formData.message}
               onChange={handleChange}
               placeholder="Your Message"
-              className="border-b-2 py-3 text-xs font-bold uppercase outline-none resize-none"
+              className="border-b-2 py-3 text-xs font-bold uppercase outline-none resize-none w-full"
             />
 
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="w-full bg-[#0D1B2A] text-white py-4 rounded-2xl font-black uppercase   tracking-[0.2em] flex items-center justify-center gap-3"
+              disabled={isSubmitting}
+              className="w-full bg-[#0D1B2A] text-white py-4 rounded-2xl font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 disabled:opacity-50"
             >
-              Send Message <ArrowRight size={18} />
+              {isSubmitting ? 'SENDING...' : 'Send Message'}{' '}
+              <ArrowRight size={18} />
             </motion.button>
           </form>
 

@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "aos": "^2.3.4",
     "axios": "^1.13.2",
+    "emailjs": "^5.0.0",
     "framer-motion": "^12.23.22",
     "gsap": "^3.13.0",
     "jspdf": "^4.0.0",

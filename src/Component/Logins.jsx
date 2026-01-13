@@ -33,7 +33,7 @@ const Logins = () => {
     setError('');
 
     try {
-      const endpoint = isLogin ? '/login' : '/register';
+      const endpoint = isLogin ? '/auth/login' : '/auth/register';
 
       const payload = isLogin
         ? {
