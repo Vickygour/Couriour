@@ -246,64 +246,75 @@ const CreateShipment = () => {
 
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
-  const createShipment = async () => {
-    setLoading(true);
-    try {
-      const payload = {
-        sender: {
-          name: formData.senderName,
-          phone: formData.senderPhone,
-          email: formData.senderEmail || undefined,
-          address: {
-            street: formData.originAddress,
-            city: formData.originCity,
-            state: formData.originState,
-            pincode: formData.originPincode,
-          },
+const createShipment = async () => {
+  setLoading(true);
+  try {
+    const payload = {
+      sender: {
+        name: formData.senderName,
+        phone: formData.senderPhone,
+        email: formData.senderEmail || undefined,
+        address: {
+          street: formData.originAddress,
+          city: formData.originCity,
+          state: formData.originState,
+          pincode: formData.originPincode,
         },
-        receiver: {
-          name: formData.receiverName,
-          phone: formData.receiverPhone,
-          email: formData.receiverEmail || undefined,
-          address: {
-            street: formData.destAddress,
-            city: formData.destCity,
-            state: formData.destState,
-            pincode: formData.destPincode,
-          },
+      },
+      receiver: {
+        name: formData.receiverName,
+        phone: formData.receiverPhone,
+        email: formData.receiverEmail || undefined,
+        address: {
+          street: formData.destAddress,
+          city: formData.destCity,
+          state: formData.destState,
+          pincode: formData.destPincode,
         },
-        package: {
-          weight: parseFloat(formData.weight),
-          description: formData.packageDescription || 'General Cargo',
-          value: parseFloat(formData.packageValue) || 0,
-          fragile: formData.fragile,
-        },
-        deliveryMethod: formData.method,
-      };
+      },
+      package: {
+        weight: parseFloat(formData.weight),
+        description: formData.packageDescription || 'General Cargo',
+        value: parseFloat(formData.packageValue) || 0,
+        fragile: formData.fragile,
+      },
+      deliveryMethod: formData.method,
+      pricing: pricing, // ✅ Complete pricing object bhej rahe hain
+    };
 
-      const response = await API.post('/shipment/create', payload);
-      if (response.data.success) {
-        const { trackingCode, shipment } = response.data.data;
-        setTrackingCode(trackingCode);
-        setShipmentData(shipment);
-        toast.success('Shipment created successfully!');
-        setStep(5);
-      } else {
-        toast.error(response.data.message || 'Failed to create shipment');
+    const response = await API.post('/shipment/create', payload);
+    if (response.data.success) {
+      const { trackingCode, shipment } = response.data.data;
+      setTrackingCode(trackingCode);
+      setShipmentData(shipment);
+
+      // ✅ Verify ki frontend aur backend pricing same hai
+      console.log('Frontend pricing:', pricing);
+      console.log('Backend saved pricing:', shipment.pricing);
+
+      if (Math.abs(pricing.total - shipment.pricing.total) > 0.01) {
+        console.warn('Pricing mismatch detected!');
       }
-    } catch (error) {
-      console.error('Create Shipment Error:', error);
-      const demoTrackingCode = `LM-${Math.random()
-        .toString(36)
-        .substring(2, 8)
-        .toUpperCase()}-IN`;
-      setTrackingCode(demoTrackingCode);
-      toast.success('Shipment created! (Demo Mode)');
+
+      toast.success('Shipment created successfully!');
       setStep(5);
-    } finally {
-      setLoading(false);
+    } else {
+      toast.error(response.data.message || 'Failed to create shipment');
     }
-  };
+  } catch (error) {
+    console.error('Create Shipment Error:', error);
+    // Demo fallback
+    const demoTrackingCode = `LM-${Math.random()
+      .toString(36)
+      .substring(2, 8)
+      .toUpperCase()}-IN`;
+    setTrackingCode(demoTrackingCode);
+    toast.success('Shipment created! (Demo Mode)');
+    setStep(5);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const verifyPayment = async () => {
     setLoading(true);
